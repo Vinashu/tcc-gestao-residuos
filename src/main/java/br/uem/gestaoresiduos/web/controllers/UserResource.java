@@ -1,5 +1,6 @@
 package br.uem.gestaoresiduos.web.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,11 @@ public class UserResource {
 
 	@Autowired
 	private UserService userService;
+	
+	@RequestMapping("/user")
+	public Principal user(Principal user){
+		return user;
+	}
 	
 	@RequestMapping(value="", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
