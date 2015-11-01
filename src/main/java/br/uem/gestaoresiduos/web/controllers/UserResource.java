@@ -22,7 +22,7 @@ import br.uem.gestaoresiduos.services.UserService;
  *
  */
 @Controller
-@RequestMapping("/rest/users/")
+@RequestMapping("/users/")
 public class UserResource {
 
 	@Autowired
