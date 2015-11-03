@@ -4,7 +4,6 @@
 package br.uem.gestaoresiduos.services;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import java.util.Date;
 
@@ -22,7 +21,6 @@ import br.uem.gestaoresiduos.entities.Campus;
 import br.uem.gestaoresiduos.entities.Laboratorio;
 import br.uem.gestaoresiduos.entities.TipoCampus;
 import br.uem.gestaoresiduos.entities.TiposResiduos;
-import br.uem.gestaoresiduos.repositories.CampusRespository;
 
 /**
  * @author root
@@ -53,9 +51,13 @@ public class LaboratorioServiceTest {
 		laboratorio = new Laboratorio();
 		laboratorio.setBloco("E90");
 		laboratorio.setCampus(campus);
+		laboratorio.setNome("Laboratório de Química Orgânica");
+		laboratorio.setSigla("LQO");
 		laboratorio.setDataAtualizacao(new Date());
 		laboratorio.setResponsavel("Prof Delano Caraio");
 		laboratorio.setSala("001");
+		laboratorio.setTelefone("3011-2010");
+		laboratorio.setEmail("lqo@uem.br");
 		laboratorio.setTipoAtividade("Atividades Diversas");
 		laboratorio.setTipoResiduos(TiposResiduos.QUIMICO);
 		

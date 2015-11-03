@@ -22,9 +22,8 @@ angular
 											+ btoa(credentials.username + ":"
 													+ credentials.password)
 								} : {};
-								console.log(headers);
 
-								$http.post('user', {
+								$http.post('users/user/', {
 									headers : headers
 								}).success(function(data) {
 									if (data.name) {

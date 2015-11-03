@@ -1533,7 +1533,7 @@
 }
 
 .md-aside {
-  position: relative;
+  position: absolute;
   z-index: 40;
   width: 240px;
   max-width: 240px;
@@ -1845,3 +1845,4 @@ fieldset[disabled] .md-switch input + i:after {
 .md-whiteframe-z5 {
   box-shadow: 0 27px 24px 0 rgba(0, 0, 0, 0.2);
 }
+

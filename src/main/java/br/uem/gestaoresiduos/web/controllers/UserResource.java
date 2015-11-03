@@ -22,13 +22,14 @@ import br.uem.gestaoresiduos.services.UserService;
  *
  */
 @Controller
-@RequestMapping("/users/")
+@RequestMapping("api/users/")
 public class UserResource {
 
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping("/user")
+	@RequestMapping(value="user", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
 	public Principal user(Principal user){
 		return user;
 	}

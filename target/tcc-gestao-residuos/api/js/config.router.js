@@ -20,7 +20,7 @@ angular
 						'MODULE_CONFIG',
 						function($stateProvider, $urlRouterProvider,
 								$httpProvider, JQ_CONFIG, MODULE_CONFIG) {
-							
+
 							$httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
 							var layout = "tpl/app.html";
 							if (window.location.href.indexOf("material") > 0) {
@@ -44,6 +44,27 @@ angular
 												url : '/dashboard-v3',
 												templateUrl : 'tpl/app_dashboard_v3.html',
 												resolve : load([ 'js/controllers/dashboard.js' ])
+											})
+
+									// componentes
+									.state(
+											'app.laboratorios',
+											{
+												url : '/laboratorios',
+												template : '<div ui-view class="wrapper-md"></div>',
+												resolve : load([ 'js/controllers/laboratorio.js', 'js/services/laboratorio.js' ])
+											})
+									.state(
+											'app.laboratorios.pesquisar',
+											{
+												url : '/',
+												templateUrl : 'tpl/laboratorios/pesquisar.html'
+											})
+									.state(
+											'app.laboratorios.edit',
+											{
+												url : '/edit',
+												templateUrl : 'tpl/laboratorios/edit.html'
 											})
 
 									// pages
@@ -105,46 +126,6 @@ angular
 													}
 												}
 											})
-
-									.state(
-											'app.material',
-											{
-												url : '/material',
-												template : '<div ui-view class="wrapper-md"></div>',
-												resolve : load([ 'js/controllers/material.js' ])
-											})
-									.state(
-											'app.material.button',
-											{
-												url : '/button',
-												templateUrl : 'tpl/material/button.html'
-											})
-									.state('app.material.color', {
-										url : '/color',
-										templateUrl : 'tpl/material/color.html'
-									})
-									.state('app.material.icon', {
-										url : '/icon',
-										templateUrl : 'tpl/material/icon.html'
-									})
-									.state('app.material.card', {
-										url : '/card',
-										templateUrl : 'tpl/material/card.html'
-									})
-									.state('app.material.form', {
-										url : '/form',
-										templateUrl : 'tpl/material/form.html'
-									})
-									.state('app.material.list', {
-										url : '/list',
-										templateUrl : 'tpl/material/list.html'
-									})
-									.state(
-											'app.material.ngmaterial',
-											{
-												url : '/ngmaterial',
-												templateUrl : 'tpl/material/ngmaterial.html'
-											});
 
 							function load(srcs, callback) {
 								return {

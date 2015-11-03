@@ -2,3 +2,4 @@
 /home/pupim/workspace-tcc2/tcc-gestao-residuos/src/test/java/br/uem/gestaoresiduos/repositories/CampusRepositoryTest.java
 /home/pupim/workspace-tcc2/tcc-gestao-residuos/src/test/java/br/uem/gestaoresiduos/repositories/LaboratorioRepositoryTest.java
 /home/pupim/workspace-tcc2/tcc-gestao-residuos/src/test/java/br/uem/gestaoresiduos/services/UserServiceTest.java
+/home/pupim/workspace-tcc2/tcc-gestao-residuos/src/test/java/br/uem/gestaoresiduos/web/controllers/LaboratorioResourceTest.java

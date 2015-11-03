@@ -1,5 +1,8 @@
 package br.uem.gestaoresiduos.web.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -24,6 +27,12 @@ public class LaboratorioResource {
 	public ResponseEntity<Laboratorio> create(Laboratorio laboratorio) {
 		Laboratorio savedLab = laboratorioService.create(laboratorio);
 		return new ResponseEntity<Laboratorio>(savedLab, HttpStatus.CREATED);
+	}
+	
+	@RequestMapping(value="", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public List<Laboratorio> findAll() {
+		return laboratorioService.findAll();
 	}
 	
 }

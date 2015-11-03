@@ -22,19 +22,26 @@ public class Laboratorio{
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
+	private String nome;
+	private String sigla;
+	
 	@OneToOne(cascade = CascadeType.MERGE, optional = false, fetch = FetchType.EAGER, orphanRemoval = true)
 	@PrimaryKeyJoinColumn
 	private Campus campus;
+	
 	private String bloco;
 	private String sala;
 	private String responsavel;
-
+	private String telefone;
+	private String email;
+	
 	@Column(name = "data_atualizacao", nullable = false)
 	private Date dataAtualizacao;
 
 	@Column(name="tipo_atividade")
 	private String tipoAtividade;
 	
+	@Column(name="tipo_residuos")
 	@Enumerated(value=EnumType.STRING)
 	private TiposResiduos tipoResiduos;
 
@@ -100,6 +107,38 @@ public class Laboratorio{
 
 	public void setTipoResiduos(TiposResiduos tipoResiduos) {
 		this.tipoResiduos = tipoResiduos;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getSigla() {
+		return sigla;
+	}
+
+	public void setSigla(String sigla) {
+		this.sigla = sigla;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	

@@ -29,7 +29,7 @@ public class CampusRepositoryTest {
 		campus = new Campus();
 		campus.setNome("Sede");
 		campus.setTipo(TipoCampus.Sede);
-		campus.setLocalizacao("D67 - Sala 001");
+		campus.setLocalizacao("Maringá");
 		
 	}
 
