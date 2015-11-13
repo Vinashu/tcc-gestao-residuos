@@ -1,5 +1,6 @@
 package br.uem.gestaoresiduos.services;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,9 @@ public class LaboratorioService {
 	}
 	
 	public Laboratorio create(Laboratorio lab) {
+		if (lab.getDataAtualizacao() == null) {
+			lab.setDataAtualizacao(new Date());
+		}
 		return laboratorioRepository.save(lab);
 	}
 	

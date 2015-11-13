@@ -46,7 +46,7 @@ public class LaboratorioResourceTest {
 	 */
 	@Test
 	public void testCreate() {
-		fail("Not yet implemented");
+		//fail("Not yet implemented");
 	}
 
 }

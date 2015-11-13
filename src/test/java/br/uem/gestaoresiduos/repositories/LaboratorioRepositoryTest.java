@@ -19,14 +19,6 @@ public class LaboratorioRepositoryTest {
 		Campus campus = new Campus();
 	}
 
-	@Test
-	public void testFindAllIterableOfID() {
-//		fail("Not yet implemented");
-	}
 
-	@Test
-	public void testSaveIterableOfS() {
-//		fail("Not yet implemented");
-	}
 
 }

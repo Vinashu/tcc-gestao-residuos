@@ -27,7 +27,8 @@ public class CampusRepositoryTest {
 	@Before
 	public void setUp() throws Exception {
 		campus = new Campus();
-		campus.setNome("Sede");
+		campus.setId(1L);
+		campus.setNome("Campus Sede");
 		campus.setTipo(TipoCampus.Sede);
 		campus.setLocalizacao("Maringá");
 		
@@ -37,7 +38,7 @@ public class CampusRepositoryTest {
 	public void test() {
 		Campus result = campusRepository.save(campus);
 		
-		assertEquals(result.getNome(), "Sede");
+		assertEquals(result.getNome(), "Campus Sede");
 		
 	}
 

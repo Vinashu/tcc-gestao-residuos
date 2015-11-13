@@ -6,22 +6,21 @@
 angular
 		.module('app')
 		.run(
-				[ '$rootScope', '$state', '$stateParams',
-						function($rootScope, $state, $stateParams) {
+				[ '$rootScope', '$state', '$stateParams','$http',
+						function($rootScope, $state, $stateParams, $http) {
 							$rootScope.$state = $state;
 							$rootScope.$stateParams = $stateParams;
+							 
 						} ])
 		.config(
 				[
 						'$stateProvider',
 						'$urlRouterProvider',
-						'$httpProvider',
 						'JQ_CONFIG',
 						'MODULE_CONFIG',
 						function($stateProvider, $urlRouterProvider,
-								$httpProvider, JQ_CONFIG, MODULE_CONFIG) {
-
-							$httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
+								JQ_CONFIG, MODULE_CONFIG) {
+							
 							var layout = "tpl/app.html";
 							if (window.location.href.indexOf("material") > 0) {
 								layout = "tpl/blocks/material.layout.html";
@@ -173,6 +172,6 @@ angular
 											} ]
 								}
 							}
-							$httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
+							
 
 						} ]);

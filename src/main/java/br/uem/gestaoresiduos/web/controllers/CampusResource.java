@@ -22,6 +22,7 @@ public class CampusResource {
 	@RequestMapping(value="", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public List<Campus> findAll() {
-		return campusService.findAll();
+		List<Campus> campus = campusService.findAll();
+		return campus;
 	}
 }

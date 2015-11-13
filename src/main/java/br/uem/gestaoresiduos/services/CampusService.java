@@ -20,4 +20,12 @@ public class CampusService {
 	public List<Campus> findAll(){
 		return campusRespository.findAll();
 	}
+	
+	public Campus create(Campus campus) {
+		return campusRespository.save(campus);
+	}
+
+	public Campus findById(long id) {
+		return campusRespository.findById(id);
+	}
 }

@@ -9,53 +9,48 @@
 <div ng-controller="labCtrl" layout="column" ng-cloak
 	class="md-inline-form">
 	<md-content layout-padding>
-		<form name="labForm">
+	<form name="labForm" ngSubmit="submitLab">
 		<div layout layout-sm="column">
-			<md-input-container flex>
-        		<label>Nome Laboratório</label>
-       			<input ng-model="lab.nome">
-     		</md-input-container>			
-			
-			<md-input-container class="md-block">
-        		<label>Sigla</label>
-       			<input ng-model="lab.sigla">
-     		</md-input-container>
-     	</div>	
-     	<div layout layout-sm="column">
-     		<md-input-container>
-       			<md-select ng-model="lab.campus" aria-label="Campus">
-           			<md-option ng-repeat="campus in campi" value="{{campus.id}}" >
-              			{{campus.nome}}
-            		</md-option>
-          		</md-select>
-     		</md-input-container>			
-     		
-     		<md-input-container flex>
-        		<label>Bloco</label>
-       			<input ng-model="lab.bloco">
-     		</md-input-container>			
-     		
-     		<md-input-container flex>
-        		<label>Sala</label>
-       			<input ng-model="lab.sala">
-     		</md-input-container>			
-		</div>	
-			
-			<md-input-container class="md-block">
-        		<label>Responsável</label>
-       			<input ng-model="lab.responsavel">
-     		</md-input-container>			
-		
-			<md-input-container class="md-block">
-        		<label>Telefone para contato</label>
-       			<input ng-model="lab.tel">
-     		</md-input-container>			
-		
-			<md-input-container class="md-block">
-        		<label>Email para contato</label>
-       			<input ng-model="lab.email">
-     		</md-input-container>			
-		
-		</form>
+			<md-input-container flex> <label>Nome
+				Laboratório</label> <input ng-model="lab.nome"> </md-input-container>
+
+			<md-input-container class="md-block"> <label>Sigla</label>
+			<input ng-model="lab.sigla"> </md-input-container>
+		</div>
+		<div layout layout-sm="column">
+			<md-input-container flex> <label>Campus</label>
+			<md-select ng-model="lab.campus"> <md-option
+				ng-repeat="campus in campi" ng-value="campus"> {{
+			campus.nome }} </md-option> </md-select> </md-input-container>
+
+			<md-input-container flex> <label>Bloco</label> <input
+				ng-model="lab.bloco"> </md-input-container>
+
+			<md-input-container flex> <label>Sala</label> <input
+				ng-model="lab.sala"> </md-input-container>
+		</div>
+
+		<md-input-container class="md-block"> <label>Responsável</label>
+		<input ng-model="lab.responsavel"> </md-input-container>
+
+		<div layout layout-sm="column">
+
+			<md-input-container flex> <label>Email</label> <input
+				ng-model="lab.email"> </md-input-container>
+
+			<md-input-container flex> <label>Telefone</label>
+			<input ng-model="lab.telefone"> </md-input-container>
+
+		</div>
+		<md-input-container flex> <label>Atividades
+			do laboratório</label> <textarea ng-model="lab.tipoAtividade" columns="1"
+			md-maxlength="512"></textarea> </md-input-container>
+
+		<section layout="row" layout-sm="column" layout-align="right right"
+			layout-wrap>
+			<md-button class="md-raised" ng-click='cancelar()'>Cancelar</md-button>
+			<md-button class="md-raised md-primary" ng-click='submitLab()'>Salvar</md-button>
+		</section>
+</form>
 	</md-content>
 </div>

@@ -36,17 +36,15 @@ public class LaboratorioServiceTest {
 	@Autowired
 	private LaboratorioService laboratorioService;
 	
+	@Autowired
+	private CampusService campusService;
 
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
-		campus = new Campus();
-		campus.setId(1);
-		campus.setLocalizacao("Maringá");
-		campus.setNome("Campus principal");
-		campus.setTipo(TipoCampus.Sede);
+		campus = campusService.findById(20L);
 		
 		laboratorio = new Laboratorio();
 		laboratorio.setBloco("E90");

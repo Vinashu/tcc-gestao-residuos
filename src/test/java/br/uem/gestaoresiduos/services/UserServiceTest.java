@@ -25,14 +25,14 @@ public class UserServiceTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		user = new User(1, "victor", "victort@asd.ad", "sfd", null);
+		user = new User(1, "Victor Pupim", "pupimvictor@gmail.com", "3182", null);
 	}
 
 	@Test
 	public void testCreate() {
 		User result = userService.create(user);
 		
-		assertEquals("victor", result.getName());
+		assertEquals("Victor Pupim", result.getName());
 		
 	}
 

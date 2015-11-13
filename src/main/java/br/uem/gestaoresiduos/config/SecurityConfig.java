@@ -41,7 +41,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder registry) throws Exception {
-
 		registry.userDetailsService(customUserDetailsService);
 	}
 
@@ -61,37 +60,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				new AjaxAuthenticationSuccessHandler(new SavedRequestAwareAuthenticationSuccessHandler()))
 		.and().httpBasic().and().logout().and().authorizeRequests()
 		.antMatchers("/public/js/login**", "/public/login*", "/public/login**", "/public/register",
-				"/public/logout", "/libs/**", "/").permitAll().anyRequest()
+				"/public/logout", "/libs/**").permitAll().anyRequest()
 		.authenticated().and().csrf()
 		.csrfTokenRepository(csrfTokenRepository()).and()
 		.addFilterAfter(csrfHeaderFilter(), CsrfFilter.class);
 		
-		/*http.authorizeRequests()
-				.antMatchers()
-				.permitAll()
-				.antMatchers("/admin", "/admin/**")
-				.hasRole("ADMIN")
-				.anyRequest()
-				.authenticated()
-				.and()
-				.formLogin()
-				.loginPage("/public/login")
-				.loginProcessingUrl("/api/authenticate")
-				.usernameParameter("username").passwordParameter("password")
-				.successHandler(
-						new AjaxAuthenticationSuccessHandler(new SavedRequestAwareAuthenticationSuccessHandler()))
-				.and()
-				.httpBasic()
-				.and()
-				.logout()
-				.logoutUrl("/public/logout")
-				.logoutSuccessUrl("/public/login.html")
-				.permitAll()
-				.and()
-				.csrf()
-				.csrfTokenRepository(csrfTokenRepository())
-				.and()
-				.addFilterAfter(csrfHeaderFilter(), CsrfFilter.class);*/
 	}
 
 	private CsrfTokenRepository csrfTokenRepository() {

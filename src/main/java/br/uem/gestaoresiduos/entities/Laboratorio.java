@@ -1,23 +1,31 @@
 package br.uem.gestaoresiduos.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+
+
+@JsonAutoDetect
 @Entity
 @Table(name="laboratorios")
-public class Laboratorio{
+public class Laboratorio implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -25,8 +33,8 @@ public class Laboratorio{
 	private String nome;
 	private String sigla;
 	
-	@OneToOne(cascade = CascadeType.MERGE, optional = false, fetch = FetchType.EAGER, orphanRemoval = true)
-	@PrimaryKeyJoinColumn
+	@ManyToOne
+	@JoinColumn(name="campus_id")
 	private Campus campus;
 	
 	private String bloco;
@@ -44,7 +52,7 @@ public class Laboratorio{
 	@Column(name="tipo_residuos")
 	@Enumerated(value=EnumType.STRING)
 	private TiposResiduos tipoResiduos;
-
+	
 	public String getTipoAtividade() {
 		return tipoAtividade;
 	}
@@ -140,8 +148,5 @@ public class Laboratorio{
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	
-	
 	
 }
