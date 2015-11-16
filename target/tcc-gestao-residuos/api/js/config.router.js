@@ -6,31 +6,23 @@
 angular
 		.module('app')
 		.run(
-				[ '$rootScope', '$state', '$stateParams',
-						function($rootScope, $state, $stateParams) {
+				[ '$rootScope', '$state', '$stateParams', '$http',
+						function($rootScope, $state, $stateParams, $http) {
 							$rootScope.$state = $state;
 							$rootScope.$stateParams = $stateParams;
+
 						} ])
 		.config(
 				[
 						'$stateProvider',
 						'$urlRouterProvider',
-						'$httpProvider',
 						'JQ_CONFIG',
 						'MODULE_CONFIG',
-						function($stateProvider, $urlRouterProvider,
-								$httpProvider, JQ_CONFIG, MODULE_CONFIG) {
+						function($stateProvider, $urlRouterProvider, JQ_CONFIG,
+								MODULE_CONFIG) {
 
-							$httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
-							var layout = "tpl/app.html";
-							if (window.location.href.indexOf("material") > 0) {
-								layout = "tpl/blocks/material.layout.html";
-								$urlRouterProvider
-										.otherwise('/app/dashboard-v3');
-							} else {
-								$urlRouterProvider
-										.otherwise('/app/dashboard-v1');
-							}
+							var layout = "tpl/blocks/material.layout.html";
+							$urlRouterProvider.otherwise('/app/dashboard-v3');
 
 							$stateProvider
 									.state('app', {
@@ -52,7 +44,9 @@ angular
 											{
 												url : '/laboratorios',
 												template : '<div ui-view class="wrapper-md"></div>',
-												resolve : load([ 'js/controllers/laboratorio.js', 'js/services/laboratorio.js' ])
+												resolve : load([
+														'js/controllers/laboratorio.js',
+														'js/services/laboratorio.js' ])
 											})
 									.state(
 											'app.laboratorios.pesquisar',
@@ -62,6 +56,15 @@ angular
 											})
 									.state(
 											'app.laboratorios.edit',
+											{
+												url : '/edit/{labId}',
+												params : {
+													'labId' : null
+												},
+												templateUrl : 'tpl/laboratorios/edit.html'
+											})
+									.state(
+											'app.laboratorios.novo',
 											{
 												url : '/edit',
 												templateUrl : 'tpl/laboratorios/edit.html'
@@ -173,6 +176,5 @@ angular
 											} ]
 								}
 							}
-							$httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
 
 						} ]);

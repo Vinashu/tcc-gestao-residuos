@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="br.uem.gestaoresiduos.services.UserServiceTest" time="0.458" tests="1" errors="1" skipped="0" failures="0">
+<testsuite name="br.uem.gestaoresiduos.services.UserServiceTest" time="0.504" tests="1" errors="1" skipped="0" failures="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64"/>
@@ -59,7 +59,7 @@
     <property name="sun.desktop" value="gnome"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase name="testCreate" classname="br.uem.gestaoresiduos.services.UserServiceTest" time="0.458">
+  <testcase name="testCreate" classname="br.uem.gestaoresiduos.services.UserServiceTest" time="0.504">
     <error message="could not execute statement; SQL [n/a]; constraint [UK_6dotkott2kjsp8vw4d0m25fb7]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement" type="org.springframework.dao.DataIntegrityViolationException"><![CDATA[org.springframework.dao.DataIntegrityViolationException: could not execute statement; SQL [n/a]; constraint [UK_6dotkott2kjsp8vw4d0m25fb7]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement
 	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
 	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
@@ -105,7 +105,7 @@
 	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96)
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
 	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:653)
-	at br.uem.gestaoresiduos.services.UserService$$EnhancerBySpringCGLIB$$3dac92e.create(<generated>)
+	at br.uem.gestaoresiduos.services.UserService$$EnhancerBySpringCGLIB$$2cf2ce6a.create(<generated>)
 	at br.uem.gestaoresiduos.services.UserServiceTest.testCreate(UserServiceTest.java:33)
 ]]></error>
     <system-out><![CDATA[Hibernate: select user0_.id as id1_3_1_, user0_.dob as dob2_3_1_, user0_.email as email3_3_1_, user0_.name as name4_3_1_, user0_.password as password5_3_1_, roles1_.user_id as user_id3_3_3_, roles1_.role_id as role_id1_2_3_, roles1_.role_id as role_id1_2_0_, roles1_.role_name as role_nam2_2_0_ from users user0_ left outer join roles roles1_ on user0_.id=roles1_.user_id where user0_.id=?

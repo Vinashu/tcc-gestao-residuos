@@ -48,7 +48,7 @@
     "angular-resource": "1.4.3",
     "angular-sanitize": "1.4.3",
     "angular-touch": "1.4.3",
-    "angular-material": "~0.10.0",
+    "angular-material": "~0.11.2",
     "angular-translate": "~2.5.2",
     "angular-translate-loader-static-files": "~2.5.2",
     "angular-translate-storage-cookie": "~2.5.2",

@@ -15,6 +15,16 @@ app.service('labSvc', [ '$http', function($http) {
 					});
 	}
 	
+	this.getLab = function(labId) {
+		return $http.get("laboratorios/lab/"+labId)
+			.then(
+					function(response) {
+						return response.data
+					}, function(httpError) {	
+						throw httpError;
+					});
+	}
+	
 	this.getCampi = function() {
 		return $http.get("campus/")
 			.then(

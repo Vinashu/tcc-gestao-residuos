@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: br.uem.gestaoresiduos.services.UserServiceTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 6.345 sec <<< FAILURE! - in br.uem.gestaoresiduos.services.UserServiceTest
-testCreate(br.uem.gestaoresiduos.services.UserServiceTest)  Time elapsed: 0.458 sec  <<< ERROR!
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 9.89 sec <<< FAILURE! - in br.uem.gestaoresiduos.services.UserServiceTest
+testCreate(br.uem.gestaoresiduos.services.UserServiceTest)  Time elapsed: 0.504 sec  <<< ERROR!
 org.springframework.dao.DataIntegrityViolationException: could not execute statement; SQL [n/a]; constraint [UK_6dotkott2kjsp8vw4d0m25fb7]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement
 	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
 	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
@@ -48,6 +48,6 @@ org.springframework.dao.DataIntegrityViolationException: could not execute state
 	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96)
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
 	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:653)
-	at br.uem.gestaoresiduos.services.UserService$$EnhancerBySpringCGLIB$$3dac92e.create(<generated>)
+	at br.uem.gestaoresiduos.services.UserService$$EnhancerBySpringCGLIB$$2cf2ce6a.create(<generated>)
 	at br.uem.gestaoresiduos.services.UserServiceTest.testCreate(UserServiceTest.java:33)
 

@@ -53,6 +53,40 @@ public class Laboratorio implements Serializable{
 	@Enumerated(value=EnumType.STRING)
 	private TiposResiduos tipoResiduos;
 	
+	@Column(name="residuo_quimico")
+	private boolean residuoQuimico;
+	
+	@Column(name="residuo_hospitalar")
+	private boolean residuoHospitalar;
+	
+	@Column(name="residuo_solido")
+	private boolean residuoSolido;
+	
+	
+	public boolean getResiduoQuimico() {
+		return residuoQuimico;
+	}
+
+	public void setResiduoQuimico(boolean residuoQuimico) {
+		this.residuoQuimico = residuoQuimico;
+	}
+
+	public boolean getResiduoHospitalar() {
+		return residuoHospitalar;
+	}
+
+	public void setResiduoHospitalar(boolean residuoHospitalar) {
+		this.residuoHospitalar = residuoHospitalar;
+	}
+
+	public boolean getResiduoSolido() {
+		return residuoSolido;
+	}
+
+	public void setResiduoSolido(boolean residuoSolido) {
+		this.residuoSolido = residuoSolido;
+	}
+
 	public String getTipoAtividade() {
 		return tipoAtividade;
 	}

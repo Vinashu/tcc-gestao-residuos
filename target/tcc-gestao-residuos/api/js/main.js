@@ -14,7 +14,9 @@ angular
 						'$http',
 						'$rootScope',
 						function($scope, $translate, $localStorage, $window, $http, $rootScope) {
-
+							
+							$http.defaults.headers.common["X-XSRF-TOKEN"] = $window.csrfToken;
+							
 							var authenticate = function(credentials, callback) {
 								
 								var headers = credentials ? {

@@ -61,7 +61,7 @@ public class UserResource {
 		return new ResponseEntity<User>(savedUser, HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="{id}", method=RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value="{id}", method=RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_VALUE )
 	@ResponseBody
 	public ResponseEntity<Void> deleteUser(@PathVariable("id") int id) {
 		userService.deleteUser(id);

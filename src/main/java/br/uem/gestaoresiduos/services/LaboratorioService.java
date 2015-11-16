@@ -30,7 +30,7 @@ public class LaboratorioService {
 		return laboratorioRepository.findByBloco(bloco);
 	}
 	
-	public Laboratorio findLaboratorioById(Long id) {
+	public Laboratorio findLaboratorioById(int id) {
 		return laboratorioRepository.findOne(id);
 		
 	}
