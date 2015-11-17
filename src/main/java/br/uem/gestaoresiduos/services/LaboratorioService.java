@@ -4,6 +4,9 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,8 +21,11 @@ public class LaboratorioService {
 	@Autowired
 	private LaboratorioRepository laboratorioRepository;
 	
-	public List<Laboratorio> findAll() {
-		return laboratorioRepository.findAll();
+	@Transactional(readOnly=true)
+	public Page<Laboratorio> findAll(int page) {
+		PageRequest pageableRequest = new PageRequest(page, 20);
+		Page<Laboratorio> results = laboratorioRepository.findAll(pageableRequest);
+		return results;
 	}
 	
 	public List<Laboratorio> findByCampus(Campus campus){

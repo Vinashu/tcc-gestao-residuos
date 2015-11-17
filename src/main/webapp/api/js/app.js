@@ -18,4 +18,6 @@ angular.module('app', [
     'oc.lazyLoad',
     'pascalprecht.translate',
     'ngMaterial',
+    'flash',
+    'angularUtils.directives.dirPagination'
 ]);

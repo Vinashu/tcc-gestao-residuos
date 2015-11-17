@@ -13,7 +13,8 @@ angular
 						'$window',
 						'$http',
 						'$rootScope',
-						function($scope, $translate, $localStorage, $window, $http, $rootScope) {
+						'Flash',
+						function($scope, $translate, $localStorage, $window, $http, $rootScope, Flash) {
 							
 							$http.defaults.headers.common["X-XSRF-TOKEN"] = $window.csrfToken;
 							

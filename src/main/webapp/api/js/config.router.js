@@ -52,6 +52,9 @@ angular
 											'app.laboratorios.pesquisar',
 											{
 												url : '/',
+												params : {
+													'page' : 0
+												},
 												templateUrl : 'tpl/laboratorios/pesquisar.html'
 											})
 									.state(

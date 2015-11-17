@@ -15,11 +15,20 @@ app.service('labSvc', [ '$http', function($http) {
 					});
 	}
 	
+	this.list = function(page) {
+		return $http.get("laboratorios/"+page)
+			.then(function(response) {
+				return response.data
+			}, function(httpError) {
+				throw httpError;
+			});
+	}
+	
 	this.getLab = function(labId) {
 		return $http.get("laboratorios/lab/"+labId)
 			.then(
 					function(response) {
-						return response.data
+						return response
 					}, function(httpError) {	
 						throw httpError;
 					});
