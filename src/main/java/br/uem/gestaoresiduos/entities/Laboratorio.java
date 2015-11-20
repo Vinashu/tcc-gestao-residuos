@@ -22,9 +22,6 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 @Table(name="laboratorios")
 public class Laboratorio implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	@Id

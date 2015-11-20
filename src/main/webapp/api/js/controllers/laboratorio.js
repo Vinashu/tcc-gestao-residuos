@@ -6,15 +6,15 @@ app.controller('labCtrl', [
 		'$scope',
 		'$http',
 		'labSvc',
+		'campusSvc',
 		'$state',
 		'$stateParams',
 		'Flash',
 		'$mdDialog',
 		'$location',
-		function($scope, $http, labSvc, $state, $stateParams, Flash, $mdDialog,
+		function($scope, $http, labSvc, campusSvc, $state, $stateParams, Flash, $mdDialog,
 				$location) {
 
-			var novoLab = {};
 			$scope.laboratorios = [];
 			$scope.labsCount = 0;
 			$scope.labsPerPage = 20;
@@ -47,9 +47,7 @@ app.controller('labCtrl', [
 						lab : lab
 					},
 				
-					template : '<md-dialog>' + '  <md-dialog-content>'
-							+ '     Hi There {{lab.nome}}'
-							+ '  </md-dialog-content>' + '</md-dialog>'
+					templateUrl : 'tpl/laboratorios/view.html'
 				});
 			}
 
@@ -98,7 +96,7 @@ app.controller('labCtrl', [
 			};
 
 			$scope.getCampi = function() {
-				labSvc.getCampi().then(function(campiData) {
+				campusSvc.getCampi().then(function(campiData) {
 					$scope.campi = campiData;
 				});
 			}
@@ -107,7 +105,7 @@ app.controller('labCtrl', [
 				labSvc.getLab($stateParams.labId)
 						.then(
 								function successCallback(labData) {
-									$scope.lab = labData;
+									$scope.lab = labData.data;
 								},
 								function(error) {
 									Flash.create('warning',

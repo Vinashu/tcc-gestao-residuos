@@ -39,6 +39,10 @@ angular
 											})
 
 									// componentes
+											
+									/*
+									 * Laboratórios
+									 */	
 									.state(
 											'app.laboratorios',
 											{
@@ -46,7 +50,8 @@ angular
 												template : '<div ui-view class="wrapper-md"></div>',
 												resolve : load([
 														'js/controllers/laboratorio.js',
-														'js/services/laboratorio.js' ])
+														'js/services/laboratorio.js',
+														'js/services/campus.js'])
 											})
 									.state(
 											'app.laboratorios.pesquisar',
@@ -72,6 +77,43 @@ angular
 												url : '/edit',
 												templateUrl : 'tpl/laboratorios/edit.html'
 											})
+									
+											/*
+									 * Unidades Centralizadoras
+									 */											
+									.state(
+											'app.unidCentralizadoras',
+											{
+												url : '/unidCentralizadoras',
+												template : '<div ui-view class="wrapper-md"></div>',
+												resolve : load([
+														'js/controllers/unidCentralizadora.js',
+														'js/services/unidCentralizadora.js',
+														'js/services/campus.js',
+														'js/services/laboratorio.js'])
+											})
+									.state(
+											'app.unidCentralizadoras.pesquisar',
+											{
+												url : '/',
+												templateUrl : 'tpl/unidCentralizadoras/pesquisar.html'
+											})
+									.state(
+											'app.unidCentralizadoras.edit',
+											{
+												url : '/edit/{unidCentralizadoraId}',
+												params : {
+													'unidCentralizadoraId' : null
+												},
+												templateUrl : 'tpl/unidCentralizadoras/edit.html'
+											})
+									.state(
+											'app.unidCentralizadoras.novo',
+											{
+												url : '/edit',
+												templateUrl : 'tpl/unidCentralizadoras/edit.html'
+											})
+		
 
 									// pages
 									.state(

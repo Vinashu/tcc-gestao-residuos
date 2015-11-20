@@ -42,6 +42,7 @@ public class LaboratorioService {
 	}
 	
 	public Laboratorio update(Laboratorio lab) {
+		lab.setDataAtualizacao(new Date());
 		return laboratorioRepository.save(lab);
 	}
 	
