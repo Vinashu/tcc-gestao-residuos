@@ -8,6 +8,7 @@
 		<table	class="table table-bordered table-striped">
 			<thead>
 				<tr>
+					<th>Id</th>		
 					<th>Nome</th>
 					<th>Sigla</th>
 					<th>Tipos de Resíduos</th>
@@ -19,6 +20,7 @@
 			<tbody>
 				<tr dir-paginate="lab in laboratorios | itemsPerPage: labsPerPage" total-items="labsCount" current-page="pagination.current">
 					
+					<td>{{lab.id}}</td>
 					<td ng-click="showLabDetails(lab)">{{lab.nome}}</td>
 					<td>{{lab.sigla}}</td>
 					

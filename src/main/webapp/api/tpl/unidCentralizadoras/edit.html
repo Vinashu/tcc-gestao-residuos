@@ -61,6 +61,7 @@
 		<table class="table table-bordered table-striped">
 			<thead>
 				<tr>
+					<th>Id</th>
 					<th>Nome</th>
 					<th>Sigla</th>
 					<th>Tipos de Resíduos</th>
@@ -70,6 +71,7 @@
 			<tbody>
 				<tr ng-repeat="lab in unidCentralizadora.laboratorios">
 
+					<td>{{lab.id}}</td>
 					<td>{{lab.nome}}</td>
 					<td>{{lab.sigla}}</td>
 

@@ -14,7 +14,8 @@ angular
 						'$http',
 						'$rootScope',
 						'Flash',
-						function($scope, $translate, $localStorage, $window, $http, $rootScope, Flash) {
+						'underscore',
+						function($scope, $translate, $localStorage, $window, $http, $rootScope, Flash, underscore) {
 							
 							$http.defaults.headers.common["X-XSRF-TOKEN"] = $window.csrfToken;
 							

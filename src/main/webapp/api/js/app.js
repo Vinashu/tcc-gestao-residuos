@@ -19,5 +19,6 @@ angular.module('app', [
     'pascalprecht.translate',
     'ngMaterial',
     'flash',
-    'angularUtils.directives.dirPagination'
+    'angularUtils.directives.dirPagination',
+    'underscore'
 ]);

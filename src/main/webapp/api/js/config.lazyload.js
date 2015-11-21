@@ -89,6 +89,12 @@ angular.module('app')
           ]
       },
       {
+          name:'underscore',
+          files: [
+            '../libs/angular/angular-underscore/angular-underscore.js'
+          ]
+      },
+      {
           name:'ui.calendar',
           files: ['../libs/angular/angular-ui-calendar/src/calendar.js']
       },

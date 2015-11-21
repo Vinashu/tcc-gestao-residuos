@@ -13,10 +13,12 @@ app.controller('unidCentralizadoraCtrl', [
 		'Flash',
 		'$mdDialog',
 		'$location',
+		'underscore',
 		function($scope, $http, unidCentralizadoraSvc, campusSvc,labSvc, $state, $stateParams, Flash,
-				$mdDialog, $location) {
+				$mdDialog, $location, underscore) {
 
-			
+			$scope.unidCentralizadora = {};
+			$scope.unidCentralizadora.laboratorios = [];
 			
 			$scope.addLabs = function(unidCentralizadora) {
 				$mdDialog.show({
@@ -33,10 +35,34 @@ app.controller('unidCentralizadoraCtrl', [
 			}
 
 			$scope.dialogLabsCtrl = function($scope, $mdDialog, unidCentralizadora) {
+				
+				$scope.unidCentralizadora = unidCentralizadora;
+				
+				$scope.addRemoveLab = function(lab) {
+					var idx = unidCentralizadora.laboratorios.indexOf(lab);
+			        if (idx > -1) {
+			        	unidCentralizadora.laboratorios.remove(lab);
+			        }else{
+			        	unidCentralizadora.laboratorios.push(lab);
+			        }
+				}
+				
+				$scope.exists = function (item, list) {
+			        return list.indexOf(item) > -1;
+			      };
+				
+				$scope.carregaLabs = function() {
+					labSvc.list().then(function(labList) {
+						$scope.laboratorios = labList;
+					})
+				};
+				$scope.carregaLabs();
+				
 				$scope.closeDialog = function() {
 					$mdDialog.hide();
 				}
-				$scope.unidCentralizadora = unidCentralizadora;
+				
+				
 			}
 			
 			$scope.getCampi = function() {
@@ -46,9 +72,6 @@ app.controller('unidCentralizadoraCtrl', [
 			}
 			$scope.getCampi();
 			
-			$scope.getLabs = function(unidCentralizadora) {
-				labSvc.
-			}
 			
 			
 		} ]);

@@ -57,4 +57,8 @@ public class LaboratorioService {
 		laboratorioRepository.delete(id);
 	}
 
+	public List<Laboratorio> findAll() {
+		return laboratorioRepository.findAll();
+	}
+
 }

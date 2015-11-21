@@ -25,7 +25,7 @@ app.controller('labCtrl', [
 
 			$scope.carregaLabs = function(page) {
 				if ($location.path().indexOf('/edit') <= 0) {
-					labSvc.list(page).then(function(labList) {
+					labSvc.listPagenation(page).then(function(labList) {
 						$scope.laboratorios = labList.content;
 						$scope.labsCount = labList.totalElements;
 					})
