@@ -83,15 +83,15 @@ angular.module('app')
           ]
       },
       {
-          name:'angularFileUpload',
+          name: 'underscore',
           files: [
-            '../libs/angular/angular-file-upload/angular-file-upload.js'
+              '../libs/angular/underscore/underscore.js',
           ]
       },
       {
-          name:'underscore',
+          name:'angularFileUpload',
           files: [
-            '../libs/angular/angular-underscore/angular-underscore.js'
+            '../libs/angular/angular-file-upload/angular-file-upload.js'
           ]
       },
       {

@@ -40,7 +40,7 @@ public class UnidadeCentralizadora implements Serializable{
 	private String responsavel;
 	private String telefone;
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.DETACH, fetch=FetchType.EAGER)
 	@JoinTable(name="unid_centralizadora_to_labs", joinColumns={@JoinColumn(name="unid_centralizadora_id", referencedColumnName="id")}, inverseJoinColumns={@JoinColumn(name="lab_id", referencedColumnName="id")})
 	private List<Laboratorio> laboratorios;
 	

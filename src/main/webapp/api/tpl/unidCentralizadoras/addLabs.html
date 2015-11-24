@@ -6,6 +6,7 @@
 </div>
 <section layout="row" layout-sm="column" layout-align="end center">
 	<md-button class="md-raised md-primary" ng-click='closeDialog()'>Cancelar</md-button>
+	<md-button class="md-raised md-primary" ng-click='salvarLabs()'>Salvar</md-button>
 </section>
 </md-toolbar>
 
@@ -14,7 +15,7 @@
 	<md-input-container flex> <md-subheader
 		class="md-no-sticky">Laboratórios da UEM</md-subheader> <md-list-item
 		ng-repeat="lab in laboratorios"> 
-		<md-checkbox ng-model="lab.checked" ng-change="addRemoveLab(lab)" class="md-secondary"></md-checkbox>
+		<md-checkbox ng-checked="isLabFromUnid(lab)" ng-click="addRemoveLab(lab)" class="md-secondary"></md-checkbox>
 		<md-divider></md-divider>
 	<p>{{ lab.nome }}</p>
 
@@ -24,7 +25,7 @@
 		class="md-no-sticky">Laboratórios da Unidade
 	Centralizadora</md-subheader> <md-list-item
 		ng-repeat="lab in unidCentralizadora.laboratorios"> <md-checkbox
-		class="md-secondary"></md-checkbox>
+		class="md-secondary" ng-checked="isLabFromUnid(lab)" ></md-checkbox>
 	<p>{{ lab.nome }}</p>
 
 	</md-list-item> </md-input-container>

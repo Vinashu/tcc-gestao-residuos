@@ -8,7 +8,7 @@
 <div ng-controller="unidCentralizadoraCtrl" layout="column" ng-cloak
 	class="md-inline-form">
 	<md-content layout-padding>
-	<form name="unidCentralizadoraForm" ngSubmit="submitLab">
+	<form name="unidCentralizadoraForm" ngSubmit="submitUnidCentralizadora()">
 		<div layout layout-sm="column">
 			<md-input-container flex> <label>Nome
 				Unidade Centralizadora</label> <input ng-model="unidCentralizadora.nome"
@@ -41,10 +41,10 @@
 
 
 		<p>Tipo de Resíduos Processados</p>
-		<md-radio-group ng-model="unidadeCentralizadora.tiposResiduos">
-		<md-radio-button value="quimico">Resíduos Químicos</md-radio-button> <md-radio-button
-			value="hospitalar">Resíduos Hospitalares</md-radio-button> <md-radio-button
-			value="solido">Resíduos Sólidos</md-radio-button> </md-radio-group>
+		<md-radio-group ng-model="unidCentralizadora.tipoResiduos">
+		<md-radio-button value="QUIMICO">Resíduos Químicos</md-radio-button> <md-radio-button
+			value="HOSPITALAR">Resíduos Hospitalares</md-radio-button> <md-radio-button
+			value="SOLIDO">Resíduos Sólidos</md-radio-button> </md-radio-group>
 		<md-divider></md-divider>
 
 
