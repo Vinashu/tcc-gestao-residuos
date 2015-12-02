@@ -2,7 +2,11 @@ package br.uem.gestaoresiduos.entities;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
@@ -12,16 +16,23 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 @Entity(name="coleta_residuos_solidos")
 public class ColetaResiduosSolidos {
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	private int OS;
 	private float peso;
-	private Local local;
 	private String observacoes;
+	
+	@Column(name="data_coleta")
 	private Date dataColeta;
 	
 	@ManyToOne
 	@JoinColumn(name="unid_centralizadora_id")
 	private UnidadeCentralizadora unidadeCentralizadora;
+
+	@ManyToOne
+	@JoinColumn(name="local_id")	
+	private Local local;
 	
 	public int getId() {
 		return id;

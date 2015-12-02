@@ -15,5 +15,15 @@ app.service('unidCentralizadoraSvc', [ '$http', function($http) {
 					});
 	}
 	
+	this.findUnidadesCentralizadoras = function() {
+		return $http.get("unidCentralizadoras/")
+			.then(
+				function(response) {
+					return response.data
+			}, function(httpError) {
+					throw httpError.status;
+			});
+	}
+	
 	
 } ]);

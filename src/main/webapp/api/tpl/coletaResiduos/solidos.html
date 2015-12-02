@@ -1,0 +1,117 @@
+<meta charset="UTF-8">
+
+<div class="bg-light lter b-b wrapper-md">
+	<h1 class="m-n font-thin h3">Coleta de Resíduos Sólidos</h1>
+</div>
+<div flash-message="10000"></div>
+
+<div ng-controller="coletaResiduosSolidosCtrl" layout="column" ng-cloak
+	class="md-inline-form">
+	<md-content layout-padding>
+	
+	<form name="coletaResiduosSolidosForm">
+		<md-content flex>		
+			<md-input-container flex="70"> <label>Unidade Centralizadora</label>
+				<md-select ng-model="unidCentralizadora" ng-model-options="{trackBy: '$value.nome'}">
+					<md-option	required ng-repeat="unid in unidadesCentralizadoras" ng-value="unid">
+						{{ unid.nome }} 
+					</md-option> 
+				</md-select> 
+			</md-input-container>
+			
+			<md-input-container flex="30"> <label>Campus</label> <input
+				disabled ng-model="unidCentralizadora.campus.nome"> </md-input-container>
+				
+		</md-content>
+		
+		<!-- Pesquisa Coleta Residuos solidos -->
+		<md-content flex>
+			<nav ui-nav class="navi clearfix">
+				<ul class="nav">
+					<li >
+						<a href md-ink-ripple style="text-decoration: underline;">
+	      					<i class="glyphicon glyphicon-search"></i>
+	      					<span>Pesquisar Coletas</span>
+	    				</a>
+						<ul class="nav nav-sub dk">
+							<li>
+	          					<md-content layout-padding layout="row"  style="border: 1px solid #eee" flex>
+									<md-input-container class="md-icon-float md-icon-right md-block" flex="10">
+										<label>Mês</label>
+										<input ng-model="search.mes" type="number" step="1" max="12" min="1">
+									</md-input-container>
+									
+									<md-input-container class="md-icon-float md-icon-right md-block" flex="20">
+										<label>Ano</label>
+										<input ng-model="search.ano">
+									</md-input-container>
+									
+									<md-input-container flex="50"> <label>Local</label>
+										<md-select ng-model="search.local" ng-model-options="{trackBy: '$value.nome'}">
+											<md-option	required ng-repeat="local in locais" ng-value="local">
+												{{ local.nome }} 
+											</md-option> 
+										</md-select> 
+									</md-input-container>	
+									
+									<md-button class="md-raised md-primary" style="max-height: 20px;" ng-click='searchColeta()'>
+											Pesquisar
+									</md-button>
+								</md-content>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+		</md-content>			
+		
+		<md-content >
+		
+			
+		<div class="bg-light lter b-b wrapper-md" style="margin-top: 30px;">
+			<b>Colelas de {{unidCentralizadora.nome}}</b>
+			<md-button class="md-fab md-primary md-mini" ng-click="addColeta()"
+				aria-label="Add Coleta"> <md-tooltip
+				md-direction="right"> Adicionar Coleta de Resíduos Sólidos </md-tooltip> 
+				<i class="glyphicon glyphicon-plus"></i>
+			</md-button>
+		</div>
+		
+			<table	class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th>Data</th>		
+					<th>OS</th>
+					<th>Peso</th>
+					<th>Local</th>
+					<th>Observações</th>
+				</tr>
+			</thead>
+				<tbody>
+					<tr dir-paginate="coleta in coletas | itemsPerPage: coletasPerPage" total-items="coletasCount" current-page="pagination.current">
+						
+						<td>{{coleta.data}}</td>
+						<td>{{coleta.OS}}</td>
+						<td>{{coleta.peso}}</td>
+						<td>{{coleta.local.nome}}</td>
+						<td>{{coleta.observacoes}}</td>
+					</tr>
+				</tbody>
+			</table>		
+			<dir-pagination-controls on-page-change="pageChanged(newPageNumber)" auto-hide="false"></dir-pagination-controls>
+		</md-content>
+		
+		<md-content>
+			gráficos
+		</md-content>		
+		
+			
+	</form>
+	
+	
+	
+	
+	
+	
+	</md-content>
+</div>

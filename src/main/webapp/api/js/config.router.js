@@ -113,6 +113,30 @@ angular
 												url : '/edit',
 												templateUrl : 'tpl/unidCentralizadoras/edit.html'
 											})
+											
+									/*
+									 * Coleta de Resíduos
+									 */	
+									.state(
+											'app.coletaResiduos',
+											{
+												url : '/coletaResiduos',
+												template : '<div ui-view class="wrapper-md"></div>',
+												resolve : load([
+														'js/services/laboratorio.js',
+														'js/services/unidCentralizadora.js',
+														'js/services/local.js'])
+											})
+									.state(
+											'app.coletaResiduos.solidos',
+											{
+												url : '/solidos',
+												templateUrl : 'tpl/coletaResiduos/solidos.html',
+												resolve: load([
+												               'js/controllers/coletaResiduosSolidos.js',
+												               'js/services/coletaResiduosSolidos.js'])
+											})
+											
 		
 
 									// pages
