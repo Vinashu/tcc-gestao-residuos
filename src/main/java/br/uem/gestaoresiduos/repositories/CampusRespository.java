@@ -10,6 +10,4 @@ import br.uem.gestaoresiduos.entities.Campus;
 @Repository
 public interface CampusRespository extends JpaRepository<Campus, Serializable>{
 
-	Campus findById(long id);
-
 }

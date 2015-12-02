@@ -2,6 +2,8 @@ package br.uem.gestaoresiduos.repositories;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Date;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,10 +29,12 @@ public class CampusRepositoryTest {
 	@Before
 	public void setUp() throws Exception {
 		campus = new Campus();
-		campus.setId(1L);
+		campus.setId(1);
+		campus.setSigla("SEDE");
 		campus.setNome("Campus Sede");
 		campus.setTipo(TipoCampus.Sede);
 		campus.setLocalizacao("Maringá");
+		campus.setDataAtualizacao(new Date());
 		
 	}
 

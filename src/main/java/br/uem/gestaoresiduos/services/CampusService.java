@@ -25,7 +25,8 @@ public class CampusService {
 		return campusRespository.save(campus);
 	}
 
-	public Campus findById(long id) {
-		return campusRespository.findById(id);
+	public Campus findById(int id) {
+		return campusRespository.findOne(id);
 	}
+	
 }

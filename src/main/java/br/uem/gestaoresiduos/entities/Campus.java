@@ -1,37 +1,26 @@
 package br.uem.gestaoresiduos.entities;
 
+import java.io.Serializable;
+
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="campus")
-public class Campus {
+@DiscriminatorValue(value="campus")
+public class Campus extends Local implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5784864129037017707L;
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private long id;
-	private String nome;
 	@Enumerated(value=EnumType.STRING)
 	private TipoCampus tipo;
 	private String localizacao;
 	
-	public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
-	}
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
 	public TipoCampus getTipo() {
 		return tipo;
 	}
@@ -49,7 +38,6 @@ public class Campus {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((localizacao == null) ? 0 : localizacao.hashCode());
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
 		return result;
 	}
@@ -67,11 +55,6 @@ public class Campus {
 			if (other.localizacao != null)
 				return false;
 		} else if (!localizacao.equals(other.localizacao))
-			return false;
-		if (nome == null) {
-			if (other.nome != null)
-				return false;
-		} else if (!nome.equals(other.nome))
 			return false;
 		if (tipo != other.tipo)
 			return false;

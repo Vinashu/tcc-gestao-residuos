@@ -44,7 +44,8 @@ public class LaboratorioServiceTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		campus = campusService.findById(20L);
+		Integer id = 1;
+		campus = campusService.findById(id);
 		
 		laboratorio = new Laboratorio();
 		laboratorio.setBloco("E90");
