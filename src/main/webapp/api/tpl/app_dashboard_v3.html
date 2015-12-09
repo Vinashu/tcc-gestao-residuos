@@ -1,17 +1,129 @@
-<div class="bg-light lt b-b wrapper-md">
-  <div class="row">
-    <div class="col-sm-6 col-xs-12">
-      <h1 class="m-n font-thin h3 text-black">Dashboard</h1>
-    </div>
-  </div>
-</div>
-<div class="hbox hbox-auto-xs hbox-auto-sm">
-  <!-- main -->
-  <div class="col">
-    <!-- / main header -->
-    <div class="wrapper-md" >
-      
-    </div>
-  </div>
 
+<div class="hbox hbox-auto-xs hbox-auto-sm">
+	<!-- main -->
+	<div class="col">
+		<!-- / main header -->
+		<div class="wrapper-md">
+
+			<!-- Widget Resíduos solidos -->
+			<div class="col-sm-12" style="padding-right: 5px;padding-left: 5px;margin-bottom: 20px;">
+				<div class="bg-white no-border">
+					<div class="wrapper bg-solidos" >
+								 <span class="h4 text-white">Resíduos Sólidos</span>
+					</div>
+					<div class="panel-heading">
+						
+						
+						<div class="text-center m-t-md">
+							
+							<div ui-jq="plot" ui-options="
+						              [
+						               { data: [[1, 9],[2, 22], [3, 12],[4, 20],[5, 13],[6, 28], [7, 12],[8, 20],[9, 7],[10, 25], [11, 12],[12, 20]], label: 'Reciclável', points: { show: true }, lines: { show: true, fill: true, fillColor: { colors: [{ opacity: 0.1 }, { opacity: 0.1}] } } }, 
+						                { data: [[1, 22], [2, 20], [3, 8],[4, 25], [5, 12],[6, 20], [7, 9],[8, 22],[9, 25], [10, 12],[11,33],[12, 20]], label: 'Não reciclável', points: { show: true, radius: 4 },lines: { show: true, fill: true, fillColor: { colors: [{ opacity: 0.1 }, { opacity: 0.1}] } }  }
+						              ],
+						              {
+						                colors: [ '{{app.color.info}}','{{app.color.warning}}' ],
+						                series: { shadowSize: 2 },
+						                xaxis:{ font: { color: '#ccc' } },
+						                yaxis:{ font: { color: '#ccc' } },
+						                grid: { hoverable: true, clickable: true, borderWidth: 0, color: '#ccc' },
+						                tooltip: true,
+						                tooltipOpts: { content: '%s of %x.0 is %y.4 quilos',  defaultTheme: false, shifts: { x: 0, y: 20 } }
+						              }
+            							" style="height:240px"></div>
+         					 </div>                  
+							
+							
+						</div>
+					
+					<div class="panel-footer bg-light lter wrapper">
+					
+						<div class="hbox text-center b-b b-light text-sm">
+							<div class="bg-primary col wrapper">
+								<span>Reciclável</span>
+								<div class="h1 text-info font-thin">11.790 Kg</div>
+							</div>
+							<div class="col wrapper bg-info">
+								<span>Não Reciclável</span>
+								<div class="h1 text-warning font-thin">12.560 Kg</div>
+							</div>
+						
+							<a ui-sref="app.coletaResiduos.solidos" class="col padder-v text-muted b-r b-light lt">
+								<i class="icon-layers block m-b-xs fa-2x"></i>
+								<span>Coletas</span>
+							</a>
+							<a ui-sref="app.coletaResiduos.solidos.novaColeta" class="col padder-v text-muted b-r b-light lt"> 
+								<i class="icon-plus block m-b-xs fa-2x"></i>
+								<span>Nova Coleta</span>
+							</a>
+							<a ui-sref="app.unidCentralizadoras.pesquisar" class="col padder-v text-muted lt"> 
+								<i class=" icon-size-actual block m-b-xs fa-2x"></i> 
+								<span>Unid. Centralizadoras</span>
+							</a>
+						</div>
+
+					</div>
+					
+					</div>
+					
+					
+				</div>
+				
+				
+					<!-- Widget Resíduos Quimicos -->
+			<div class="col-sm-12" style="padding-right: 5px;padding-left: 5px;margin-bottom: 20px;">
+				<div class="bg-white no-border">
+					<div class="wrapper bg-quimicos" >
+								 <span class="h4 text-white">Resíduos Químicos</span>
+					</div>
+					<div class="panel-heading">
+						
+						
+						<div class="text-center m-t-md">
+							
+							<div ui-jq="plot" ui-options="
+					              [ 
+								      { label: 'Alcool Contaminado', data: 40 }, 
+								      { label: 'Reagentes Sólidos Vencidos', data: 10 },
+								      { label: 'Gel de Extração biologica', data: 20 },
+								      { label: 'Acetato de Etilla', data: 12 },
+								      { label: 'Formol Usado', data: 18 }
+								    ],
+				              {
+				                series: { pie: { show: true, innerRadius: 0.5, stroke: { width: 0 }, label: { show: true, threshold: 0.05 } } },
+				                colors: ['{{app.color.primary}}','{{app.color.info}}','{{app.color.success}}','{{app.color.warning}}','{{app.color.danger}}'],
+				                grid: { hoverable: true, clickable: true, borderWidth: 0, color: '#ccc' },   
+				                tooltip: true,
+				                tooltipOpts: { content: '%s: %p.0%' }
+				              }
+				            	" style="height:400px">
+				            </div>
+       					 </div>                  
+							
+							
+					</div>
+				</div>
+					
+			
+			</div>
+				
+				
+					<!-- Widget Resíduos hosp -->
+			<div class="col-sm-12" style="padding-right: 5px;padding-left: 5px;">
+				<div class="bg-white no-border">
+					<div class="wrapper bg-hospitalares" >
+								 <span class="h4 text-white">Resíduos Hospitalares</span>
+					</div>
+					<div class="panel-heading">
+						
+						
+						
+							
+					</div>
+				</div>
+			</div>		
+				
+			
+		</div>
+	</div>
 </div>

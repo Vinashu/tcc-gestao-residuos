@@ -136,6 +136,17 @@ angular
 												               'js/controllers/coletaResiduosSolidos.js',
 												               'js/services/coletaResiduosSolidos.js'])
 											})
+									.state(
+											'app.coletaResiduos.solidos.novaColeta',
+											{
+												url : '/solidos',
+												templateUrl : 'tpl/coletaResiduos/solidos.html',
+												params: { 'novaColeta' : true },
+												resolve: load([
+												               'js/controllers/coletaResiduosSolidos.js',
+												               'js/services/coletaResiduosSolidos.js'])
+											})		
+											
 											
 		
 

@@ -71,11 +71,8 @@ app
 											unidCentralizadora.laboratorios, {
 												id : lab.id
 											}))) {
-										unidCentralizadora.laboratorios = _
-												.without(
-														unidCentralizadora.laboratorios,
-														_
-																.findWhere(
+										unidCentralizadora.laboratorios = _.without(
+												unidCentralizadora.laboratorios,_.findWhere(
 																		unidCentralizadora.laboratorios,
 																		{
 																			id : lab.id
@@ -109,6 +106,22 @@ app
 								$scope.salvarLabs = function() {
 									$mdDialog.hide();
 								}
+
+							}
+							
+							if ($stateParams.unidCentralizadoraId != null) {
+								unidCentralizadoraSvc.getUnid($stateParams.unidCentralizadoraId)
+										.then(
+												function successCallback(unidData) {
+													$scope.unidCentralizadora = unidData.data;
+												},
+												function(error) {
+													Flash.create('warning',
+															'Unidade não encontrado -' + $stateParams.unidCentralizadoraId + 'Erro:'
+																	+ error.statusText,
+															'custom-class');
+												});
+							} else {
 
 							}
 

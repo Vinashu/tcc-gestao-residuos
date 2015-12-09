@@ -26,6 +26,7 @@ public class Local implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="local_id")
 	private int id;
 	private String nome;
 	private String sigla;

@@ -6,13 +6,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.uem.gestaoresiduos.entities.Campus;
 import br.uem.gestaoresiduos.entities.Laboratorio;
 import br.uem.gestaoresiduos.repositories.LaboratorioRepository;
+import br.uem.gestaoresiduos.repositories.LocalRepository;
 
 @Service
 @Transactional
@@ -20,6 +20,9 @@ public class LaboratorioService {
 
 	@Autowired
 	private LaboratorioRepository laboratorioRepository;
+	
+	@Autowired
+	private LocalRepository localRepository;
 	
 	@Transactional(readOnly=true)
 	public Page<Laboratorio> findAll(int page) {
@@ -37,7 +40,7 @@ public class LaboratorioService {
 	}
 	
 	public Laboratorio findLaboratorioById(int id) {
-		return laboratorioRepository.findOne(id);
+		return (Laboratorio) localRepository.findOne(id);
 		
 	}
 	

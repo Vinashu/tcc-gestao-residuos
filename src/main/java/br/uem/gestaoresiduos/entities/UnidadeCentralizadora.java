@@ -14,8 +14,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -40,8 +40,8 @@ public class UnidadeCentralizadora implements Serializable{
 	private String responsavel;
 	private String telefone;
 	
-	@OneToMany(cascade=CascadeType.DETACH, fetch=FetchType.EAGER)
-	@JoinTable(name="unid_centralizadora_to_labs", joinColumns={@JoinColumn(name="unid_centralizadora_id", referencedColumnName="id")}, inverseJoinColumns={@JoinColumn(name="lab_id", referencedColumnName="id")})
+	@ManyToMany(cascade=CascadeType.DETACH, fetch=FetchType.EAGER)
+	@JoinTable(name="unid_centralizadora_to_labs", joinColumns={@JoinColumn(name="unid_centralizadora_id", referencedColumnName="id")}, inverseJoinColumns={@JoinColumn(name="lab_id", referencedColumnName="local_id")})
 	private List<Laboratorio> laboratorios;
 	
 	@Column(name="tipo_residuos")
