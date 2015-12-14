@@ -14,8 +14,6 @@
 		</section>
 	</md-toolbar>
 
-	<div flash-message="10000"></div>
-	
 	<div ng-controller="novaColetaCtrl" layout="column" ng-cloak class="md-inline-form">
 		<md-content layout-padding>
 		
@@ -38,13 +36,20 @@
 						</md-option>
 					</md-select>
 				</md-input-container>
+				
 			</div>
+			<div layout layout-sm="column">	
+					<md-radio-group ng-model="novaColeta.reciclavel" style="margin: 0px;">
+	     				<md-radio-button ng-value="true" class="md-primary">Reciclável</md-radio-button>
+	     				<md-radio-button ng-value="false"> Não Reciclável</md-radio-button>
+	      			</md-radio-group>
+</div>
 			<div layout>
-				<md-datepicker ng-model="novaColeta.data" md-placeholder="Data da Coleta" style="margin-right: 0px;"></md-datepicker>
+				<md-datepicker ng-model="novaColeta.dataColeta" md-placeholder="Data da Coleta" style="margin-right: 0px;"></md-datepicker>
 				
 				<md-input-container flex> 
 					<label>Observações</label>
-					<input ng-model="novaColeta.OS"> 
+					<input ng-model="novaColeta.observacoes"> 
 				</md-input-container>
 			</div>
 				

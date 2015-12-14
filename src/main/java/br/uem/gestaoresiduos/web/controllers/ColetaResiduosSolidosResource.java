@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.uem.gestaoresiduos.entities.ColetaResiduosSolidos;
+import br.uem.gestaoresiduos.entities.Local;
+import br.uem.gestaoresiduos.entities.UnidadeCentralizadora;
 import br.uem.gestaoresiduos.services.ColetaResiduosSolidosService;
 
 @Controller
@@ -28,6 +30,12 @@ public class ColetaResiduosSolidosResource {
 	public ResponseEntity<ColetaResiduosSolidos> create(@RequestBody ColetaResiduosSolidos coletaResiduosSolidos) {
 		ColetaResiduosSolidos savedColeta = coletaResiduosSolidosService.create(coletaResiduosSolidos);
 		return new ResponseEntity<ColetaResiduosSolidos>(savedColeta, HttpStatus.CREATED);
+	}
+	
+	@RequestMapping(value="find", method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public List<ColetaResiduosSolidos> find(@RequestBody int mes, int ano, Local local, UnidadeCentralizadora unidCentralizadora) {
+		return coletaResiduosSolidosService.findByMesAnoLocalUnidCentralizadora(mes, ano, local, unidCentralizadora);
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

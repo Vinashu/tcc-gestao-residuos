@@ -11,7 +11,7 @@
 	
 	<form name="coletaResiduosSolidosForm">
 		<md-content flex>		
-			<md-input-container flex="70"> <label>Unidade Centralizadora</label>
+			<md-input-container flex="70" style="min-width: 250px"> <label>Unidade Centralizadora</label>
 				<md-select ng-model="unidCentralizadora" ng-model-options="{trackBy: '$value.nome'}">
 					<md-option	required ng-repeat="unid in unidadesCentralizadoras" ng-value="unid">
 						{{ unid.nome }} 
@@ -19,11 +19,11 @@
 				</md-select> 
 			</md-input-container>
 			
-			<md-input-container flex="30"> <label>Campus</label> <input
-				disabled ng-model="unidCentralizadora.campus.nome"> </md-input-container>
+			<md-input-container flex="30"> <label>Campus</label> <b><input
+				disabled ng-model="unidCentralizadora.campus.nome"> </b></md-input-container>
 				
 		</md-content>
-		
+		<md-divider></md-divider>
 		<!-- Pesquisa Coleta Residuos solidos -->
 		<md-content flex>
 			<nav ui-nav class="navi clearfix">
@@ -54,7 +54,7 @@
 										</md-select> 
 									</md-input-container>	
 									
-									<md-button class="md-raised md-primary" style="max-height: 20px;" ng-click='searchColeta()'>
+									<md-button class="md-raised md-primary" style="max-height: 20px;" ng-click='findColetasUnid()'>
 											Pesquisar
 									</md-button>
 								</md-content>

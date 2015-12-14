@@ -34,24 +34,37 @@ app.controller('coletaResiduosSolidosCtrl', [
 			}
 			$scope.carregaUnidadesCentralizadoras();
 			
+		
+			$scope.findColetasUnid = function() {
+				coletaResiduosSolidosSvc.findColetasUnid($scope.search.mes, $scope.search.ano, $scope.search.local, $scope.unidCentralizadora)
+					.then(function(coletasData) {
+						$scope.coletas = coletasData;
+					}, function(error) {
+						Flash.create('error',
+								"Erro ao pesquisar coletas: "
+										+ error, "custom-class");
+					})
+			}
+			
+			$scope.novaColeta = {};
 			$scope.addNovaColeta = function() {
 				$mdDialog.show({
 					clickOutsideToClose : true,
 					scope : $scope,
 					preserveScope : true,
 					controller : 'novaColetaCtrl',
-				
+
 					templateUrl : 'tpl/coletaResiduos/novaColetaSolido.html'
 				});
 			}
 			
-
+			
 			$scope.novaColetaCtrl = function($scope, $mdDialog) {
 				$scope.closeDialog = function() {
 					$mdDialog.hide();
 				}
 				
-				$scope.novaColeta = {};
+				$scope.novaColeta.unidadeCentralizadora = $scope.unidCentralizadora;
 				$scope.locais = [];
 				
 				$scope.carregaLocais = function() {
@@ -63,7 +76,17 @@ app.controller('coletaResiduosSolidosCtrl', [
 				$scope.carregaLocais();
 				
 				$scope.salvarColeta = function() {
-					//Implementar post
+					coletaResiduosSolidosSvc.submitColeta($scope.novaColeta)
+						.then(function(savedColeta) {
+							Flash.create('success', 'Coleta '
+									+ savedColeta.OS
+									+ ' criada com sucesso',
+									'custom-class');
+							$mdDialog.hide();
+							$scope.novaColeta = {};
+						}, function(error) {
+							
+						});
 				}
 				
 			}

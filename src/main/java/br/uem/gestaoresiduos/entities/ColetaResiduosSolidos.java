@@ -34,6 +34,8 @@ public class ColetaResiduosSolidos {
 	@JoinColumn(name="local_id")	
 	private Local local;
 	
+	private boolean reciclavel;
+	
 	public int getId() {
 		return id;
 	}
@@ -75,6 +77,12 @@ public class ColetaResiduosSolidos {
 	}
 	public void setObservacoes(String observacoes) {
 		this.observacoes = observacoes;
+	}
+	public boolean getReciclavel() {
+		return reciclavel;
+	}
+	public void setReciclavel(boolean reciclavel) {
+		this.reciclavel = reciclavel;
 	}
 	@Override
 	public int hashCode() {
