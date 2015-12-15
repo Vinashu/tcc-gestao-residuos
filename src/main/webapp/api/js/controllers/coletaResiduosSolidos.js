@@ -47,6 +47,7 @@ app.controller('coletaResiduosSolidosCtrl', [
 			}
 			
 			$scope.novaColeta = {};
+			//$scope.novaColeta = {};
 			$scope.addNovaColeta = function() {
 				$mdDialog.show({
 					clickOutsideToClose : true,
