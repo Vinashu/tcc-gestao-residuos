@@ -6,12 +6,14 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.fasterxml.jackson.databind.JsonNode;
+
 import br.uem.gestaoresiduos.entities.ColetaResiduosSolidos;
-import br.uem.gestaoresiduos.entities.Local;
-import br.uem.gestaoresiduos.entities.UnidadeCentralizadora;
 import br.uem.gestaoresiduos.repositories.ColetaResiduosSolidosRepository;
 
 @Service
@@ -29,22 +31,31 @@ public class ColetaResiduosSolidosService {
 		return coletaResiduosSolidosRepository.findOne(id);
 	}
 	
-	public List<ColetaResiduosSolidos> findAll() {
-		return coletaResiduosSolidosRepository.findAll();
+	public Page<ColetaResiduosSolidos> findAll(JsonNode unitId, int page) {
+		PageRequest pageableRequest = new PageRequest(page, 20);
+		int unidCentralizadoraId = unitId.asInt();
+		return coletaResiduosSolidosRepository.findByUnidadeCentralizadoraId(unidCentralizadoraId, pageableRequest);
 	}
 
-	public List<ColetaResiduosSolidos> findByMesAnoLocalUnidCentralizadora(int mes, int ano, Local local,
-			UnidadeCentralizadora unidCentralizadora) {
+	public Page<ColetaResiduosSolidos> findByMesAnoLocalUnidCentralizadora(JsonNode search, int page) {
+		PageRequest pageableRequest = new PageRequest(page, 20);
 		SimpleDateFormat sdf1= new SimpleDateFormat("dd/MM/yyyy"); 
 		
+		int mes = search.get("mes").asInt();
+		int ano = search.get("ano").asInt();
+		int unidCentralizadoraId = search.get("unidCentralizadoraId").asInt();
+		int localId = search.get("localId").asInt();
 		Date start = null, end = null;
+		
 		try {
 			start = sdf1.parse("01/"+mes+"/"+ano);
 			end = sdf1.parse("31/"+mes+"/"+ano);
 		} catch (ParseException e) {
+			e.printStackTrace();
 		}
 		
-		return coletaResiduosSolidosRepository.findByDataColetaBetweenAndLocalAndUnidadeCentralizadora(start, end, local, unidCentralizadora);
+		Page<ColetaResiduosSolidos> results = coletaResiduosSolidosRepository.findByDataColetaBetweenAndLocalIdAndUnidadeCentralizadoraId(start, end, localId, unidCentralizadoraId, pageableRequest);
+		return results;
 	}
 	
 }

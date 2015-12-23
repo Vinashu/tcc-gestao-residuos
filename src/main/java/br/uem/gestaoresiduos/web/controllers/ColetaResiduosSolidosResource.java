@@ -3,6 +3,7 @@ package br.uem.gestaoresiduos.web.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +12,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.fasterxml.jackson.databind.JsonNode;
 
 import br.uem.gestaoresiduos.entities.ColetaResiduosSolidos;
 import br.uem.gestaoresiduos.entities.Local;
@@ -32,16 +36,16 @@ public class ColetaResiduosSolidosResource {
 		return new ResponseEntity<ColetaResiduosSolidos>(savedColeta, HttpStatus.CREATED);
 	}
 	
-	@RequestMapping(value="find", method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value="find/{page}", method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public List<ColetaResiduosSolidos> find(@RequestBody int mes, int ano, Local local, UnidadeCentralizadora unidCentralizadora) {
-		return coletaResiduosSolidosService.findByMesAnoLocalUnidCentralizadora(mes, ano, local, unidCentralizadora);
+	public Page<ColetaResiduosSolidos> find(@PathVariable Integer page, @RequestBody JsonNode search) {
+		return coletaResiduosSolidosService.findByMesAnoLocalUnidCentralizadora(search, page);
 	}
-
-	@RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	
+	@RequestMapping(value = "findAll/{page}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public List<ColetaResiduosSolidos> findAll() {
-		return coletaResiduosSolidosService.findAll();
+	public Page<ColetaResiduosSolidos> findAll(@PathVariable Integer page, @RequestBody JsonNode unidId) {
+		return coletaResiduosSolidosService.findAll(unidId, page);
 	}
 
 	@RequestMapping(value = "coleta/{coletaId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

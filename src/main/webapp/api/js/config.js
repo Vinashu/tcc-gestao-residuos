@@ -16,9 +16,16 @@ angular.module('app')
         app.value      = $provide.value;
     }
   ])
+  
+	.filter("asDate", function () {
+	    return function (input) {
+	        return new Date(input);
+	    }
+  })
   .config(['$translateProvider', function($translateProvider){
     // Register a loader for the static files
-    // So, the module will search missing translation tables under the specified urls.
+    // So, the module will search missing translation tables under the specified
+	// urls.
     // Those urls are [prefix][langKey][suffix].
     $translateProvider.useStaticFilesLoader({
       prefix: 'l10n/',
@@ -32,5 +39,6 @@ angular.module('app')
 
 var underscore = angular.module('underscore', []);
 underscore.factory('_', function() {
-	return window._; // assumes underscore has already been loaded on the page
+	return window._; // assumes underscore has already been loaded on the
+						// page
 });  

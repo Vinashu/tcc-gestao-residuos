@@ -13,7 +13,8 @@ angular
 						'$window',
 						'$http',
 						'$rootScope',
-						function($scope, $translate, $localStorage, $window, $http, $rootScope) {
+						'Flash',
+						function($scope, $translate, $localStorage, $window, $http, $rootScope, Flash) {
 							
 							$http.defaults.headers.common["X-XSRF-TOKEN"] = $window.csrfToken;
 							
@@ -30,6 +31,7 @@ angular
 								}).success(function(data) {
 									if (data.name) {
 										$rootScope.authenticated = true;
+										$scope.loggedUser = data;
 									} else {
 										$rootScope.authenticated = false;
 									}
@@ -40,7 +42,7 @@ angular
 								});
 
 							}
-
+							$scope.loggedUser={};
 							authenticate();
 							$scope.credentials = {};
 							$scope.login = function() {
@@ -66,7 +68,7 @@ angular
 
 							// config
 							$scope.app = {
-								name : 'Angulr',
+								name : 'UEM - Sistema de Gestão de Resíduos',
 								version : '2.0.3',
 								// for chart colors
 								color : {

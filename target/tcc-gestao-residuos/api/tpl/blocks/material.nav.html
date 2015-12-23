@@ -9,13 +9,44 @@
       <span class="font-bold" >Dashboard</span>
     </a>
   </li>
+  
+  <li>
+    <a href md-ink-ripple class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+      <i class="glyphicon glyphicon-list"></i>
+      <span>Coleta de Resíduos</span>
+    </a>
+    <ul class="nav nav-sub dk">
+      
+      <li ui-sref-active="active">
+        <a ui-sref="app.coletaResiduos.solidos">
+          <span>Sólidos</span>
+        </a>
+      </li>
+      
+      <li ui-sref-active="active">
+        <a ui-sref="app.coletaResiduos.quimicos">
+          <span>Químicos</span>
+        </a>
+      </li>
+      
+      <li ui-sref-active="active">
+        <a ui-sref="app.coletaResiduos.hospilares">
+          <span>Hospitalares</span>
+        </a>
+      </li>
+    </ul>
+  </li>
 
   <li class="line dk"></li>
 
   <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
     <span >Componentes</span>
   </li>
-  <li ng-class="{active:$state.includes('app.table')}">
+  <li>
     <a href md-ink-ripple class="auto">
       <span class="pull-right text-muted">
         <i class="fa fa-fw fa-angle-right text"></i>
@@ -39,6 +70,32 @@
       </li>
     </ul>
   </li>
+  
+  <li>
+    <a href md-ink-ripple class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+      <i class="glyphicon glyphicon-list"></i>
+      <span>Unid. Centralizadoras</span>
+    </a>
+    <ul class="nav nav-sub dk">
+      
+      <li ui-sref-active="active">
+        <a ui-sref="app.unidCentralizadoras.pesquisar">
+          <span>Pesquisar Unid. Centralizadoras</span>
+        </a>
+      </li>
+      
+      <li ui-sref-active="active">
+        <a ui-sref="app.unidCentralizadoras.novo">
+          <span>Cadastrar Unid. Centralizadoras</span>
+        </a>
+      </li>
+    </ul>
+  </li>
+  
   <li ui-sref-active="active">
     <a ui-sref="app.chart" md-ink-ripple>
       <i class="glyphicon glyphicon-signal"></i>

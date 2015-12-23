@@ -29,6 +29,7 @@ public class UnidadeCentralizadora implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="unid_id")
 	private int id;
 	private String nome;
 	
@@ -41,8 +42,8 @@ public class UnidadeCentralizadora implements Serializable{
 	private String telefone;
 	
 	@ManyToMany(cascade=CascadeType.DETACH, fetch=FetchType.EAGER)
-	@JoinTable(name="unid_centralizadora_to_labs", joinColumns={@JoinColumn(name="unid_centralizadora_id", referencedColumnName="id")}, inverseJoinColumns={@JoinColumn(name="lab_id", referencedColumnName="local_id")})
-	private List<Laboratorio> laboratorios;
+	@JoinTable(name="unid_centralizadora_to_local", joinColumns={@JoinColumn(name="unid_centralizadora_id", referencedColumnName="unid_id")}, inverseJoinColumns={@JoinColumn(name="loc_id", referencedColumnName="local_id")})
+	private List<Local> locais;
 	
 	@Column(name="tipo_residuos")
 	@Enumerated(value=EnumType.STRING)
@@ -70,6 +71,14 @@ public class UnidadeCentralizadora implements Serializable{
 
 	public void setCampus(Campus campus) {
 		this.campus = campus;
+	}
+
+	public List<Local> getLocais() {
+		return locais;
+	}
+
+	public void setLocais(List<Local> locais) {
+		this.locais = locais;
 	}
 
 	public String getBloco() {
@@ -104,13 +113,6 @@ public class UnidadeCentralizadora implements Serializable{
 		this.telefone = telefone;
 	}
 
-	public List<Laboratorio> getLaboratorios() {
-		return laboratorios;
-	}
-
-	public void setLaboratorios(List<Laboratorio> laboratorios) {
-		this.laboratorios = laboratorios;
-	}
 
 	public TiposResiduos getTipoResiduos() {
 		return tipoResiduos;
@@ -127,7 +129,6 @@ public class UnidadeCentralizadora implements Serializable{
 		result = prime * result + ((bloco == null) ? 0 : bloco.hashCode());
 		result = prime * result + ((campus == null) ? 0 : campus.hashCode());
 		result = prime * result + id;
-		result = prime * result + ((laboratorios == null) ? 0 : laboratorios.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((responsavel == null) ? 0 : responsavel.hashCode());
 		result = prime * result + ((sala == null) ? 0 : sala.hashCode());
@@ -156,11 +157,6 @@ public class UnidadeCentralizadora implements Serializable{
 		} else if (!campus.equals(other.campus))
 			return false;
 		if (id != other.id)
-			return false;
-		if (laboratorios == null) {
-			if (other.laboratorios != null)
-				return false;
-		} else if (!laboratorios.equals(other.laboratorios))
 			return false;
 		if (nome == null) {
 			if (other.nome != null)

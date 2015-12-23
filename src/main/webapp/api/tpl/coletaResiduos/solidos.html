@@ -47,14 +47,14 @@
 									</md-input-container>
 									
 									<md-input-container flex="50"> <label>Local</label>
-										<md-select ng-model="search.local" ng-model-options="{trackBy: '$value.nome'}">
-											<md-option	required ng-repeat="local in locais" ng-value="local">
+										<md-select ng-model="search.localId" ng-model-options="{trackBy: '$value.nome'}">
+											<md-option	required ng-repeat="local in unidCentralizadora.locais" ng-value="local.id">
 												{{ local.nome }} 
 											</md-option> 
 										</md-select> 
 									</md-input-container>	
 									
-									<md-button class="md-raised md-primary" style="max-height: 20px;" ng-click='findColetasUnid()'>
+									<md-button class="md-raised md-primary" style="max-height: 20px;" ng-click='findColetasUnid(0)'>
 											Pesquisar
 									</md-button>
 								</md-content>
@@ -90,8 +90,8 @@
 				<tbody>
 					<tr dir-paginate="coleta in coletas | itemsPerPage: coletasPerPage" total-items="coletasCount" current-page="pagination.current">
 						
-						<td>{{coleta.data}}</td>
-						<td>{{coleta.OS}}</td>
+						<td>{{coleta.dataColeta  | asDate | date:'dd-MM-yyyy' }}</td>
+						<td>{{coleta.os}}</td>
 						<td>{{coleta.peso}}</td>
 						<td>{{coleta.local.nome}}</td>
 						<td>{{coleta.observacoes}}</td>

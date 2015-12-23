@@ -76,6 +76,19 @@ angular.module('app')
           ]
       },
       {
+          name: 'Flash',
+          files: [
+              '../libs/angular/angular-flash/angular-flash.js',
+              '../libs/angular/angular-flash/angular-flash.css'
+          ]
+      },
+      {
+          name: 'underscore',
+          files: [
+              '../libs/angular/underscore/underscore.js',
+          ]
+      },
+      {
           name:'angularFileUpload',
           files: [
             '../libs/angular/angular-file-upload/angular-file-upload.js'
@@ -164,9 +177,9 @@ angular.module('app')
           ]
       },
       {
-          name: 'smart-table',
+          name: 'dirPagination',
           files: [
-              '../libs/angular/angular-smart-table/dist/smart-table.min.js'
+              '../libs/angular/angularUtils/dirPagination.js'
           ]
       },
       {

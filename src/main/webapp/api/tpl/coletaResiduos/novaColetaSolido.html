@@ -20,7 +20,7 @@
 			<div layout layout-sm="column">
 				<md-input-container flex> 
 					<label>OS</label>
-					<input required ng-model="novaColeta.OS"> 
+					<input required ng-model="novaColeta.os"> 
 				</md-input-container>
 				
 				<md-input-container flex> 
@@ -31,7 +31,7 @@
 				<md-input-container flex>
 					<label>Local</label>
 					<md-select ng-model="novaColeta.local" ng-model-options="{trackBy: '$value.nome'}">
-						<md-option required ng-repeat="local in locais" ng-value="local">
+						<md-option required ng-repeat="local in unidCentralizadora.locais" ng-value="local">
 							{{ local.nome }} 
 						</md-option>
 					</md-select>

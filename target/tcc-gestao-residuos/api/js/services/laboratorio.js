@@ -15,26 +15,32 @@ app.service('labSvc', [ '$http', function($http) {
 					});
 	}
 	
+	this.listPagenation = function(page) {
+		return $http.get("laboratorios/"+page)
+			.then(function(response) {
+				return response.data
+			}, function(httpError) {
+				throw httpError;
+			});
+	}
+	
+	this.list = function() {
+		return $http.get("laboratorios/")
+			.then(function(response) {
+				return response.data
+			}, function(httpError) {
+				throw httpError;
+			});
+	}
+	
 	this.getLab = function(labId) {
 		return $http.get("laboratorios/lab/"+labId)
 			.then(
 					function(response) {
-						return response.data
+						return response
 					}, function(httpError) {	
 						throw httpError;
 					});
 	}
-	
-	this.getCampi = function() {
-		return $http.get("campus/")
-			.then(
-				function(response) {
-					return response.data
-				}, function(httpError) {
-					throw httpError.status;
-				});
-	}
-	
-	
 	
 } ]);

@@ -17,4 +17,5 @@ public class LocalService {
 	public List<Local> findAll(){
 		return localRepository.findAll();
 	}
+	
 }

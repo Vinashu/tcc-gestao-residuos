@@ -1,5 +1,6 @@
-/home/pupim/workspace-tcc2/tcc-gestao-residuos/src/test/java/br/uem/gestaoresiduos/services/LaboratorioServiceTest.java
-/home/pupim/workspace-tcc2/tcc-gestao-residuos/src/test/java/br/uem/gestaoresiduos/repositories/CampusRepositoryTest.java
-/home/pupim/workspace-tcc2/tcc-gestao-residuos/src/test/java/br/uem/gestaoresiduos/repositories/LaboratorioRepositoryTest.java
-/home/pupim/workspace-tcc2/tcc-gestao-residuos/src/test/java/br/uem/gestaoresiduos/services/UserServiceTest.java
-/home/pupim/workspace-tcc2/tcc-gestao-residuos/src/test/java/br/uem/gestaoresiduos/web/controllers/LaboratorioResourceTest.java
+C:\Users\Jonas\git\tcc-gestao-residuos\src\test\java\br\uem\gestaoresiduos\repositories\CampusRepositoryTest.java
+C:\Users\Jonas\git\tcc-gestao-residuos\src\test\java\br\uem\gestaoresiduos\services\LaboratorioServiceTest.java
+C:\Users\Jonas\git\tcc-gestao-residuos\src\test\java\br\uem\gestaoresiduos\repositories\LaboratorioRepositoryTest.java
+C:\Users\Jonas\git\tcc-gestao-residuos\src\test\java\br\uem\gestaoresiduos\services\ColetaResiduosSolidosServiceTest.java
+C:\Users\Jonas\git\tcc-gestao-residuos\src\test\java\br\uem\gestaoresiduos\services\UserServiceTest.java
+C:\Users\Jonas\git\tcc-gestao-residuos\src\test\java\br\uem\gestaoresiduos\web\controllers\LaboratorioResourceTest.java

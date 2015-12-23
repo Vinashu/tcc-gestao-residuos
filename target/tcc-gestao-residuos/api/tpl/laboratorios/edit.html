@@ -1,17 +1,9 @@
 <meta charset="UTF-8">
 
-<md-toolbar class="demo-toolbar md-primary">
-<h2 class="md-toolbar-tools">
-	<span>Novo Laboratório</span>
-</h2>
-</md-toolbar>
-
-<div ng-messages='ajaxRequest'>
-        <div ng-message='serverError'>Server Error! Please Try again.</div>
-        <div ng-message='notFound'>Oops! Resource Not Found!.</div>
-        <div ng-message='error'>Request  Failed! Try Again.</div>
-        <div ng-message='success'>Request Success</div>
+<div class="bg-light lter b-b wrapper-md">
+	<h1 class="m-n font-thin h3">Novo Laboratório</h1>
 </div>
+<div flash-message="10000"></div>
 
 <div ng-controller="labCtrl" layout="column" ng-cloak
 	class="md-inline-form">
@@ -19,45 +11,48 @@
 	<form name="labForm" ngSubmit="submitLab">
 		<div layout layout-sm="column">
 			<md-input-container flex> <label>Nome
-				Laboratório</label> <input ng-model="lab.nome" required="required"> </md-input-container>
+				Laboratório</label> <input ng-model="lab.nome" required="required">
+			</md-input-container>
 
 			<md-input-container class="md-block"> <label>Sigla</label>
 			<input ng-model="lab.sigla"> </md-input-container>
 		</div>
+
 		<div layout layout-sm="column">
 			<md-input-container flex> <label>Campus</label>
-			<md-select ng-model="lab.campus" > <md-option required
-				ng-repeat="campus in campi" ng-value="campus"> {{
-			campus.nome }} </md-option> </md-select> </md-input-container>
+			<md-select ng-model="lab.campus"
+				ng-model-options="{trackBy: '$value.nome'}"> <md-option
+				required ng-repeat="campus in campi" ng-value="campus">
+			{{ campus.nome }} </md-option> </md-select> </md-input-container>
 
-			<md-input-container flex> <label>Bloco</label> <input required
-				ng-model="lab.bloco"> </md-input-container>
+			<md-input-container flex> <label>Bloco</label> <input
+				required ng-model="lab.bloco"> </md-input-container>
 
-			<md-input-container flex> <label>Sala</label> <input required
-				ng-model="lab.sala"> </md-input-container>
+			<md-input-container flex> <label>Sala</label> <input
+				required ng-model="lab.sala"> </md-input-container>
 		</div>
-		<md-input-container flex> <label>Atividades
-			do laboratório</label> <textarea ng-model="lab.tipoAtividade" columns="1"
-			md-maxlength="512" required></textarea> </md-input-container>
-			
+
 		<div layout="row" layout-wrap>
-    	    <div flex="20">
-        		<md-checkbox ng-model="lab.residuoQuimico" aria-label="Resíduo Químico">
-          			Resíduo Químico
-        		</md-checkbox>
-      		</div>
-      		<div flex="20">
-        		<md-checkbox ng-model="lab.residuoHospitalar" aria-label="Resíduo Hospitalar">
-          			Resíduo Hospitalar
-        		</md-checkbox>
-      		</div>
-      		<div flex="20">
-        		<md-checkbox ng-model="lab.residuoSolido" aria-label="Resíduo Sólido">
-          			Resíduo Sólido 
-        		</md-checkbox>
-      		</div>
-      	</div>
-			
+			<md-input-container flex> <label>Atividades
+				do laboratório</label> <textarea ng-model="lab.tipoAtividade" columns="100"
+				md-maxlength="512" required></textarea> </md-input-container>
+		</div>
+
+		<div layout="row" layout-wrap>
+			<div flex="20">
+				<md-checkbox ng-model="lab.residuoQuimico"
+					aria-label="Resíduo Químico"> Resíduo Químico </md-checkbox>
+			</div>
+			<div flex="20">
+				<md-checkbox ng-model="lab.residuoHospitalar"
+					aria-label="Resíduo Hospitalar"> Resíduo Hospitalar </md-checkbox>
+			</div>
+			<div flex="20">
+				<md-checkbox ng-model="lab.residuoSolido"
+					aria-label="Resíduo Sólido"> Resíduo Sólido </md-checkbox>
+			</div>
+		</div>
+
 		<md-input-container class="md-block"> <label>Responsável</label>
 		<input ng-model="lab.responsavel" required> </md-input-container>
 
@@ -72,9 +67,11 @@
 		</div>
 		<section layout="row" layout-sm="column" layout-align="right right"
 			layout-wrap>
-			<md-button class="md-raised" ng-click='cancelar()'>Cancelar</md-button>
-			<md-button class="md-raised md-primary" ng-click='submitLab()'>Salvar</md-button>
+			<md-button class="md-raised" novalidate type="button"
+				ng-click='showConfirmDialog($event)'>Cancelar</md-button>
+			<md-button class="md-raised md-primary"
+				ng-click='labForm.$valid && submitLab()'>Salvar</md-button>
 		</section>
-</form>
+	</form>
 	</md-content>
 </div>

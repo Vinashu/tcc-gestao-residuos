@@ -15,9 +15,8 @@ app.service('coletaResiduosSolidosSvc', [ '$http', function($http) {
 				});
 	}
 	
-	this.findColetasUnid = function(mes, ano, local, unidCentralizadora) {
-		var params = { mes : mes, ano: ano, local: local, unidCentralizadora : unidCentralizadora};
-		return $http.post("coletaResiduosSolidos/find", params)
+	this.findColetasMesAnoLocalUnid = function(search, page) {
+		return $http.post("coletaResiduosSolidos/find/" + page, search)
 		.then(
 				function(response) {
 					return response.data
@@ -26,5 +25,19 @@ app.service('coletaResiduosSolidosSvc', [ '$http', function($http) {
 				});
 	
 	}
+	
+	this.findColetasUnid = function(unidId, page) {
+		return $http.post("coletaResiduosSolidos/findAll/" + page, unidId)
+		.then(
+				function(response) {
+					return response.data
+				}, function(httpError) {
+					throw httpError;
+				});
+	
+	}
+	
+	
+	
 	
 }]);

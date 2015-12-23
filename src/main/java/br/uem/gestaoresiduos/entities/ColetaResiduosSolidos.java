@@ -19,7 +19,7 @@ public class ColetaResiduosSolidos {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
-	private int OS;
+	private int os;
 	private float peso;
 	private String observacoes;
 	
@@ -27,7 +27,7 @@ public class ColetaResiduosSolidos {
 	private Date dataColeta;
 	
 	@ManyToOne
-	@JoinColumn(name="unid_centralizadora_id")
+	@JoinColumn(name="unid_id")
 	private UnidadeCentralizadora unidadeCentralizadora;
 
 	@ManyToOne
@@ -42,11 +42,11 @@ public class ColetaResiduosSolidos {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getOS() {
-		return OS;
+	public int getOs() {
+		return os;
 	}
-	public void setOS(int oS) {
-		OS = oS;
+	public void setOs(int oS) {
+		os = oS;
 	}
 	public float getPeso() {
 		return peso;
@@ -88,7 +88,7 @@ public class ColetaResiduosSolidos {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + OS;
+		result = prime * result + os;
 		result = prime * result + ((dataColeta == null) ? 0 : dataColeta.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((local == null) ? 0 : local.hashCode());
@@ -105,7 +105,7 @@ public class ColetaResiduosSolidos {
 		if (getClass() != obj.getClass())
 			return false;
 		ColetaResiduosSolidos other = (ColetaResiduosSolidos) obj;
-		if (OS != other.OS)
+		if (os != other.os)
 			return false;
 		if (dataColeta == null) {
 			if (other.dataColeta != null)
