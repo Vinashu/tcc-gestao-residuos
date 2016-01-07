@@ -17,5 +17,9 @@ public class LocalService {
 	public List<Local> findAll(){
 		return localRepository.findAll();
 	}
+
+	public List<Local> findNotLab() {
+		return localRepository.findByTipoDifLab();
+	}
 	
 }

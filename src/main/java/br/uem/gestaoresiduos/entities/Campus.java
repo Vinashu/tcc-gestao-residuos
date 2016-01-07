@@ -12,9 +12,7 @@ import javax.persistence.Table;
 @Table(name="campus")
 @DiscriminatorValue(value="campus")
 public class Campus extends Local implements Serializable{
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 5784864129037017707L;
 	
 	@Enumerated(value=EnumType.STRING)

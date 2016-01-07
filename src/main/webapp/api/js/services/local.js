@@ -15,4 +15,13 @@ app.service('localSvc', [ '$http', function($http) {
 				});
 	}
 	
+	this.listNotLab = function() {
+		return $http.get("locais/notLab")
+			.then(
+				function(response) {
+					return response.data
+				}, function(httpError) {
+					throw httpError.status;
+				});
+	}
 }]);

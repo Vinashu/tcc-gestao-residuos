@@ -4,12 +4,12 @@
  */
 app
 		.controller(
-				'coletaResiduosSolidosCtrl',
+				'coletaResiduosQuimicosCtrl',
 				[
 						'$scope',
 						'unidCentralizadoraSvc',
 						'localSvc',
-						'coletaResiduosSolidosSvc',
+						'coletaResiduosQuimicosSvc',
 						'$state',
 						'$stateParams',
 						'Flash',
@@ -17,8 +17,8 @@ app
 						'$location',
 						'_',
 						function($scope, unidCentralizadoraSvc, localSvc,
-								coletaResiduosSolidosSvc, $state, $stateParams,
-								Flash, $mdDialog, $location, _) {
+								coletaResiduosQuimicosSvc, $state,
+								$stateParams, Flash, $mdDialog, $location, _) {
 
 							// Inicialização da Página
 
@@ -51,9 +51,10 @@ app
 							}
 
 							$scope.buscaInicial = function(page) {
-								coletaResiduosSolidosSvc
+								coletaResiduosQuimicosSvc
 										.findColetasUnid(
-												$scope.unidCentralizadora.id, --page)
+												$scope.unidCentralizadora.id,
+												--page)
 										.then(
 												function(coletasData) {
 													$scope.coletas = coletasData.content;
@@ -71,24 +72,16 @@ app
 
 							$scope.carregaUnidadesCentralizadoras();
 
-							if ($stateParams.novaColeta) {
-								$scope.addNovaColeta();
-							}
-
 							// Pesquisa Coletas
 							$scope.findColetasUnid = function(page) {
 								$scope.search.unidCentralizadoraId = $scope.unidCentralizadora.id;
 								$scope.search.localId = _
 										.first($scope.unidCentralizadora.locais).id;
-								coletaResiduosSolidosSvc
-										.findColetasMesAnoLocalUnid(
+								coletaResiduosQuimicosSvc
+										.findColetasMesAnoLabUnid(
 												$scope.search, --page)
 										.then(
 												function(coletasData) {
-													/*coletaResiduosSolidosSvc
-															.findColetasMesAnoLocalUnid(
-																	$scope.search,
-																	page);*/
 													$scope.coletas = coletasData.content;
 													$scope.coletasCount = coletasData.totalElements;
 													$scope.pageChanged = $scope.findColetasUnid;
@@ -101,58 +94,6 @@ app
 																			+ error.statusText,
 																	"custom-class");
 												})
-							}
-
-							// Nova Coleta
-
-							$scope.novaColeta = {};
-							$scope.addNovaColeta = function() {
-								$mdDialog
-										.show({
-											clickOutsideToClose : true,
-											scope : $scope,
-											preserveScope : true,
-											controller : 'novaColetaCtrl',
-
-											templateUrl : 'tpl/coletaResiduos/novaColetaSolido.html'
-										});
-							}
-
-							$scope.novaColetaCtrl = function($scope, $mdDialog) {
-								$scope.closeDialog = function() {
-									$mdDialog.hide();
-								}
-
-								$scope.novaColeta.unidadeCentralizadora = $scope.unidCentralizadora;
-								$scope.locais = [];
-
-								$scope.carregaLocais = function() {
-									localSvc.findLocais().then(
-											function(locaisData) {
-												$scope.locais = locaisData;
-											})
-								}
-								$scope.carregaLocais();
-
-								$scope.salvarColeta = function() {
-									coletaResiduosSolidosSvc
-											.submitColeta($scope.novaColeta)
-											.then(
-													function(savedColeta) {
-														Flash
-																.create(
-																		'success',
-																		'Coleta '
-																				+ savedColeta.OS
-																				+ ' criada com sucesso',
-																		'custom-class');
-														$mdDialog.hide();
-														$scope.novaColeta = {};
-													}, function(error) {
-
-													});
-								}
-
 							}
 
 						} ]);

@@ -17,29 +17,44 @@ app
 						'$mdDialog',
 						'$location',
 						'_',
+						'localSvc',
 						function($scope, $http, unidCentralizadoraSvc,
 								campusSvc, labSvc, $state, $stateParams, Flash,
-								$mdDialog, $location, _) {
+								$mdDialog, $location, _, localSvc) {
 
 							$scope.unidCentralizadora = {};
-							$scope.unidCentralizadora.laboratorios = [];
+							$scope.unidCentralizadora.locais = [];
 
 							$scope.submitUnidCentralizadora = function() {
-								unidCentralizadoraSvc.saveUnidCentralizadora($scope.unidCentralizadora)
-										.then(function(savedUnidCentralizadora) {
+								unidCentralizadoraSvc
+										.saveUnidCentralizadora(
+												$scope.unidCentralizadora)
+										.then(
+												function(
+														savedUnidCentralizadora) {
 													var idSavedUnidCentralizadora = savedUnidCentralizadora.id;
-													$state.go('app.unidCentralizadoras.edit',
+													$state
+															.go(
+																	'app.unidCentralizadoras.edit',
 																	{
 																		'unidCentralizadoraId' : idSavedUnidCentralizadora
 																	})
-															.then(function(data) {
-																Flash.create('success', 'Unidade Centralizadora '
-																		+ savedUnidCentralizadora.nome
-																		+ ' criada com sucesso',
-																		'custom-class');
+															.then(
+																	function(
+																			data) {
+																		Flash
+																				.create(
+																						'success',
+																						'Unidade Centralizadora '
+																								+ savedUnidCentralizadora.nome
+																								+ ' criada com sucesso',
+																						'custom-class');
 																	})
-												}, function(error) {
-													Flash.create('error', "Não foi possível salvar a Unidade Centralizadora");
+												},
+												function(error) {
+													Flash
+															.create('error',
+																	"Não foi possível salvar a Unidade Centralizadora");
 												});
 							}
 
@@ -68,33 +83,41 @@ app
 
 								$scope.addRemoveLab = function(lab) {
 									if (!_.isUndefined(_.findWhere(
-											unidCentralizadora.laboratorios, {
+											unidCentralizadora.locais, {
 												id : lab.id
 											}))) {
-										unidCentralizadora.laboratorios = _.without(
-												unidCentralizadora.laboratorios,_.findWhere(
-																		unidCentralizadora.laboratorios,
+										unidCentralizadora.locais = _
+												.without(
+														unidCentralizadora.locais,
+														_
+																.findWhere(
+																		unidCentralizadora.locais,
 																		{
 																			id : lab.id
 																		}));
 									} else {
-										unidCentralizadora.laboratorios
-												.push(lab);
+										unidCentralizadora.locais.push(lab);
 									}
 								}
 
 								$scope.isLabFromUnid = function(lab) {
 									return !_.isUndefined(_.findWhere(
-											unidCentralizadora.laboratorios, {
+											unidCentralizadora.locais, {
 												id : lab.id
 											}));
 								};
 
 								$scope.carregaLabs = function() {
-									$scope.laboratorios = [];
-									labSvc.list().then(function(labList) {
-										$scope.laboratorios = labList;
-									})
+									$scope.locais = [];
+									if (unidCentralizadora.tipoResiduos != "QUIMICO") {
+										localSvc.listNotLab().then(function(localList) {
+											$scope.locais = localList;
+										})
+									} else {
+										labSvc.list().then(function(labList) {
+											$scope.locais = labList;
+										})
+									}
 								};
 								$scope.carregaLabs();
 
@@ -108,18 +131,25 @@ app
 								}
 
 							}
-							
+
 							if ($stateParams.unidCentralizadoraId != null) {
-								unidCentralizadoraSvc.getUnid($stateParams.unidCentralizadoraId)
+								unidCentralizadoraSvc
+										.getUnid(
+												$stateParams.unidCentralizadoraId)
 										.then(
-												function successCallback(unidData) {
+												function successCallback(
+														unidData) {
 													$scope.unidCentralizadora = unidData.data;
 												},
 												function(error) {
-													Flash.create('warning',
-															'Unidade não encontrado -' + $stateParams.unidCentralizadoraId + 'Erro:'
-																	+ error.statusText,
-															'custom-class');
+													Flash
+															.create(
+																	'warning',
+																	'Unidade não encontrado -'
+																			+ $stateParams.unidCentralizadoraId
+																			+ 'Erro:'
+																			+ error.statusText,
+																	'custom-class');
 												});
 							} else {
 

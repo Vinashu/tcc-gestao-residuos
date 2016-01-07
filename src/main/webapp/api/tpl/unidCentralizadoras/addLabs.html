@@ -1,7 +1,7 @@
 <md-dialog flex="50"> <md-toolbar layout="row">
 <div class="md-toolbar-tools">
 	<h3>
-		<span>Laboratórios da Unidade</span>
+		<span>Locais de Coleta da Unidade</span>
 	</h3>
 </div>
 <section layout="row" layout-sm="column" layout-align="end center">
@@ -13,8 +13,8 @@
 <div layout layout-sm="column" style="margin-bottom: 20px;">
 
 	<md-input-container flex> <md-subheader
-		class="md-no-sticky">Laboratórios da UEM</md-subheader> <md-list-item
-		ng-repeat="lab in laboratorios"> 
+		class="md-no-sticky">Locais de Coleta</md-subheader> <md-list-item
+		ng-repeat="lab in locais"> 
 		<md-checkbox ng-checked="isLabFromUnid(lab)" ng-click="addRemoveLab(lab)" class="md-secondary"></md-checkbox>
 		<md-divider></md-divider>
 	<p>{{ lab.nome }}</p>
@@ -22,9 +22,9 @@
 	</md-list-item> </md-input-container>
 
 	<md-input-container flex> <md-subheader
-		class="md-no-sticky">Laboratórios da Unidade
+		class="md-no-sticky">Locais de Coleta da Unidade
 	Centralizadora</md-subheader> <md-list-item
-		ng-repeat="lab in unidCentralizadora.laboratorios"> <md-checkbox
+		ng-repeat="lab in unidCentralizadora.locais"> <md-checkbox
 		class="md-secondary" ng-checked="isLabFromUnid(lab)" ></md-checkbox>
 	<p>{{ lab.nome }}</p>
 

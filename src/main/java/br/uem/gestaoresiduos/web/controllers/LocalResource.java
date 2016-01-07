@@ -26,4 +26,9 @@ public class LocalResource {
 		return localService.findAll();
 	}
 	
+	@RequestMapping(path="/notLab", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public List<Local> findNotLab() {
+		return localService.findNotLab();
+	}
 }

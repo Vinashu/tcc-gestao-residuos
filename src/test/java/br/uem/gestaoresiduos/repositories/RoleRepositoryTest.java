@@ -1,4 +1,4 @@
-package br.uem.gestaoresiduos.services;
+package br.uem.gestaoresiduos.repositories;
 
 import static org.junit.Assert.*;
 
@@ -12,28 +12,36 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 import br.uem.gestaoresiduos.config.AppConfig;
 import br.uem.gestaoresiduos.config.PersistenceConfig;
-import br.uem.gestaoresiduos.entities.User;
+import br.uem.gestaoresiduos.entities.Role;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader=AnnotationConfigContextLoader.class,classes={AppConfig.class, PersistenceConfig.class})
-public class UserServiceTest {
-	
+public class RoleRepositoryTest {
+
 	@Autowired
-	private UserService userService;
+	private RoleRepository roleRepository;
 	
-	private User user;
+	Role adminRole;
+	Role unidCentralRole;
 	
 	@Before
 	public void setUp() throws Exception {
-		user = new User(1, "Victor Pupim", "pupimvictor@gmail.com", "3182", null, null);
+		adminRole = new Role(1, "ADMIN");
+		unidCentralRole = new Role(2, "UNIDCENTRAL");
+	}
+	
+	@Test
+	public void testSaveIterableOfS() {
+		Role savedRoleAdmin = roleRepository.save(adminRole);
+		Role savedRoleUnidCentral = roleRepository.save(unidCentralRole);
+		
+		assertEquals("ADMIN", savedRoleAdmin.getRoleName());
+		assertEquals("UNIDCETRAL", savedRoleUnidCentral.getRoleName());
 	}
 
 	@Test
-	public void testCreate() {
-		User result = userService.create(user);
-		
-		assertEquals("Victor Pupim", result.getName());
-		
+	public void testGetOne() {
+		assertEquals("ADMIN", roleRepository.getOne(1));
 	}
 
 }

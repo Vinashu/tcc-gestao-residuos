@@ -39,10 +39,10 @@ angular
 											})
 
 									// componentes
-											
+
 									/*
 									 * Laboratórios
-									 */	
+									 */
 									.state(
 											'app.laboratorios',
 											{
@@ -51,7 +51,7 @@ angular
 												resolve : load([
 														'js/controllers/laboratorio.js',
 														'js/services/laboratorio.js',
-														'js/services/campus.js'])
+														'js/services/campus.js' ])
 											})
 									.state(
 											'app.laboratorios.pesquisar',
@@ -77,10 +77,10 @@ angular
 												url : '/edit',
 												templateUrl : 'tpl/laboratorios/edit.html'
 											})
-									
-											/*
+
+									/*
 									 * Unidades Centralizadoras
-									 */											
+									 */
 									.state(
 											'app.unidCentralizadoras',
 											{
@@ -90,7 +90,8 @@ angular
 														'js/controllers/unidCentralizadora.js',
 														'js/services/unidCentralizadora.js',
 														'js/services/campus.js',
-														'js/services/laboratorio.js'])
+														'js/services/laboratorio.js',
+														'js/services/local.js'])
 											})
 									.state(
 											'app.unidCentralizadoras.pesquisar',
@@ -113,10 +114,10 @@ angular
 												url : '/edit',
 												templateUrl : 'tpl/unidCentralizadoras/edit.html'
 											})
-											
+
 									/*
 									 * Coleta de Resíduos
-									 */	
+									 */
 									.state(
 											'app.coletaResiduos',
 											{
@@ -125,30 +126,60 @@ angular
 												resolve : load([
 														'js/services/laboratorio.js',
 														'js/services/unidCentralizadora.js',
-														'js/services/local.js'])
+														'js/services/local.js' ])
 											})
+
+									/*
+									 * sólidos
+									 */
 									.state(
 											'app.coletaResiduos.solidos',
 											{
 												url : '/solidos',
 												templateUrl : 'tpl/coletaResiduos/solidos.html',
-												resolve: load([
-												               'js/controllers/coletaResiduosSolidos.js',
-												               'js/services/coletaResiduosSolidos.js'])
+												resolve : load([
+														'js/controllers/coletaResiduosSolidos.js',
+														'js/services/coletaResiduosSolidos.js' ])
 											})
 									.state(
 											'app.coletaResiduos.solidos.novaColeta',
 											{
 												url : '/solidos',
 												templateUrl : 'tpl/coletaResiduos/solidos.html',
-												params: { 'novaColeta' : true },
-												resolve: load([
-												               'js/controllers/coletaResiduosSolidos.js',
-												               'js/services/coletaResiduosSolidos.js'])
-											})		
-											
-											
-		
+												params : {
+													'novaColeta' : true
+												},
+												resolve : load([
+														'js/controllers/coletaResiduosSolidos.js',
+														'js/services/coletaResiduosSolidos.js' ])
+											})
+
+									/*
+									 * quimicos
+									 */
+
+									.state(
+											'app.coletaResiduos.quimicos',
+											{
+												url : '/quimicos',
+												templateUrl : 'tpl/coletaResiduos/quimicos.html',
+												resolve : load([
+														'js/controllers/coletaResiduosQuimicos.js',
+														'js/services/coletaResiduosQuimicos.js' ])
+											})
+									.state(
+											'app.coletaResiduos.quimicos.novaColeta',
+											{
+												url : '/quimicos/edit',
+												templateUrl : 'tpl/coletaResiduos/novaColetaQuimico.html',
+												params : {
+													'novaColeta' : true,
+													'unidCentralizadora': null
+												},
+												resolve : load([
+														'js/controllers/coletaResiduosQuimicos.js',
+														'js/services/coletaResiduosQuimicos.js' ])
+											})
 
 									// pages
 									.state(

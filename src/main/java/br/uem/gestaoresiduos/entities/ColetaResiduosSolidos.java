@@ -18,6 +18,7 @@ public class ColetaResiduosSolidos {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="coleta_residuos_solidos_id")
 	private int id;
 	private int os;
 	private float peso;

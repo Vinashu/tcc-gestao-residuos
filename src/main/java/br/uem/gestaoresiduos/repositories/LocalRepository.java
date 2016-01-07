@@ -14,4 +14,7 @@ public interface LocalRepository extends JpaRepository<Local, Serializable>{
 	@Query("select l from Local l where local_tipo = 'campus'")
 	public List<Local> findAllCampus();
 
+	@Query("select l from Local l where local_tipo != 'lab'")
+	public List<Local> findByTipoDifLab();
+
 	}

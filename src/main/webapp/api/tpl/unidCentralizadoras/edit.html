@@ -41,7 +41,7 @@
 
 
 		<p>Tipo de Resíduos Processados</p>
-		<md-radio-group ng-model="unidCentralizadora.tipoResiduos">
+		<md-radio-group ng-model="unidCentralizadora.tipoResiduos" ng-init="unidCentralizadora.tipoResiduos='QUIMICO'">
 		<md-radio-button value="QUIMICO">Resíduos Químicos</md-radio-button> <md-radio-button
 			value="HOSPITALAR">Resíduos Hospitalares</md-radio-button> <md-radio-button
 			value="SOLIDO">Resíduos Sólidos</md-radio-button> </md-radio-group>
@@ -49,10 +49,10 @@
 
 
 		<div class="bg-light lter b-b wrapper-md" style="margin-top: 30px;">
-			<b>Laboratórios da Unidade Centralizadora</b>
+			<b>Locais de Coleta da Unidade Centralizadora</b>
 			<md-button class="md-fab md-primary md-mini" ng-click="addLabs(unidCentralizadora)"
-				aria-label="Add Laboratório"> <md-tooltip
-				md-direction="right"> Add Laboratório </md-tooltip> 
+				aria-label="Add Locais de Coleta"> <md-tooltip
+				md-direction="right"> Add Locais de Coleta </md-tooltip> 
 				<i class="glyphicon glyphicon-plus"></i>
 			</md-button>
 		</div>
@@ -69,17 +69,17 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="lab in unidCentralizadora.laboratorios">
+				<tr ng-repeat="local in unidCentralizadora.locais">
 
-					<td>{{lab.id}}</td>
-					<td>{{lab.nome}}</td>
-					<td>{{lab.sigla}}</td>
+					<td>{{local.id}}</td>
+					<td>{{local.nome}}</td>
+					<td>{{local.sigla}}</td>
 
-					<td><span ng-if=lab.residuoQuimico>Quimico</span> <span
-						ng-if=lab.residuoHospitalar>Hospitalar</span> <span
-						ng-if=lab.residuoSolido>Sólido</span></td>
+					<td><span ng-if=local.residuoQuimico>Quimico</span> <span
+						ng-if=local.residuoHospitalar>Hospitalar</span> <span
+						ng-if=local.residuoSolido>Sólido</span></td>
 
-					<td>{{lab.campus.nome}}</td>
+					<td>{{local.campus.nome}}</td>
 				</tr>
 			</tbody>
 

@@ -2,10 +2,12 @@ package br.uem.gestaoresiduos.security;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Set;
+import java.util.List;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
 import br.uem.gestaoresiduos.entities.Role;
 import br.uem.gestaoresiduos.entities.User;
 
@@ -29,7 +31,7 @@ public class SecurityUser extends User implements UserDetails
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		
 		Collection<GrantedAuthority> authorities = new ArrayList<>();
-		Set<Role> userRoles = this.getRoles();
+		List<Role> userRoles = this.getRoles();
 		
 		if(userRoles != null)
 		{
