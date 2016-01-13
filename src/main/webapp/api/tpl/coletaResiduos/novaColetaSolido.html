@@ -1,12 +1,10 @@
 <md-dialog flex="60"> 
-	<md-toolbar layout="row">
-		<div class="md-toolbar-tools">
-			<h3>
+	<md-toolbar  layout="row">
+		<div class="bg-solidos md-toolbar-tools">
 				<span>Nova Coleta de Resíduos Sólidos de {{unidCentralizadora.nome}}</span>
-			</h3>
 		</div>
 		
-		<section layout="row" layout-sm="column" layout-align="end center">
+		<section class="bg-solidos" layout="row" layout-sm="column" layout-align="end center">
 			<md-button class="md-raised " novalidate type="button"
 				ng-click='closeDialog()'>Cancelar</md-button>
 			<md-button class="md-raised md-primary"

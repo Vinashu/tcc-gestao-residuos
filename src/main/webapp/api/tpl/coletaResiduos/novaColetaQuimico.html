@@ -1,20 +1,122 @@
 <meta charset="UTF-8">
 
-<div class="bg-light lter b-b wrapper-md">
-	<h1 class="m-n font-thin h3">Coleta de Resíduos Sólidos</h1>
+<div class="bg-quimicos lter b-b wrapper-md">
+	<span class="m-n text-white h3">Nova Coleta de Resíduos Químicos</span>
 </div>
 <div flash-message="10000"></div>
 
-<div ng-controller="coletaResiduosSolidosCtrl" layout="column" ng-cloak
-	class="md-inline-form">
+<div ng-controller="novaColetaResiduosQuimicosCtrl" layout="column"
+	ng-cloak class="md-inline-form">
 	<md-content layout-padding>
 
-	<form name="coletaResiduosSolidosForm">
-	
-	
-	
-	
-	
+	<form name="novaColetaResiduosQuimicosForm">
+
+		<md-content flex> <md-input-container flex="30">
+		<label>Unidade Centralizadora</label>
+		<b><input disabled	ng-model="novaColeta.unidadeCentralizadora.nome"
+			style="border-bottom-color: black; color: black;"> </b> </md-input-container> </md-content>
+
+		<md-content flex> 
+			<md-input-container>
+				<label>Laboratório</label>
+				 <md-select ng-model="novaColeta.laboratorio">
+				 	<md-option	ng-repeat="lab in novaColeta.unidadeCentralizadora.locais" value="{{lab}}">
+						{{lab.nome}} 
+					</md-option>
+				 </md-select> 
+			</md-input-container> 
+			
+			<md-datepicker ng-model="novaColeta.dataColeta"	md-placeholder="Data da Coleta" aria-label="Data da Coleta"></md-datepicker>
+
+		</md-content>
+
+		<md-content flex="75">
+			<div class="bg-light lter b-b wrapper-md" style="margin-top: 30px;">
+				<b>Materiais Coletados</b>
+				<md-button class="md-fab md-primary md-mini"
+					ng-click="showNovoMaterialInputs=!showNovoMaterialInputs" aria-label="Add Material Coletado">
+					<md-tooltip md-direction="right">
+					 	Adicionar Material	Coletado no Laboratório selecionado
+					</md-tooltip> <i class="glyphicon glyphicon-plus"></i> 
+				 </md-button>
+			</div>
+		
+			<div ng-show="showNovoMaterialInputs" >
+				
+				<form class="form-horizontal">
+					<div class="controls form-inline" >
+					     <div class="input-group" style="width: 32%;">
+	     					<span class="input-group-btn" style="width: 10%;">
+					       		<button class="btn btn-default" type="button">
+					       			<md-tooltip md-direction="right">
+						 				Adicionar Novo Material
+									</md-tooltip>
+									<i class="glyphicon glyphicon-plus" ></i>
+								</button>
+					      	</span>
+						    <select class="form-control" ng-model="novoMaterialColetado.material"  placeholder="Material" name="size" >
+						    	<option value="">Selecione o material</option>
+						    	<option ng-repeat="material in materiais" value="{{material | json}}">{{material.descricao}}</option>
+						    </select>
+					  	</div>
+					  	
+					  	<div class="input-group" style="width: 23%;">
+					 	<input flex type="text" class="form-control" ng-model="novoMaterialColetado.quantidade"  placeholder="Quantidade" >
+					  </div>
+					  
+					  <div class="input-group" style="width: 25%;">
+					    <select flex class="form-control" ng-model="novoMaterialColetado.unidadeMedida" placeholder="Unidade Medida" name="size" >
+					    	<option value="">Unidade de Medida</option>
+					    	<option ng-repeat="unidMedida in unidadesMedida" value="{{unidMedida}}">{{unidMedida.nome}}</option>
+					    </select>
+					  </div>
+					  	  <button type="button" ng-click="addMaterialColetado()" class="btn btn-primary" style="width: 14%;">Ok</button>
+					</div>
+				</form>
+			</div>
+		
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th>Material Coletado</th>
+					<th>Quantidade</th>
+					<th>Unid. de Medida</th>
+					<th>Ações</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="materialColetado in novaColeta.materiaisColetados">
+					<td>{{materialColetado.material.descricao}}</td>
+					<td>{{materialColetado.quantidade}}</td>
+					<td>{{materialColetado.unidadeMedida.sigla}}</td>
+					<td>
+						<i class="glyphicon glyphicon-edit" ng-click="editarMaterialColetado(materialColetado)">
+							<md-tooltip md-direction="left" >
+				 				Editar material coletado
+							</md-tooltip>
+						</i>
+						<i class="glyphicon glyphicon-trash" ng-click="deleteMaterialColetado(materialColetado)">
+							<md-tooltip md-direction="left">
+				 				Excluir material da coleta
+							</md-tooltip>
+						</i>
+						<i class="glyphicon glyphicon-refresh" ng-if="isEditing && !isCreating">
+							<md-tooltip md-direction="right">
+				 				Disponibilizar material para reuso
+							</md-tooltip>
+						</i>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		</md-content>
+		<md-button class="md-raised md-primary"
+				ng-click='submitColeta()'>Salvar</md-button>
+	</md-content>
+
+
+
+
 	</form>
 
 	</md-content>

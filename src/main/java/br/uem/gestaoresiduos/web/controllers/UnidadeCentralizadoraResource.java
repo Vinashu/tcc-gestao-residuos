@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import br.uem.gestaoresiduos.entities.TiposResiduos;
 import br.uem.gestaoresiduos.entities.UnidadeCentralizadora;
 import br.uem.gestaoresiduos.services.UnidadeCentralidoraService;
 
@@ -35,6 +36,12 @@ public class UnidadeCentralizadoraResource {
 	@ResponseBody
 	public List<UnidadeCentralizadora> findAll() {
 		return unidadeCentralidoraService.findAll();
+	}
+	
+	@RequestMapping(value="{tipoResiduos}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public List<UnidadeCentralizadora> findByTipoResiduos(@PathVariable("tipoResiduos") TiposResiduos tiposResiduos) {
+		return unidadeCentralidoraService.findByTipoResiduos(tiposResiduos);
 	}
 	
 	@RequestMapping(value="unid/{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)

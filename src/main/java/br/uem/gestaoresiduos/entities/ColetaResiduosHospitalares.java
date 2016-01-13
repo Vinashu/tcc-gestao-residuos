@@ -41,8 +41,8 @@ public class ColetaResiduosHospitalares implements Serializable {
 	@JoinColumn(name = "local_id")
 	private Local local;
 
-	@OneToMany(cascade=CascadeType.DETACH, fetch=FetchType.EAGER)
-	@JoinColumn(name="coleta_id", referencedColumnName="coleta_residuos_hospitalares_id")
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinColumn(name="coleta_hospitalar_id", referencedColumnName="coleta_residuos_hospitalares_id")
 	private List<MaterialColetado> materiaisColetados;
 
 	public int getId() {

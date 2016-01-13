@@ -3,11 +3,11 @@ package br.uem.gestaoresiduos.services;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.apache.log4j.Priority;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.uem.gestaoresiduos.entities.TiposResiduos;
 import br.uem.gestaoresiduos.entities.UnidadeCentralizadora;
 import br.uem.gestaoresiduos.repositories.UnidadeCentralizadoraRepository;
 
@@ -22,6 +22,10 @@ public class UnidadeCentralidoraService {
 
 	public List<UnidadeCentralizadora> findAll() {
 		return unidadeCentralizadoraRepository.findAll();
+	}
+	
+	public List<UnidadeCentralizadora> findByTipoResiduos(TiposResiduos tiposResiduos) {
+		return unidadeCentralizadoraRepository.findByTipoResiduos(tiposResiduos);
 	}
 
 	public UnidadeCentralizadora create(UnidadeCentralizadora unidadeCentralizadora) {

@@ -33,7 +33,8 @@ app
 
 							$scope.carregaUnidadesCentralizadoras = function() {
 								unidCentralizadoraSvc
-										.findUnidadesCentralizadoras()
+										.findUnidadesCentralizadorasByTipo(
+												'QUIMICO')
 										.then(
 												function(unidades) {
 													$scope.unidadesCentralizadoras = unidades;
@@ -75,25 +76,30 @@ app
 							// Pesquisa Coletas
 							$scope.findColetasUnid = function(page) {
 								$scope.search.unidCentralizadoraId = $scope.unidCentralizadora.id;
-								$scope.search.localId = _
-										.first($scope.unidCentralizadora.locais).id;
 								coletaResiduosQuimicosSvc
-										.findColetasMesAnoLabUnid(
-												$scope.search, --page)
-										.then(
-												function(coletasData) {
+										.findColetasMesAnoLabUnid($scope.search, --page)
+										.then(function(coletasData) {
 													$scope.coletas = coletasData.content;
 													$scope.coletasCount = coletasData.totalElements;
 													$scope.pageChanged = $scope.findColetasUnid;
 												},
 												function(error) {
-													Flash
-															.create(
-																	'error',
-																	"Erro ao pesquisar coletas: "
-																			+ error.statusText,
-																	"custom-class");
+													Flash.create('error',"Erro ao pesquisar coletas: "+ error.statusText,"custom-class");
 												})
+							}
+
+							// nova coleta
+
+							$scope.addNovaColeta = function() {
+								$state.go('app.coletaResiduos.quimicos.novaColeta',
+												{
+													'novaColeta' : true,
+													'editColeta' : true,
+													'unidCentralizadoraId' : $scope.unidCentralizadora.id
+												})
+										.then(function(success) {
+												}, function(error) {
+												});
 							}
 
 						} ]);

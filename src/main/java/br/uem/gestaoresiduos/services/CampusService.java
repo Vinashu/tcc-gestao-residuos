@@ -21,6 +21,7 @@ public class CampusService {
 	private LocalRepository localRepository;
 	
 	
+	@SuppressWarnings("unchecked")
 	public List<Campus> findAll(){
 		return (List<Campus>)(List<?>) localRepository.findAllCampus();
 	}

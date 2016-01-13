@@ -25,6 +25,17 @@ app.service('unidCentralizadoraSvc', [ '$http', function($http) {
 			});
 	}
 	
+	this.findUnidadesCentralizadorasByTipo = function(tipoResiduos) {
+		return $http.get("unidCentralizadoras/" + tipoResiduos)
+			.then(
+				function(response) {
+					return response.data
+			}, function(httpError) {
+					throw httpError.status;
+			});
+	}
+	
+	
 	this.getUnid = function(unidCentralizadoraId) {
 		return $http.get("unidCentralizadoras/unid/"+unidCentralizadoraId)
 			.then(

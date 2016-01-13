@@ -14,40 +14,40 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
-import br.uem.gestaoresiduos.entities.ColetaResiduosSolidos;
-import br.uem.gestaoresiduos.services.ColetaResiduosSolidosService;
+import br.uem.gestaoresiduos.entities.ColetaResiduosQuimicos;
+import br.uem.gestaoresiduos.services.ColetaResiduosQuimicosService;
 
 @Controller
-@RequestMapping("api/coletaResiduosSolidos/")
-public class ColetaResiduosSolidosResource {
+@RequestMapping("api/coletaResiduosQuimicos/")
+public class ColetaResiduosQuimicosResource {
 
 	@Autowired
-	private ColetaResiduosSolidosService coletaResiduosSolidosService;
+	private ColetaResiduosQuimicosService coletaResiduosQuimicosService;
 
 	@RequestMapping(value = "", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public ResponseEntity<ColetaResiduosSolidos> create(@RequestBody ColetaResiduosSolidos coletaResiduosSolidos) {
-		ColetaResiduosSolidos savedColeta = coletaResiduosSolidosService.create(coletaResiduosSolidos);
-		return new ResponseEntity<ColetaResiduosSolidos>(savedColeta, HttpStatus.CREATED);
+	public ResponseEntity<ColetaResiduosQuimicos> create(@RequestBody ColetaResiduosQuimicos coletaResiduosQuimicos) {
+		ColetaResiduosQuimicos savedColeta = coletaResiduosQuimicosService.create(coletaResiduosQuimicos);
+		return new ResponseEntity<ColetaResiduosQuimicos>(savedColeta, HttpStatus.CREATED);
 	}
 	
 	@RequestMapping(value="find/{page}", method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public Page<ColetaResiduosSolidos> find(@PathVariable Integer page, @RequestBody JsonNode search) {
-		return coletaResiduosSolidosService.findByMesAnoLocalUnidCentralizadora(search, page);
+	public Page<ColetaResiduosQuimicos> find(@PathVariable Integer page, @RequestBody JsonNode search) {
+		return coletaResiduosQuimicosService.findByMesAnoLocalUnidCentralizadora(search, page);
 	}
 	
 	@RequestMapping(value = "findAll/{page}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public Page<ColetaResiduosSolidos> findAll(@PathVariable Integer page, @RequestBody JsonNode unidId) {
-		return coletaResiduosSolidosService.findAll(unidId, page);
+	public Page<ColetaResiduosQuimicos> findAll(@PathVariable Integer page, @RequestBody JsonNode unidId) {
+		return coletaResiduosQuimicosService.findAll(unidId, page);
 	}
 
 	@RequestMapping(value = "coleta/{coletaId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public ResponseEntity<ColetaResiduosSolidos> findById(@PathVariable int id) {
-		ColetaResiduosSolidos coleta = coletaResiduosSolidosService.findById(id);
-		return new ResponseEntity<ColetaResiduosSolidos>(coleta, HttpStatus.OK);
+	public ResponseEntity<ColetaResiduosQuimicos> findById(@PathVariable int id) {
+		ColetaResiduosQuimicos coleta = coletaResiduosQuimicosService.findById(id);
+		return new ResponseEntity<ColetaResiduosQuimicos>(coleta, HttpStatus.OK);
 	}
 
 }

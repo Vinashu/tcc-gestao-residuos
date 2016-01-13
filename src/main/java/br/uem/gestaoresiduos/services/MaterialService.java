@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.uem.gestaoresiduos.entities.Material;
 import br.uem.gestaoresiduos.entities.TipoMaterial;
 import br.uem.gestaoresiduos.repositories.MaterialRepository;
 
 @Service
+@Transactional
 public class MaterialService {
 	
 	@Autowired

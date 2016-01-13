@@ -15,20 +15,30 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
 @JsonAutoDetect
 @Entity
-@Table(name="material")
-public class Material implements Serializable{
-	
+@Table(name = "material")
+public class Material implements Serializable {
+
 	private static final long serialVersionUID = -1926295067621453665L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="material_id")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "material_id")
 	private int id;
-	
-	private String nome;
-	
+
+	@Column(unique=true)
+	private String descricao;
+
 	@Enumerated(EnumType.STRING)
 	private TipoMaterial tipo;
+
+	public Material() {
+		super();
+	}
+
+	public Material(String descricao, TipoMaterial tipo) {
+		this.descricao = descricao;
+		this.tipo = tipo;
+	}
 
 	public int getId() {
 		return id;
@@ -38,11 +48,12 @@ public class Material implements Serializable{
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
+
 }

@@ -174,11 +174,15 @@ angular
 												templateUrl : 'tpl/coletaResiduos/novaColetaQuimico.html',
 												params : {
 													'novaColeta' : true,
-													'unidCentralizadora': null
+													'editColeta' : true,
+													'unidCentralizadoraId': null
 												},
+												parent : 'app.coletaResiduos',
 												resolve : load([
-														'js/controllers/coletaResiduosQuimicos.js',
-														'js/services/coletaResiduosQuimicos.js' ])
+														'js/controllers/novaColetaResiduosQuimicos.js',
+														'js/services/coletaResiduosQuimicos.js',
+														'js/services/material.js',
+														'js/services/unidadeMedida.js'])
 											})
 
 									// pages

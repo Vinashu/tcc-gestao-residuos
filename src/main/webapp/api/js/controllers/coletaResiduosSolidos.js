@@ -21,7 +21,6 @@ app
 								Flash, $mdDialog, $location, _) {
 
 							// Inicialização da Página
-
 							$scope.unidCentralizadora = {};
 							$scope.unidadesCentralizadoras = [];
 							$scope.search = {};
@@ -30,10 +29,11 @@ app
 							$scope.pagination = {
 								current : 1
 							};
-
+							
 							$scope.carregaUnidadesCentralizadoras = function() {
 								unidCentralizadoraSvc
-										.findUnidadesCentralizadoras()
+										.findUnidadesCentralizadorasByTipo(
+												'SOLIDO')
 										.then(
 												function(unidades) {
 													$scope.unidadesCentralizadoras = unidades;
@@ -53,7 +53,8 @@ app
 							$scope.buscaInicial = function(page) {
 								coletaResiduosSolidosSvc
 										.findColetasUnid(
-												$scope.unidCentralizadora.id, --page)
+												$scope.unidCentralizadora.id,
+												--page)
 										.then(
 												function(coletasData) {
 													$scope.coletas = coletasData.content;
@@ -78,17 +79,11 @@ app
 							// Pesquisa Coletas
 							$scope.findColetasUnid = function(page) {
 								$scope.search.unidCentralizadoraId = $scope.unidCentralizadora.id;
-								$scope.search.localId = _
-										.first($scope.unidCentralizadora.locais).id;
 								coletaResiduosSolidosSvc
 										.findColetasMesAnoLocalUnid(
 												$scope.search, --page)
 										.then(
 												function(coletasData) {
-													/*coletaResiduosSolidosSvc
-															.findColetasMesAnoLocalUnid(
-																	$scope.search,
-																	page);*/
 													$scope.coletas = coletasData.content;
 													$scope.coletasCount = coletasData.totalElements;
 													$scope.pageChanged = $scope.findColetasUnid;
@@ -143,13 +138,21 @@ app
 																.create(
 																		'success',
 																		'Coleta '
-																				+ savedColeta.OS
+																				+ savedColeta.os
 																				+ ' criada com sucesso',
 																		'custom-class');
 														$mdDialog.hide();
 														$scope.novaColeta = {};
-													}, function(error) {
-
+														$scope.buscaInicial(1);
+													},
+													function(error) {
+														Flash
+																.create(
+																		'error',
+																		"Erro ao criar coleta"
+																				+ ": "
+																				+ error.statusText,
+																		"custom-class");
 													});
 								}
 

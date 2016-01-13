@@ -1,7 +1,7 @@
 <meta charset="UTF-8">
 
-<div class="bg-light lter b-b wrapper-md">
-	<h1 class="m-n font-thin h3">Coleta de Resíduos Sólidos</h1>
+<div class="bg-solidos lter b-b wrapper-md">
+	<span class="m-n text-white h3">Coleta de Resíduos Sólidos</span>
 </div>
 <div flash-message="10000"></div>
 
@@ -12,7 +12,7 @@
 	<form name="coletaResiduosSolidosForm">
 		<md-content flex>		
 			<md-input-container flex="70" style="min-width: 250px"> <label>Unidade Centralizadora</label>
-				<md-select ng-model="unidCentralizadora" ng-model-options="{trackBy: '$value.nome'}">
+				<md-select ng-model="unidCentralizadora"  ng-change="buscaInicial(1)">
 					<md-option	required ng-repeat="unid in unidadesCentralizadoras" ng-value="unid">
 						{{ unid.nome }} 
 					</md-option> 
@@ -43,18 +43,21 @@
 									
 									<md-input-container class="md-icon-float md-icon-right md-block" flex="20">
 										<label>Ano</label>
-										<input ng-model="search.ano">
+										<input ng-model="search.ano" ng-required="search.mes!=null">
 									</md-input-container>
 									
 									<md-input-container flex="50"> <label>Local</label>
-										<md-select ng-model="search.localId" ng-model-options="{trackBy: '$value.nome'}">
+										<md-select ng-model="search.localId" ng-init="search.localId=-1">
+											<md-option ng-value="-1">
+												Todos 
+											</md-option> 
 											<md-option	required ng-repeat="local in unidCentralizadora.locais" ng-value="local.id">
 												{{ local.nome }} 
 											</md-option> 
 										</md-select> 
 									</md-input-container>	
 									
-									<md-button class="md-raised md-primary" style="max-height: 20px;" ng-click='findColetasUnid(0)'>
+									<md-button class="md-raised md-primary" style="max-height: 20px;" ng-click='findColetasUnid(1)'>
 											Pesquisar
 									</md-button>
 								</md-content>

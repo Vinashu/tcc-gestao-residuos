@@ -29,31 +29,18 @@ app
 								unidCentralizadoraSvc
 										.saveUnidCentralizadora(
 												$scope.unidCentralizadora)
-										.then(
-												function(
-														savedUnidCentralizadora) {
+										.then(function(savedUnidCentralizadora) {
 													var idSavedUnidCentralizadora = savedUnidCentralizadora.id;
-													$state
-															.go(
-																	'app.unidCentralizadoras.edit',
-																	{
-																		'unidCentralizadoraId' : idSavedUnidCentralizadora
-																	})
-															.then(
-																	function(
-																			data) {
-																		Flash
-																				.create(
-																						'success',
+													$state.go('app.unidCentralizadoras.edit',
+																	{'unidCentralizadoraId' : idSavedUnidCentralizadora})
+															.then(function(data) {
+																		Flash.create('success',
 																						'Unidade Centralizadora '
 																								+ savedUnidCentralizadora.nome
-																								+ ' criada com sucesso',
-																						'custom-class');
+																								+ ' criada com sucesso','custom-class');
 																	})
-												},
-												function(error) {
-													Flash
-															.create('error',
+												},function(error) {
+													Flash.create('error',
 																	"Não foi possível salvar a Unidade Centralizadora");
 												});
 							}

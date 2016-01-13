@@ -41,8 +41,8 @@ public class ColetaResiduosQuimicos implements Serializable {
 	@JoinColumn(name = "lab_id")
 	private Laboratorio laboratorio;
 
-	@OneToMany(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
-	@JoinColumn(name="coleta_id", referencedColumnName="coleta_residuos_quimicos_id")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name="coleta_quimicos_id", referencedColumnName="coleta_residuos_quimicos_id")
 	private List<MaterialColetado> materiaisColetados;
 
 	public int getId() {
