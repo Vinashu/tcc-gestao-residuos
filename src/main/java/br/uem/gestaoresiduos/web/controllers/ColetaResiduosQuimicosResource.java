@@ -43,7 +43,7 @@ public class ColetaResiduosQuimicosResource {
 		return coletaResiduosQuimicosService.findAll(unidId, page);
 	}
 
-	@RequestMapping(value = "coleta/{Id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "coleta/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public ResponseEntity<ColetaResiduosQuimicos> findById(@PathVariable int id) {
 		ColetaResiduosQuimicos coleta = coletaResiduosQuimicosService.findById(id);

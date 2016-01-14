@@ -18,7 +18,6 @@ public class UndiadeMedidaService {
 	public ArrayNode listUnidadesMedida() {
 		List<UnidadeMedida> unidades = Arrays.asList(UnidadeMedida.values());
 		
-		ObjectNode jsonUnid = JsonNodeFactory.instance.objectNode();
 		ArrayNode jsonUnidades = JsonNodeFactory.instance.arrayNode();
 		
 		
@@ -27,6 +26,13 @@ public class UndiadeMedidaService {
 		}
 		
 		return jsonUnidades;
+	}
+
+	public String getUnidadeMedidaInfos(String unidadeMedida) {
+		UnidadeMedida unid = UnidadeMedida.valueOf(unidadeMedida);
+		
+		return "{\"unidade\":\"" + unid + "\",\"nome\":\""+unid.getNome()+"\",\"sigla\":\""+unid.getSigla()+"\"}";
+		
 	}
 	
 }

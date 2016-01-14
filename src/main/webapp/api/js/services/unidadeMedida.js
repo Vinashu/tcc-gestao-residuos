@@ -19,4 +19,13 @@ app.service('unidadeMedidaSvc', [ '$http', function($http) {
 				});
 	}
 	
+	this.getUnidadeMedidaInfos = function(unid) {
+		return $http.get("unidadeMedida/" + unid)
+			.then(
+				function(response) {
+					return response.data;
+			}, function(httpError) {
+					throw httpError.status;
+			});
+	}
 }]);	

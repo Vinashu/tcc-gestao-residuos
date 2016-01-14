@@ -184,6 +184,24 @@ angular
 														'js/services/material.js',
 														'js/services/unidadeMedida.js'])
 											})
+									.state(
+											'app.coletaResiduos.quimicos.editColeta',
+											{
+												url : '/quimicos/edit/{coletaId}',
+												templateUrl : 'tpl/coletaResiduos/novaColetaQuimico.html',
+												params : {
+													'novaColeta' : false,
+													'editColeta' : true,
+													'coletaId' : null,
+													'unidCentralizadoraId': null
+												},
+												parent : 'app.coletaResiduos',
+												resolve : load([
+														'js/controllers/novaColetaResiduosQuimicos.js',
+														'js/services/coletaResiduosQuimicos.js',
+														'js/services/material.js',
+														'js/services/unidadeMedida.js'])
+											})		
 
 									// pages
 									.state(

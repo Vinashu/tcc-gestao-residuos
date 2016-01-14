@@ -80,7 +80,7 @@ public class ColetaResiduosQuimicosService {
 	}
 
 	public ColetaResiduosQuimicos findById(int id) {
-		return coletaResiduosQuimicosRepository.getOne(id);
+		return coletaResiduosQuimicosRepository.findById(id);
 	}
 
 	public boolean deleteColeta(int id) {

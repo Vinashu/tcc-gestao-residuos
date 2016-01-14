@@ -1,12 +1,16 @@
 <meta charset="UTF-8">
 
-<div class="bg-quimicos lter b-b wrapper-md">
-	<span class="m-n text-white h3">Nova Coleta de Resíduos Químicos</span>
-</div>
-<div flash-message="10000"></div>
-
 <div ng-controller="novaColetaResiduosQuimicosCtrl" layout="column"
 	ng-cloak class="md-inline-form">
+
+	<div class="bg-quimicos lter b-b wrapper-md">
+		<span class="m-n text-white h3" ng-if="isCreating">Nova Coleta de Resíduos Químicos</span>
+		<span class="m-n text-white h3" ng-if="!isCreating">Editar Coleta de Resíduos Químicos. Id: {{novaColeta.id}}</span>
+		<span class="m-n text-white h3" ng-if="!isEditing">Coleta de Resíduos Químicos. Id: {{novaColeta.id}}</span>
+	</div>
+	
+	<div flash-message="10000"></div>
+	
 	<md-content layout-padding>
 
 	<form name="novaColetaResiduosQuimicosForm">
@@ -19,14 +23,17 @@
 		<md-content flex> 
 			<md-input-container>
 				<label>Laboratório</label>
-				 <md-select ng-model="novaColeta.laboratorio">
+				 <md-select ng-model="novaColeta.laboratorio" ng-if="isCreating">
 				 	<md-option	ng-repeat="lab in novaColeta.unidadeCentralizadora.locais" value="{{lab}}">
 						{{lab.nome}} 
 					</md-option>
 				 </md-select> 
+				 
+				 <b><input disabled	ng-model="novaColeta.laboratorio.nome" ng-if="!isCreating"
+						style="border-bottom-color: black; color: black;"> </b>
 			</md-input-container> 
 			
-			<md-datepicker ng-model="novaColeta.dataColeta"	md-placeholder="Data da Coleta" aria-label="Data da Coleta"></md-datepicker>
+			<md-datepicker  ng-model="novaColeta.dataColeta"	md-placeholder="Data da Coleta" aria-label="Data da Coleta"></md-datepicker>
 
 		</md-content>
 
@@ -111,7 +118,9 @@
 		</table>
 		</md-content>
 		<md-button class="md-raised md-primary"
-				ng-click='submitColeta()'>Salvar</md-button>
+				ng-click='submitColeta()' ng-if="isCreating">Salvar</md-button>
+				<md-button class="md-raised md-primary"
+				ng-click='submitEditedColeta()' ng-if="!isCreating">Salvar Alterações</md-button>
 	</md-content>
 
 

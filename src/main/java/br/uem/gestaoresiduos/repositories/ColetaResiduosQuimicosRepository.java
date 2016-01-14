@@ -21,5 +21,7 @@ public interface ColetaResiduosQuimicosRepository extends JpaRepository<ColetaRe
 
 	Page<ColetaResiduosQuimicos> findByLaboratorioIdAndUnidadeCentralizadoraId(int localId, int unidCentralizadoraId,
 			Pageable pageableRequest);
+	
+	ColetaResiduosQuimicos findById(int id);
 
 }

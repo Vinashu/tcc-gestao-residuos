@@ -84,5 +84,14 @@ public class ColetaResiduosSolidosService {
 		
 		return results;
 	}
+
+	public boolean deleteById(int id) {
+		ColetaResiduosSolidos coleta = coletaResiduosSolidosRepository.findOne(id);
+		if (coleta != null) {
+			coletaResiduosSolidosRepository.delete(coleta);
+			return true;
+		}
+		return false;
+	}
 	
 }

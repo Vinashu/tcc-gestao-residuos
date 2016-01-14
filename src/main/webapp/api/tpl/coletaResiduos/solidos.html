@@ -60,6 +60,9 @@
 									<md-button class="md-raised md-primary" style="max-height: 20px;" ng-click='findColetasUnid(1)'>
 											Pesquisar
 									</md-button>
+									<md-button class="md-primary" style="max-height: 20px;" ng-click='limparCampos()'>
+											Limpar Campos
+									</md-button>
 								</md-content>
 							</li>
 						</ul>
@@ -88,6 +91,8 @@
 					<th>Peso</th>
 					<th>Local</th>
 					<th>Observações</th>
+					<th>Reciclável</th>
+					<th>Ações</th>
 				</tr>
 			</thead>
 				<tbody>
@@ -98,6 +103,19 @@
 						<td>{{coleta.peso}}</td>
 						<td>{{coleta.local.nome}}</td>
 						<td>{{coleta.observacoes}}</td>
+						<td>{{coleta.reciclavel}}</td>
+						<td>
+							<i class="glyphicon glyphicon-edit" ng-click="editColeta(coleta)">
+								<md-tooltip md-direction="left" >
+					 				Editar Coleta de Resíduos Sólidos
+								</md-tooltip>
+							</i>
+							<i class="glyphicon glyphicon-trash" ng-click="deleteColeta(coleta)">
+								<md-tooltip md-direction="left">
+					 				Excluir Coleta de Resíduos Sólidos
+								</md-tooltip>
+							</i>
+						</td>
 					</tr>
 				</tbody>
 			</table>		

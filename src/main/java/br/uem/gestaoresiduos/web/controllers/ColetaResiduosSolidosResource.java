@@ -49,5 +49,14 @@ public class ColetaResiduosSolidosResource {
 		ColetaResiduosSolidos coleta = coletaResiduosSolidosService.findById(id);
 		return new ResponseEntity<ColetaResiduosSolidos>(coleta, HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "coleta/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public ResponseEntity<ColetaResiduosSolidos> deleteById(@PathVariable int id) {
+		if (coletaResiduosSolidosService.deleteById(id)) {
+			return new ResponseEntity<ColetaResiduosSolidos>(HttpStatus.OK);
+		}
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
 
 }

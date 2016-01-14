@@ -48,5 +48,14 @@ app.service('coletaResiduosQuimicosSvc', [
 					throw httpError;
 				});
 			}
+			
+			this.findColeta = function(coletaId) {
+				return $http.get("coletaResiduosQuimicos/coleta/" + coletaId)
+				.then(function(response) {
+					return response.data;
+				}, function(httpError) {
+					throw httpError;
+				});
+			}
 
 		} ]);

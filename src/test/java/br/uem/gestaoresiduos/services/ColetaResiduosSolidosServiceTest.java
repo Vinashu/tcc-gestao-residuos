@@ -19,6 +19,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.uem.gestaoresiduos.config.AppConfig;
 import br.uem.gestaoresiduos.config.PersistenceConfig;
+import br.uem.gestaoresiduos.entities.ColetaResiduosQuimicos;
 import br.uem.gestaoresiduos.entities.ColetaResiduosSolidos;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -43,5 +44,5 @@ public class ColetaResiduosSolidosServiceTest {
 		Page<ColetaResiduosSolidos> result = coletaResiduosSolidosService.findByMesAnoLocalUnidCentralizadora(search, page);
 		assertEquals(result.getNumberOfElements(), 4);
 	}
-
+	
 }
