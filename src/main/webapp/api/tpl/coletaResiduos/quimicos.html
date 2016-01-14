@@ -79,19 +79,33 @@
 			<table	class="table table-bordered table-striped">
 			<thead>
 				<tr>
-					<th>Data</th>		
 					<th>Laboratório</th>
-					<th>Status</th>
+					<th>Data</th>		
 					<th>Materiais Coletados</th>
+					<th>Ações</th>
+					
 				</tr>
 			</thead>
 				<tbody>
 					<tr dir-paginate="coleta in coletas | itemsPerPage: coletasPerPage" total-items="coletasCount" current-page="pagination.current">
 						
-						<td>{{coleta.dataColeta  | asDate | date:'dd-MM-yyyy' }}</td>
 						<td>{{coleta.laboratorio.nome}}</td>
-						<td>{{coleta.status}}</td>
+						<td>{{coleta.dataColeta  | asDate | date:'dd-MM-yyyy' }}</td>
 						<td>{{coleta.materiaisColetados}}</td>
+						<td>
+							<i class="glyphicon glyphicon-edit" ng-click="editarColeta(coleta)">
+								<md-tooltip md-direction="left" >
+					 				Editar Coleta de Resíduos Químicos
+								</md-tooltip>
+							</i>
+							<i class="glyphicon glyphicon-trash" ng-click="deleteColeta(coleta)">
+								<md-tooltip md-direction="left">
+					 				Excluir Coleta de Resíduos Químicos
+								</md-tooltip>
+							</i>
+						
+						</td>
+						
 					</tr>
 				</tbody>
 			</table>		

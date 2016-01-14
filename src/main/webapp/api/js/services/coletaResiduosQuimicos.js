@@ -38,7 +38,15 @@ app.service('coletaResiduosQuimicosSvc', [
 						}, function(httpError) {
 							throw httpError;
 						});
-
+			}
+			
+			this.deleteColeta = function(coletaId) {
+				return $http.delete("coletaResiduosQuimicos/" + coletaId)
+				.then(function(response) {
+					return response.data
+				}, function(httpError) {
+					throw httpError;
+				});
 			}
 
 		} ]);

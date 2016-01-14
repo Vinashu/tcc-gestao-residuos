@@ -34,14 +34,14 @@
 			<div class="bg-light lter b-b wrapper-md" style="margin-top: 30px;">
 				<b>Materiais Coletados</b>
 				<md-button class="md-fab md-primary md-mini"
-					ng-click="showNovoMaterialInputs=!showNovoMaterialInputs" aria-label="Add Material Coletado">
+					ng-click="showNovoMaterialInputs()" aria-label="Add Material Coletado">
 					<md-tooltip md-direction="right">
 					 	Adicionar Material	Coletado no Laboratório selecionado
 					</md-tooltip> <i class="glyphicon glyphicon-plus"></i> 
 				 </md-button>
 			</div>
 		
-			<div ng-show="showNovoMaterialInputs" >
+			<div ng-show="isShowNovoMaterialInputs" >
 				
 				<form class="form-horizontal">
 					<div class="controls form-inline" >

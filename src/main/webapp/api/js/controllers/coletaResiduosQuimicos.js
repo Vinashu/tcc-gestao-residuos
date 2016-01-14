@@ -101,5 +101,21 @@ app
 												}, function(error) {
 												});
 							}
+							
+							//delete coleta
+							
+							$scope.deleteColeta = function(coleta) {
+								var confirm = $mdDialog.confirm().title(
+								'Tem certeza que deseja excluir a coleta de resíduos do laboratório '+ coleta.laboratorio.nome + ' ?').ariaLabel(
+								'Excluir Coleta de Resíduos Químicos').ok('Ok').cancel('Fechar');
+
+								$mdDialog.show(confirm).then(function() {
+									coletaResiduosQuimicosSvc.deleteColeta(coleta.id)
+										.then(function(result) {
+											Flash.create('success',"Coleta Excluída com sucesso " +result);
+											$scope.pageChanged($scope.pagination.current);
+										})
+						});
+							}
 
 						} ]);

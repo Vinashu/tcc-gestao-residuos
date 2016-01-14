@@ -29,9 +29,10 @@ app
 							$scope.unidadesMedida = [];
 							
 							$scope.novaColeta = {};
+							$scope.novaColeta.dataColeta = new Date();
 							$scope.novaColeta.materiaisColetados = [];
 							$scope.novoMaterialColetado = {};
-							$scope.showNovoMaterialInputs = false;
+							$scope.isShowNovoMaterialInputs = false;
 							
 							/*
 							 * Inicialização
@@ -68,7 +69,49 @@ app
 							 * controle material coletado
 							 */
 							
+							$scope.verificaColetasLabMesAno = function() {
+								if (!_.isEmpty($scope.novaColeta.laboratorio) && _.isDate($scope.novaColeta.dataColeta) && $scope.isCreating) {
+									
+									var coletasCount = 0;
+									
+									$scope.search = {};
+									$scope.search.unidCentralizadoraId = $scope.novaColeta.unidadeCentralizadora.id;
+									$scope.search.labId = JSON.parse($scope.novaColeta.laboratorio).id;
+									$scope.search.mes = $scope.novaColeta.dataColeta.getMonth() + 1;
+									$scope.search.ano = $scope.novaColeta.dataColeta.getFullYear();
+									
+									coletaResiduosQuimicosSvc
+											.findColetasMesAnoLabUnid($scope.search, 0)
+											.then(function(coletasData) {
+												    coletasCount = coletasData.totalElements;
+												    if (coletasCount > 0) {
+														Flash.create('error', 'Já exite um registro para de coleta de resíduos para o laborátorio ' + JSON.parse($scope.novaColeta.laboratorio).nome + ' para o período de '+ $scope.search.mes +'/'+$scope.search.ano );
+														return false;
+													}else{
+														return true;
+													}
+												},
+												function(error) {
+													Flash.create('error',"Erro ao verificar coletas do laboratorio " + $scope.novaColeta.laboratorio.nome + "no mês " + $scope.search.mes + "erro: " + error.statusText,"custom-class");
+											}).then(function(result) {
+												return result;
+											});
+								}else{
+									return true;
+								}
+							}
+							
+							$scope.showNovoMaterialInputs = function() {
+								if (_.isEmpty($scope.novaColeta.laboratorio) || !_.isDate($scope.novaColeta.dataColeta)) {
+									Flash.create('error','Selecione laboratório e data da coleta antes de adicionar os materiais coletados','custom-class');
+									$scope.isShowNovoMaterialInputs = false;
+								}else{
+									$scope.isShowNovoMaterialInputs = $scope.verificaColetasLabMesAno();
+								}
+							}
+							
 							$scope.addMaterialColetado = function() {
+							
 								var novoMaterialColetado = {};
 								novoMaterialColetado.material = JSON.parse($scope.novoMaterialColetado.material);
 								novoMaterialColetado.quantidade = $scope.novoMaterialColetado.quantidade;
@@ -77,6 +120,7 @@ app
 								$scope.novaColeta.materiaisColetados.push(novoMaterialColetado);
 								
 								$scope.novoMaterialColetado = {};
+							
 							}
 							
 							$scope.atualizaMaterialColetado = function(materialColetadoOld, materialColetadoNew) {
@@ -169,7 +213,9 @@ app
 																+ lab.nome
 																+ ' criada com sucesso','custom-class');
 									}, function(error) {
-										
+										Flash.create('error',
+												'Ocorreu um erro: '+ error
+														+ 'verifique os campos e tente novamente, por favor','custom-class');
 									});
 							}
 							
