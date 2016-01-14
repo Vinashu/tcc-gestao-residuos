@@ -41,7 +41,7 @@ app.service('coletaResiduosQuimicosSvc', [
 			}
 			
 			this.deleteColeta = function(coletaId) {
-				return $http.delete("coletaResiduosQuimicos/" + coletaId)
+				return $http.delete("coletaResiduosQuimicos/coleta/" + coletaId)
 				.then(function(response) {
 					return response.data
 				}, function(httpError) {

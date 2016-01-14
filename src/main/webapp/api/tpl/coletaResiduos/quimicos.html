@@ -47,7 +47,10 @@
 									</md-input-container>
 									
 									<md-input-container flex="50"> <label>Laboratório</label>
-										<md-select ng-model="search.labId" >
+										<md-select ng-model="search.labId"  ng-init="search.labId=-1" >
+											<md-option ng-value="-1">
+												Todos 
+											</md-option> 
 											<md-option	ng-repeat="local in unidCentralizadora.locais"  ng-value="local.id">
 												{{ local.nome }} 
 											</md-option>

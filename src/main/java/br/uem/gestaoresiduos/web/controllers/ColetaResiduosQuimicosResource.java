@@ -43,11 +43,20 @@ public class ColetaResiduosQuimicosResource {
 		return coletaResiduosQuimicosService.findAll(unidId, page);
 	}
 
-	@RequestMapping(value = "coleta/{coletaId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "coleta/{Id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public ResponseEntity<ColetaResiduosQuimicos> findById(@PathVariable int id) {
 		ColetaResiduosQuimicos coleta = coletaResiduosQuimicosService.findById(id);
 		return new ResponseEntity<ColetaResiduosQuimicos>(coleta, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "coleta/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public ResponseEntity<ColetaResiduosQuimicos> delete(@PathVariable int id) {
+		if (coletaResiduosQuimicosService.deleteColeta(id)) {
+			return new ResponseEntity<ColetaResiduosQuimicos>(HttpStatus.OK);
+		}
+		return new ResponseEntity<ColetaResiduosQuimicos>(HttpStatus.NOT_FOUND);
 	}
 
 }

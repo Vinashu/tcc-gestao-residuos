@@ -83,4 +83,14 @@ public class ColetaResiduosQuimicosService {
 		return coletaResiduosQuimicosRepository.getOne(id);
 	}
 
+	public boolean deleteColeta(int id) {
+		ColetaResiduosQuimicos coleta = coletaResiduosQuimicosRepository.findOne(id);
+		if (coleta != null) {
+			coletaResiduosQuimicosRepository.delete(coleta);
+			return true;
+		}
+		return false;
+	}
+	
+
 }
