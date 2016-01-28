@@ -1,4 +1,4 @@
-package br.uem.gestaoresiduos.web.controllers;
+		package br.uem.gestaoresiduos.web.controllers;
 
 import java.util.List;
 
@@ -31,5 +31,12 @@ public class MaterialResource {
 	public Material create(@RequestBody Material material) {
 		return materialService.save(material);
 	}
+	
+	@RequestMapping(value="tiposMaterial", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public String findTiposMaterial() {
+		return materialService.getTiposMaterial();
+	}
+	
 	
 }

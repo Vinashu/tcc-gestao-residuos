@@ -15,10 +15,13 @@
 
 	<form name="novaColetaResiduosQuimicosForm">
 
-		<md-content flex> <md-input-container flex="30">
-		<label>Unidade Centralizadora</label>
-		<b><input disabled	ng-model="novaColeta.unidadeCentralizadora.nome"
-			style="border-bottom-color: black; color: black;"> </b> </md-input-container> </md-content>
+		<md-content flex> 
+			<md-input-container flex>
+				<label>Unidade Centralizadora</label>
+				<b><input disabled	ng-model="novaColeta.unidadeCentralizadora.nome"
+					style="border-bottom-color: black; color: black;width: 371px;"> </b> 
+			</md-input-container> 
+		</md-content>
 
 		<md-content flex> 
 			<md-input-container>
@@ -108,7 +111,7 @@
 							</md-tooltip>
 						</i>
 						<i class="glyphicon glyphicon-refresh" ng-if="isEditing && !isCreating">
-							<md-tooltip md-direction="right">
+							<md-tooltip md-direction="left">
 				 				Disponibilizar material para reuso
 							</md-tooltip>
 						</i>

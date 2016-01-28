@@ -93,8 +93,13 @@
 					<tr dir-paginate="coleta in coletas | itemsPerPage: coletasPerPage" total-items="coletasCount" current-page="pagination.current">
 						
 						<td>{{coleta.laboratorio.nome}}</td>
-						<td>{{coleta.dataColeta  | asDate | date:'dd-MM-yyyy' }}</td>
-						<td>{{coleta.materiaisColetados}}</td>
+						<td>{{coleta.dataColeta  | asDate | date:'dd/MM/yyyy' }}</td>
+						<td>
+							<md-list-item ng-repeat="material in coleta.materiaisColetados" style="min-height:25px">
+								{{material.material.descricao}} - {{material.quantidade}} {{getUnidMedidaInfos(material.unidadeMedida)}}
+							</md-list-item>
+						
+						</td>
 						<td>
 							<i class="glyphicon glyphicon-edit" ng-click="editColeta(coleta)">
 								<md-tooltip md-direction="left" >

@@ -114,6 +114,41 @@ angular
 												url : '/edit',
 												templateUrl : 'tpl/unidCentralizadoras/edit.html'
 											})
+											
+									.state(
+											'app.materiais',
+											{
+												url : '/materiais',
+												template : '<div ui-view class="wrapper-md"></div>'
+											})
+											
+									
+									/*
+									 * materiais quimicos
+									 */
+									.state(
+											'app.materiais.quimicos',
+											{
+												url : '/quimicos',
+												templateUrl : 'tpl/materiais/quimicos.html',
+												resolve : load([
+											                	'js/controllers/materialQuimico.js',
+																'js/services/materialQuimico.js' ])
+											})
+											
+									/*
+									 * Locais de coleta
+									 */
+									.state(
+											'app.locais.coleta',
+											{
+												url : '/locaisColeta',
+												templateUrl : 'tpl/locais/coleta.html',
+												resolve : load([
+									                	'js/controllers/locaisColeta.js',
+														'js/services/locaisColeta.js' ])
+											})
+		
 
 									/*
 									 * Coleta de Resíduos
@@ -165,7 +200,9 @@ angular
 												templateUrl : 'tpl/coletaResiduos/quimicos.html',
 												resolve : load([
 														'js/controllers/coletaResiduosQuimicos.js',
-														'js/services/coletaResiduosQuimicos.js' ])
+														'js/services/coletaResiduosQuimicos.js',
+														'js/services/unidadeMedida.js',
+														'js/services/materialQuimico.js'])
 											})
 									.state(
 											'app.coletaResiduos.quimicos.novaColeta',
@@ -179,10 +216,7 @@ angular
 												},
 												parent : 'app.coletaResiduos',
 												resolve : load([
-														'js/controllers/novaColetaResiduosQuimicos.js',
-														'js/services/coletaResiduosQuimicos.js',
-														'js/services/material.js',
-														'js/services/unidadeMedida.js'])
+														'js/controllers/novaColetaResiduosQuimicos.js'])
 											})
 									.state(
 											'app.coletaResiduos.quimicos.editColeta',
@@ -197,10 +231,7 @@ angular
 												},
 												parent : 'app.coletaResiduos',
 												resolve : load([
-														'js/controllers/novaColetaResiduosQuimicos.js',
-														'js/services/coletaResiduosQuimicos.js',
-														'js/services/material.js',
-														'js/services/unidadeMedida.js'])
+														'js/controllers/novaColetaResiduosQuimicos.js'])
 											})		
 
 									// pages

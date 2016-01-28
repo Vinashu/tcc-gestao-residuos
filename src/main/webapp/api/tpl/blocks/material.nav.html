@@ -40,6 +40,12 @@
       </li>
     </ul>
   </li>
+   <li>
+    <a ui-sref="app.relatorios">
+      <i class="glyphicon glyphicon-refresh"></i>
+      <span >Reuso de Residuos</span>
+    </a>
+  </li>
 
   <li class="line dk"></li>
 
@@ -97,28 +103,34 @@
   </li>
   
   <li ui-sref-active="active">
-    <a ui-sref="app.chart" md-ink-ripple>
-      <i class="glyphicon glyphicon-signal"></i>
-      <span translate="aside.nav.components.CHART">Chart</span>
+    <a ui-sref="app.materiais.quimicos" md-ink-ripple>
+      <i class="glyphicon glyphicon-list"></i>
+      <span >Materiais Químicos</span>
+    </a>
+  </li>
+  
+  <li ui-sref-active="active">
+    <a ui-sref="app.locais" md-ink-ripple>
+      <i class="glyphicon glyphicon-list"></i>
+      <span >Locais de Coleta</span>
     </a>
   </li>
 
   <li class="line dk hidden-folded"></li>
 
   <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">          
-    <span translate="aside.nav.your_stuff.YOUR_STUFF">Your Stuff</span>
+    <span translate="aside.nav.your_stuff.YOUR_STUFF">Perfil</span>
   </li>  
   <li>
-    <a ui-sref="app.page.profile">
+    <a ui-sref="app.usuario">
       <i class="icon-user icon text-success-lter"></i>
-      <b class="badge bg-success pull-right">30%</b>
-      <span translate="aside.nav.your_stuff.PROFILE">Profile</span>
+      <span >Usuario</span>
     </a>
   </li>
   <li>
-    <a ui-sref="app.docs">
+    <a ui-sref="app.relatorios">
       <i class="icon-question icon"></i>
-      <span translate="aside.nav.your_stuff.DOCUMENTS">Documents</span>
+      <span >Relatórios</span>
     </a>
   </li>
 </ul>

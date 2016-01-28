@@ -16,11 +16,11 @@ app
 						'$mdDialog',
 						'$location',
 						'_',
-						'materialSvc',
+						'materialQuimicoSvc',
 						'unidadeMedidaSvc',
 						function($scope, unidCentralizadoraSvc, localSvc,
 								coletaResiduosQuimicosSvc, $state,
-								$stateParams, Flash, $mdDialog, $location, _, materialSvc, unidadeMedidaSvc ) {
+								$stateParams, Flash, $mdDialog, $location, _, materialQuimicoSvc, unidadeMedidaSvc ) {
 							
 							$scope.isCreating = $stateParams.novaColeta;
 							$scope.isEditing = $stateParams.editColeta;
@@ -47,7 +47,7 @@ app
 							}
 							
 							$scope.carregaMateriais = function() {
-								materialSvc.getMateriais()
+								materialQuimicoSvc.getMateriais()
 									.then(function(materiais) {
 										$scope.materiais = materiais;
 									})
@@ -76,7 +76,6 @@ app
 												.then(function(unidMedidaInfos) {
 													item.unidadeMedida = unidMedidaInfos;
 												});
-											console.log($scope.novaColeta);
 										});
 										
 									});
@@ -225,9 +224,9 @@ app
 										$scope.carregaUnidCentralizadora();
 										
 										Flash.create('success',
-														'Coleta de Resíduos Químicos de '
-																+ lab.nome
-																+ ' criada com sucesso','custom-class');
+														'Coleta de Resíduos Químicos criada com sucesso','custom-class');
+										
+										$state.go('app.coletaResiduos.quimicos');
 									}, function(error) {
 										Flash.create('error',
 												'Ocorreu um erro: '+ error
@@ -245,6 +244,7 @@ app
 													'Coleta de Resíduos Químicos de '
 															+ savedColeta.laboratorio.nome
 															+ ' editada com sucesso','custom-class');
+									$state.go('app.coletaResiduos.quimicos');
 								}, function(error) {
 									Flash.create('error',
 											'Ocorreu um erro: '+ error

@@ -7,8 +7,6 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -21,10 +19,6 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 public class Laboratorio  extends Local implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	
-	@ManyToOne
-	@JoinColumn(name="campus_id")
-	private Campus campus;
 	
 	private String bloco;
 	private String sala;
@@ -81,14 +75,6 @@ public class Laboratorio  extends Local implements Serializable{
 		this.tipoAtividade = tipoAtividade;
 	}
 
-	public Campus getCampus() {
-		return campus;
-	}
-
-	public void setCampus(Campus campus) {
-		this.campus = campus;
-	}
-
 	public String getBloco() {
 		return bloco;
 	}
@@ -142,7 +128,6 @@ public class Laboratorio  extends Local implements Serializable{
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + ((bloco == null) ? 0 : bloco.hashCode());
-		result = prime * result + ((campus == null) ? 0 : campus.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + (residuoHospitalar ? 1231 : 1237);
 		result = prime * result + (residuoQuimico ? 1231 : 1237);
@@ -168,11 +153,6 @@ public class Laboratorio  extends Local implements Serializable{
 			if (other.bloco != null)
 				return false;
 		} else if (!bloco.equals(other.bloco))
-			return false;
-		if (campus == null) {
-			if (other.campus != null)
-				return false;
-		} else if (!campus.equals(other.campus))
 			return false;
 		if (email == null) {
 			if (other.email != null)

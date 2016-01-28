@@ -8,6 +8,10 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
+/*
+ * sem frontend... poucos e fixos campi.. cadastra na mao
+ */
+
 @Entity
 @Table(name="campus")
 @DiscriminatorValue(value="campus")

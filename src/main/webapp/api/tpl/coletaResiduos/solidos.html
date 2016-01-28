@@ -98,7 +98,7 @@
 				<tbody>
 					<tr dir-paginate="coleta in coletas | itemsPerPage: coletasPerPage" total-items="coletasCount" current-page="pagination.current">
 						
-						<td>{{coleta.dataColeta  | asDate | date:'dd-MM-yyyy' }}</td>
+						<td>{{coleta.dataColeta  | asDate | date:'dd/MM/yyyy' }}</td>
 						<td>{{coleta.os}}</td>
 						<td>{{coleta.peso}}</td>
 						<td>{{coleta.local.nome}}</td>

@@ -1,5 +1,7 @@
 package br.uem.gestaoresiduos.services;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,5 +33,19 @@ public class MaterialService {
 	
 	public Material findById(int id) {
 		return materialRepository.findOne(id);
+	}
+
+	public String getTiposMaterial() {
+		StringBuffer tiposMaterial = new StringBuffer();
+		List<TipoMaterial> tipos = Arrays.asList(TipoMaterial.values());
+		
+		tiposMaterial.append("[ ");
+		tipos.forEach(t -> {
+			tiposMaterial.append("{ \"tipo\" : \"" + t + "\" , \"descricao\" : \"" + t.getDescricao() + "\" },");
+		});
+		tiposMaterial.deleteCharAt(tiposMaterial.length() - 1);
+		tiposMaterial.append(" ]");
+		
+		return tiposMaterial.toString();
 	}
 }

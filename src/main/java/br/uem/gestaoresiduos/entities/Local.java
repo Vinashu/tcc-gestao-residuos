@@ -11,70 +11,73 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
 @Entity
-@Table(name="locais")
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="local_tipo")
-public class Local implements Serializable{
+@Table(name = "locais")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "local_tipo")
+public class Local implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 8351468163447696035L;
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="local_id")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "local_id")
 	private int id;
 	private String nome;
 	private String sigla;
-	
+
+	@ManyToOne
+	@JoinColumn(name = "campus_id")
+	private Campus campus;
 
 	@Column(name = "data_atualizacao", nullable = false)
 	private Date dataAtualizacao;
 
+	public Campus getCampus() {
+		return campus;
+	}
+
+	public void setCampus(Campus campus) {
+		this.campus = campus;
+	}
 
 	public int getId() {
 		return id;
 	}
 
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
 
 	public String getNome() {
 		return nome;
 	}
 
-
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 
 	public String getSigla() {
 		return sigla;
 	}
 
-
 	public void setSigla(String sigla) {
 		this.sigla = sigla;
 	}
-
 
 	public Date getDataAtualizacao() {
 		return dataAtualizacao;
 	}
 
-
 	public void setDataAtualizacao(Date dataAtualizacao) {
 		this.dataAtualizacao = dataAtualizacao;
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -86,7 +89,6 @@ public class Local implements Serializable{
 		result = prime * result + ((sigla == null) ? 0 : sigla.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -116,6 +118,5 @@ public class Local implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
+
 }

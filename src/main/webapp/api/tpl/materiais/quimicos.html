@@ -1,0 +1,73 @@
+<meta charset="UTF-8">
+
+<div class="bg-light lter b-b wrapper-md">
+	<h1 class="m-n font-thin h3">Materiais Químicos</h1>
+</div>
+<div flash-message="10000"></div>
+
+<div ng-controller="materialQuimicoCtrl" layout="column" ng-cloak
+	class="md-inline-form">
+	<md-content layout-padding >
+		<form name="materialForm">
+			<div layout="column" layout-sm="column" flex="40">
+				<md-input-container flex>
+					<label>Descrição do Material</label> 
+					<input ng-model="novoMaterial.descricao" required="required">
+				</md-input-container>
+	
+				<md-input-container flex>
+					<label>Tipo do Material</label>
+					<md-select required="required" ng-model="novoMaterial.tipo">
+						<md-option required ng-repeat="tipo in tiposMaterial" ng-value="tipo">
+							{{ tipo.tipo }} - {{tipo.descricao}} 
+						</md-option>
+					</md-select>
+				</md-input-container>
+			</div>
+			
+			<div flex="40">
+			
+				
+				<div class="bg-light lter b-b wrapper-md" style="margin-top: 30px;">
+					<b>Materiais Químicos</b>
+				</div>
+					<table	class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Material</th>		
+							<th>Tipo Material</th>
+							<th>Ações</th>
+						</tr>
+					</thead>
+						<tbody>
+							<tr >
+								
+								<td>{{coleta.laboratorio.nome}}</td>
+								<td>{{coleta.dataColeta  | asDate | date:'dd-MM-yyyy' }}</td>
+								<td>{{coleta.materiaisColetados}}</td>
+								<td>
+									<i class="glyphicon glyphicon-edit" ng-click="editColeta(coleta)">
+										<md-tooltip md-direction="left" >
+							 				Editar Coleta de Resíduos Químicos
+										</md-tooltip>
+									</i>
+									<i class="glyphicon glyphicon-trash" ng-click="deleteColeta(coleta)">
+										<md-tooltip md-direction="left">
+							 				Excluir Coleta de Resíduos Químicos
+										</md-tooltip>
+									</i>
+								
+								</td>
+								
+							</tr>
+						</tbody>
+					</table>		
+			</div>
+	
+		</form>
+
+	</md-content>
+
+</div>
+

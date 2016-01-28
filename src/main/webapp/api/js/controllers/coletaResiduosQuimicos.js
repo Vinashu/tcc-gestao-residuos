@@ -16,9 +16,10 @@ app
 						'$mdDialog',
 						'$location',
 						'_',
+						'unidadeMedidaSvc',
 						function($scope, unidCentralizadoraSvc, localSvc,
 								coletaResiduosQuimicosSvc, $state,
-								$stateParams, Flash, $mdDialog, $location, _) {
+								$stateParams, Flash, $mdDialog, $location, _, unidadeMedidaSvc) {
 
 							// Inicialização da Página
 
@@ -130,6 +131,24 @@ app
 								.then(function(success) {
 										}, function(error) {
 										});
+							}
+							
+							$scope.getUnidMedidaInfos = function(unid) {
+								
+								if (unid === 'LITRO') {
+									return 'L';
+								} else if (unid === 'UNIDADE') {
+									return 'Unid.';
+								}else if (unid === 'QUILO') {
+									return 'kg';
+								}
+								
+								/*LOOP INFINITO... CAUSE?!
+								 * var infos = unidadeMedidaSvc.getUnidadeMedidaInfos(unid);
+									.then(function(infos) {
+										return infos;
+									});
+								return infos;	*/
 							}
 
 						} ]);
