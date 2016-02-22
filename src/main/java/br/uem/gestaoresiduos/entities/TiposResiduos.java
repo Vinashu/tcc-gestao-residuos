@@ -1,7 +1,7 @@
 package br.uem.gestaoresiduos.entities;
 
 public enum TiposResiduos {
-	SOLIDO("Sólido"), QUIMICO("Químico"), HOSPITALAR("Hospitalar");
+	SOLIDO("Sólido"), QUIMICO("Químico"), SERVICOSAUDE("Serviço de Saúde");
 	
 	private final String tipo;
 

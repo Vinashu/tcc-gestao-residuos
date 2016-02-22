@@ -233,7 +233,47 @@ angular
 												resolve : load([
 														'js/controllers/novaColetaResiduosQuimicos.js'])
 											})		
-
+											
+											
+									/*
+									 * servicos de saude
+									 */
+									.state(
+											'app.coletaResiduos.servicosSaude',
+											{
+												url : '/servicosSaude',
+												templateUrl : 'tpl/coletaResiduos/servicoSaude.html',
+												resolve : load([
+														'js/controllers/coletaResiduosServicosSaude.js',
+														'js/services/coletaResiduosServicosSaude.js' ])
+											})
+									.state(
+											'app.coletaResiduos.servicosSaude.novaColeta',
+											{
+												url : '/servicosSaude',
+												templateUrl : 'tpl/coletaResiduos/servicosSaude.html',
+												params : {
+													'novaColeta' : true
+												},
+												resolve : load([
+														'js/controllers/coletaResiduosServicosSaude.js',
+														'js/services/coletaResiduosServicosSaude.js' ])
+											})
+											
+											
+										/*
+									 * reuso
+									 */
+									.state(
+											'app.coletaResiduos.reuso',
+											{
+												url : '/reuso',
+												templateUrl : 'tpl/reuso/reuso.html',
+												resolve : load([
+														'js/controllers/reuso.js',
+														'js/services/reuso.js' ])
+											})
+								
 									// pages
 									.state(
 											'app.page',

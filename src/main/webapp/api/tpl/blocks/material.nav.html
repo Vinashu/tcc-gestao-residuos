@@ -34,14 +34,14 @@
       </li>
       
       <li ui-sref-active="active">
-        <a ui-sref="app.coletaResiduos.hospilares">
+        <a ui-sref="app.coletaResiduos.servicosSaude">
           <span>Hospitalares</span>
         </a>
       </li>
     </ul>
   </li>
    <li>
-    <a ui-sref="app.relatorios">
+    <a ui-sref="app.coletaResiduos.reuso">
       <i class="glyphicon glyphicon-refresh"></i>
       <span >Reuso de Residuos</span>
     </a>
@@ -52,30 +52,7 @@
   <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
     <span >Componentes</span>
   </li>
-  <li>
-    <a href md-ink-ripple class="auto">
-      <span class="pull-right text-muted">
-        <i class="fa fa-fw fa-angle-right text"></i>
-        <i class="fa fa-fw fa-angle-down text-active"></i>
-      </span>
-      <i class="glyphicon glyphicon-list"></i>
-      <span>Laboratórios</span>
-    </a>
-    <ul class="nav nav-sub dk">
-      
-      <li ui-sref-active="active">
-        <a ui-sref="app.laboratorios.pesquisar">
-          <span>Pesquisar Labs.</span>
-        </a>
-      </li>
-      
-      <li ui-sref-active="active">
-        <a ui-sref="app.laboratorios.novo">
-          <span>Cadastrar Lab.</span>
-        </a>
-      </li>
-    </ul>
-  </li>
+ 
   
   <li>
     <a href md-ink-ripple class="auto">
@@ -102,11 +79,29 @@
     </ul>
   </li>
   
-  <li ui-sref-active="active">
-    <a ui-sref="app.materiais.quimicos" md-ink-ripple>
+   <li>
+    <a href md-ink-ripple class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
       <i class="glyphicon glyphicon-list"></i>
-      <span >Materiais Químicos</span>
+      <span>Laboratórios</span>
     </a>
+    <ul class="nav nav-sub dk">
+      
+      <li ui-sref-active="active">
+        <a ui-sref="app.laboratorios.pesquisar">
+          <span>Pesquisar Labs.</span>
+        </a>
+      </li>
+      
+      <li ui-sref-active="active">
+        <a ui-sref="app.laboratorios.novo">
+          <span>Cadastrar Lab.</span>
+        </a>
+      </li>
+    </ul>
   </li>
   
   <li ui-sref-active="active">
@@ -115,11 +110,18 @@
       <span >Locais de Coleta</span>
     </a>
   </li>
+  
+  <li ui-sref-active="active">
+    <a ui-sref="app.materiais.quimicos" md-ink-ripple>
+      <i class="glyphicon glyphicon-list"></i>
+      <span >Materiais Químicos</span>
+    </a>
+  </li>
 
   <li class="line dk hidden-folded"></li>
 
   <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">          
-    <span translate="aside.nav.your_stuff.YOUR_STUFF">Perfil</span>
+    <span>Perfil</span>
   </li>  
   <li>
     <a ui-sref="app.usuario">

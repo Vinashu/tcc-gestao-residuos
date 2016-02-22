@@ -10,6 +10,7 @@ import javax.persistence.Table;
 
 /*
  * sem frontend... poucos e fixos campi.. cadastra na mao
+ * NAO EXTENDER LOCAL.... Local depende de campus.
  */
 
 @Entity

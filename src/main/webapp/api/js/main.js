@@ -68,7 +68,7 @@ angular
 
 							// config
 							$scope.app = {
-								name : 'UEM - Sistema de Gestão de Resíduos',
+								name : 'SisGRUEM - Sistema de Gestão de Resíduos UEM',
 								version : '2.0.3',
 								// for chart colors
 								color : {

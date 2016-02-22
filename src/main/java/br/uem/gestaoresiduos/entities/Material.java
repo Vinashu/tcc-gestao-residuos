@@ -13,6 +13,9 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
+
+//ALTERAR TIPO MATERIAL PARA QUIM/HOSP/SOLIDO... CRIAR TIPOMATERIALSERVICOSAUDE COM A, B, C, D, E
+
 @JsonAutoDetect
 @Entity
 @Table(name = "material")

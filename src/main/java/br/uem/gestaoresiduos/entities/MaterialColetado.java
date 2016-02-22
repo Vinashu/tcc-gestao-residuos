@@ -15,6 +15,10 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
+/*
+ * add atributo boolean disponivelParaReuso e criar tabela materialcoletado_to_localarmazenado
+ */
+
 @JsonAutoDetect
 @Entity
 @Table(name="material_coletado")

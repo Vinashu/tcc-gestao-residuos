@@ -1,0 +1,165 @@
+<meta charset="UTF-8">
+
+<div class="bg-hospitalares lter b-b wrapper-md">
+	<span class="m-n text-white h3">Coleta de Resíduos de Serviços de Saúde</span>
+</div>
+<div flash-message="10000"></div>
+
+<div ng-controller="coletaResiduosServicosSaudeCtrl" layout="column" ng-cloak
+	class="md-inline-form">
+	<md-content layout-padding>
+	
+	<form name="coletaResiduosServicosSaudeForm">
+		<md-content flex>		
+			<md-input-container flex="70" style="min-width: 250px"> <label>Unidade Centralizadora</label>
+				<md-select ng-model="unidCentralizadora"  ng-change="buscaInicial(1)">
+					<md-option	required ng-repeat="unid in unidadesCentralizadoras" ng-value="unid">
+						{{ unid.nome }} 
+					</md-option> 
+				</md-select> 
+			</md-input-container>
+			
+			<md-input-container flex="30"> <label>Campus</label> <b><input
+				disabled ng-model="unidCentralizadora.campus.nome"> </b></md-input-container>
+				
+		</md-content>
+		<md-divider></md-divider>
+		<!-- Pesquisa Coleta Residuos ServicosSaude -->
+		<md-content flex>
+			<nav ui-nav class="navi clearfix">
+				<ul class="nav">
+					<li >
+						<a href md-ink-ripple style="text-decoration: underline;">
+	      					<i class="glyphicon glyphicon-search"></i>
+	      					<span>Pesquisar Coletas</span>
+	    				</a>
+						<ul class="nav nav-sub dk">
+							<li>
+	          					<md-content layout-padding layout="row"  style="border: 1px solid #eee" flex>
+									<md-input-container class="md-icon-float md-icon-right md-block" flex="10">
+										<label>Mês</label>
+										<input ng-model="search.mes" type="number" step="1" max="12" min="1">
+									</md-input-container>
+									
+									<md-input-container class="md-icon-float md-icon-right md-block" flex="20">
+										<label>Ano</label>
+										<input ng-model="search.ano" ng-required="search.mes!=null">
+									</md-input-container>
+									
+									<md-input-container flex="50"> <label>Local</label>
+										<md-select ng-model="search.localId" ng-init="search.localId=-1">
+											<md-option ng-value="-1">
+												Todos 
+											</md-option> 
+											<md-option	required ng-repeat="local in unidCentralizadora.locais" ng-value="local.id">
+												{{ local.nome }} 
+											</md-option> 
+										</md-select> 
+									</md-input-container>	
+									
+									<md-button class="md-raised md-primary" style="max-height: 20px;" ng-click='findColetasUnid(1)'>
+											Pesquisar
+									</md-button>
+									<md-button class="md-primary" style="max-height: 20px;" ng-click='limparCampos()'>
+											Limpar Campos
+									</md-button>
+								</md-content>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+		</md-content>			
+		
+		<md-content >
+		
+			
+		<div class="bg-light lter b-b wrapper-md" style="margin-top: 30px;">
+			<b>Colelas de {{unidCentralizadora.nome}}</b>
+			<md-button class="md-fab md-primary md-mini" ng-click="addNovaColeta()"
+				aria-label="Add Coleta"> <md-tooltip
+				md-direction="right"> Adicionar Coleta de Resíduos de Serviços de Saúde </md-tooltip> 
+				<i class="glyphicon glyphicon-plus"></i>
+			</md-button>
+		</div>
+		
+			<table	class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th rowspan="2">Mês</th>		
+					<th rowspan="2">Local</th>
+					<th colspan="6" style="text-align:center; background-color: #E1BEE7">Resíduos Coletados (kg)</th>
+				</tr>
+				<tr>
+						<th style="background-color: #FFEB3B">Infectantes A</th>
+						<th style="background-color: #8BC34A">Químicos B</th>
+						<th style="background-color: #90CAF9">Radioativos C</th>
+						<th style="background-color: #BDBDBD">Comuns D</th>
+						<th style="background-color: #F8BBD0">Recicláveis D</th>
+						<th style="background-color: #F44336">Perfurocortantes E</th>
+						
+						<th rowspan="2">Ações</th>
+				</tr>
+				
+					
+					
+				
+			</thead>
+				<tbody>
+					<tr dir-paginate="coleta in coletas | itemsPerPage: coletasPerPage" total-items="coletasCount" current-page="pagination.current">
+						
+						<td>{{coleta.dataColeta }}</td>
+						<td>{{coleta.local.nome}}</td>
+						<td>{{coleta.residuosInfectantesA}}</td>
+						<td>{{coleta.residuosQuimicosB}}</td>
+						<td>{{coleta.residuosRadioativosC}}</td>
+						<td>{{coleta.residuosComunsD}}</td>
+						<td>{{coleta.residuosReciclaveisD}}</td>
+						<td>{{coleta.residuosPerfuroCortantesE}}</td>
+						<td>
+							<i class="glyphicon glyphicon-edit" ng-click="editColeta(coleta)">
+								<md-tooltip md-direction="left" >
+					 				Editar Coleta de Resíduos de Serviços de Saúde
+								</md-tooltip>
+							</i>
+							<i class="glyphicon glyphicon-trash" ng-click="deleteColeta(coleta)">
+								<md-tooltip md-direction="left">
+					 				Excluir Coleta de Resíduos de Serviços de Saúde
+								</md-tooltip>
+							</i>
+						</td>
+					</tr>
+				</tbody>
+			</table>		
+			<dir-pagination-controls on-page-change="pageChanged(newPageNumber)" auto-hide="false"></dir-pagination-controls>
+		</md-content>
+		
+		<div>
+			<div ui-jq="plot" ui-options="
+						              [
+						               { data: [[1, 9],[2, 22], [3, 12],[4, 20],[5, 13],[6, 28], [7, 12],[8, 20],[9, 7],[10, 25], [11, 12],[12, 20]], label: 'Reciclável', points: { show: true }, lines: { show: true, fill: true, fillColor: { colors: [{ opacity: 0.1 }, { opacity: 0.1}] } } }, 
+						                { data: [[1, 22], [2, 20], [3, 8],[4, 25], [5, 12],[6, 20], [7, 9],[8, 22],[9, 25], [10, 12],[11,33],[12, 20]], label: 'Não reciclável', points: { show: true, radius: 4 },lines: { show: true, fill: true, fillColor: { colors: [{ opacity: 0.1 }, { opacity: 0.1}] } }  }
+						              ],
+						              {
+						                colors: [ '{{app.color.info}}','{{app.color.warning}}' ],
+						                series: { shadowSize: 2 },
+						                xaxis:{ font: { color: '#ccc' } },
+						                yaxis:{ font: { color: '#ccc' } },
+						                grid: { hoverable: true, clickable: true, borderWidth: 0, color: '#ccc' },
+						                tooltip: true,
+						                tooltipOpts: { content: '%s of %x.0 is %y.4 quilos',  defaultTheme: false, shifts: { x: 0, y: 20 } }
+						              }
+            							" style="height:240px"></div>
+         					 </div>  
+		</div>		
+		
+			
+	</form>
+	
+	
+	
+	
+	
+	
+	</md-content>
+</div>
