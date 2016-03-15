@@ -1,0 +1,39 @@
+<div ng-controller="unidCentralizadoraCtrl">
+	<div class="panel panel-default">
+		<div class="bg-light lter b-b wrapper-md">
+			<h1 class="m-n font-thin h3">Unidades Centralizadoras</h1>
+		</div>
+
+		<table	class="table table-bordered table-striped">
+		 <div class="input-group" style="width: 32%;">
+						    <select class="form-control" ng-model="searchCampus"  >
+						    	<option value="">Filtre por Campus</option>
+						    	<option ng-repeat="campus in campi" >{{ campus.nome }}</option>
+						    </select>
+					  	</div>
+			<thead>
+				<tr>
+					<th>Id</th>		
+					<th>Nome</th>
+					<th>Tipos de Resíduos</th>
+					<th>Responsável</th>
+					<th>Telefone</th>
+					<th>Campus</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-click="showUnidDetails(unid)" ng-repeat="unid in unidadesCentralizadoras | filter:searchCampus" >
+					
+					<td>{{unid.id}}</td>
+					<td>{{unid.nome}}</td>
+					<td>{{unid.tipoResiduos}}</td>
+					<td>{{unid.responsavel}}</td>
+					<td>{{unid.telefone}}</td>
+					<td>{{unid.campus.nome}}</td>
+					
+				</tr>
+			</tbody>
+			
+		</table>
+	</div>
+</div>

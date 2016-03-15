@@ -46,5 +46,15 @@ app.service('unidCentralizadoraSvc', [ '$http', function($http) {
 					});
 	}
 	
+	this.deleteUnid = function(unidCentralizadoraId) {
+		return $http.delete("unidCentralizadoras/unid/"+unidCentralizadoraId)
+			.then(
+					function(response) {
+						return response
+					}, function(httpError) {	
+						throw httpError;
+					});
+	}
+	
 	
 } ]);

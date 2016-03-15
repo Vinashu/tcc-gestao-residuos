@@ -24,6 +24,17 @@ app
 
 							$scope.unidCentralizadora = {};
 							$scope.unidCentralizadora.locais = [];
+							$scope.unidadesCentralizadoras = [];
+							$scope.isEditing = false;
+							$scope.titulo = "Nova Unidade Centralizadora";
+							
+							$scope.carregaUnidCentralizadoras = function() {
+								unidCentralizadoraSvc.findUnidadesCentralizadoras()
+									.then(function(unidsData) {
+										$scope.unidadesCentralizadoras = unidsData;
+									})
+							}
+							$scope.carregaUnidCentralizadoras();
 
 							$scope.submitUnidCentralizadora = function() {
 								unidCentralizadoraSvc
@@ -118,6 +129,43 @@ app
 								}
 
 							}
+							
+							$scope.showUnidDetails = function(unid) {
+								$state.go('app.unidCentralizadoras.edit', { unidCentralizadoraId : unid.id});
+							}
+							
+							$scope.edit = function() {
+								$scope.isEditing = false;
+							}
+							
+							$scope.showConfirmDialog = function(ev) {
+								var confirm = $mdDialog.confirm().title(
+										'Cancelar cadastro de Unidade Centralizadora?').ariaLabel(
+										'Cancelar cadastro').ok('Ok').cancel('Fechar');
+
+								$mdDialog.show(confirm).then(function() {
+									$state.go('app.unidCentralizadoras.pesquisar');
+								});
+							};
+							
+							$scope.delete = function(ev) {
+								var confirm = $mdDialog.confirm().title(
+										'Tem certeza que deseja excluir a Unidade Centralizadora?').ariaLabel(
+										'Cancelar cadastro').ok('Ok').cancel('Fechar');
+
+								$mdDialog.show(confirm).then(function() {
+									unidCentralizadoraSvc.deleteUnid($scope.unidCentralizadora.id)
+										.then(function(success) {
+											Flash.create('success',
+													'Unidade Centralizadora excluída com sucesso' ,'custom-class');
+											$state.go('app.unidCentralizadoras.pesquisar');
+										},function(error) {
+											Flash.create('error',
+											"Não foi possível excluir a Unidade Centralizadora");
+										});
+									
+								});
+							};
 
 							if ($stateParams.unidCentralizadoraId != null) {
 								unidCentralizadoraSvc
@@ -127,6 +175,8 @@ app
 												function successCallback(
 														unidData) {
 													$scope.unidCentralizadora = unidData.data;
+													$scope.isEditing = true;
+													$scope.titulo = "Unidade Centralizadora "+ 	$scope.unidCentralizadora.id;
 												},
 												function(error) {
 													Flash

@@ -5,6 +5,12 @@
 		</div>
 
 		<table	class="table table-bordered table-striped">
+		 <div class="input-group" style="width: 32%;">
+						    <select class="form-control" ng-model="searchCampus"  >
+						    	<option value="">Filtre por Campus</option>
+						    	<option ng-repeat="campus in campi" >{{ campus.nome }}</option>
+						    </select>
+					  	</div>
 			<thead>
 				<tr>
 					<th>Id</th>		
@@ -17,7 +23,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr dir-paginate="lab in laboratorios | itemsPerPage: labsPerPage" total-items="labsCount" current-page="pagination.current">
+				<tr dir-paginate="lab in laboratorios | itemsPerPage: labsPerPage | filter:searchCampus" total-items="labsCount" current-page="pagination.current">
 					
 					<td>{{lab.id}}</td>
 					<td ng-click="showLabDetails(lab)">{{lab.nome}}</td>

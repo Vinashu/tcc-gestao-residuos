@@ -40,6 +40,9 @@ public class MaterialColetado implements Serializable{
 	@Enumerated(EnumType.STRING)
 	@Column(name="unidade_medida")
 	private UnidadeMedida unidadeMedida;
+	
+	@Column(name="disponivel_para_reuso")
+	private boolean disponivelReuso;
 
 	public int getId() {
 		return id;

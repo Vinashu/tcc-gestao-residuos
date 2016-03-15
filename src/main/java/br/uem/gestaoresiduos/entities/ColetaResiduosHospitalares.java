@@ -2,18 +2,14 @@ package br.uem.gestaoresiduos.entities;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -40,10 +36,12 @@ public class ColetaResiduosHospitalares implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "local_id")
 	private Local local;
-
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinColumn(name="coleta_hospitalar_id", referencedColumnName="coleta_residuos_hospitalares_id")
-	private List<MaterialColetado> materiaisColetados;
+	
+	private Double qtdA;
+	private Double qtdB;
+	private Double qtdC;
+	private Double qtdD;
+	private Double qtdE;
 
 	public int getId() {
 		return id;
@@ -77,12 +75,44 @@ public class ColetaResiduosHospitalares implements Serializable {
 		this.local = local;
 	}
 
-	public List<MaterialColetado> getMateriaisColetados() {
-		return materiaisColetados;
+	public Double getQtdA() {
+		return qtdA;
 	}
 
-	public void setMateriaisColetados(List<MaterialColetado> materiaisColetados) {
-		this.materiaisColetados = materiaisColetados;
+	public void setQtdA(Double qtdA) {
+		this.qtdA = qtdA;
+	}
+
+	public Double getQtdB() {
+		return qtdB;
+	}
+
+	public void setQtdB(Double qtdB) {
+		this.qtdB = qtdB;
+	}
+
+	public Double getQtdC() {
+		return qtdC;
+	}
+
+	public void setQtdC(Double qtdC) {
+		this.qtdC = qtdC;
+	}
+
+	public Double getQtdD() {
+		return qtdD;
+	}
+
+	public void setQtdD(Double qtdD) {
+		this.qtdD = qtdD;
+	}
+
+	public Double getQtdE() {
+		return qtdE;
+	}
+
+	public void setQtdE(Double qtdE) {
+		this.qtdE = qtdE;
 	}
 
 }

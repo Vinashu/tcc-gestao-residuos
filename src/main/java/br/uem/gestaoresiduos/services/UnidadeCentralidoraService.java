@@ -25,11 +25,12 @@ public class UnidadeCentralidoraService {
 	}
 	
 	public List<UnidadeCentralizadora> findByTipoResiduos(TiposResiduos tiposResiduos) {
-		return unidadeCentralizadoraRepository.findByTipoResiduos(tiposResiduos);
+		return unidadeCentralizadoraRepository.findByTipoResiduosAndAtiva(tiposResiduos, true);
 	}
 
 	public UnidadeCentralizadora create(UnidadeCentralizadora unidadeCentralizadora) {
 		UnidadeCentralizadora savedUnid = null;
+		unidadeCentralizadora.setAtiva(true);
 		try {
 			savedUnid = unidadeCentralizadoraRepository.save(unidadeCentralizadora);
 		} catch (Exception e) {
@@ -40,5 +41,11 @@ public class UnidadeCentralidoraService {
 	
 	public UnidadeCentralizadora findById(int id) {
 		return unidadeCentralizadoraRepository.findOne(id);
+	}
+
+	public void deleteById(int id) {
+		UnidadeCentralizadora unid = unidadeCentralizadoraRepository.findOne(id);
+		unid.setAtiva(false);
+		unidadeCentralizadoraRepository.save(unid);
 	}
 }

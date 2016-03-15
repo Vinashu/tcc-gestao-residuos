@@ -1,99 +1,105 @@
 <meta charset="UTF-8">
+<div ng-controller="unidCentralizadoraCtrl" >
+	<div class="bg-light lter b-b wrapper-md">
+		<h1 class="m-n font-thin h3">{{titulo}}</h1>
+	</div>
+	<div flash-message="10000"></div>
+	
+	<div layout="column" ng-cloak class="md-inline-form" >
+		<md-content layout-padding>
+		<form name="unidCentralizadoraForm" ngSubmit="submitUnidCentralizadora()">
+			<div layout layout-sm="column">
+				<md-input-container flex> <label>Nome
+					Unidade Centralizadora</label> <input ng-model="unidCentralizadora.nome"
+					required="required"> </md-input-container>
+			</div>
+			<div layout layout-sm="column">
+				<md-input-container flex> <label>Campus</label>
+				<md-select ng-model="unidCentralizadora.campus"
+					ng-model-options="{trackBy: '$value.nome'}"> <md-option
+					required ng-repeat="campus in campi" ng-value="campus">
+				{{ campus.nome }} </md-option> </md-select> </md-input-container>
+	
+				<md-input-container flex> <label>Bloco</label> <input
+					required ng-model="unidCentralizadora.bloco"> </md-input-container>
+	
+				<md-input-container flex> <label>Sala</label> <input
+					required ng-model="unidCentralizadora.sala"> </md-input-container>
+			</div>
+	
+	
+			<div layout layout-sm="column" style="margin-bottom: 20px;">
+	
+				<md-input-container flex> <label>Responsável</label>
+				<input ng-model="unidCentralizadora.responsavel" required> </md-input-container>
+	
+				<md-input-container flex> <label>Telefone</label>
+				<input ng-model="unidCentralizadora.telefone" required> </md-input-container>
+	
+			</div>
+	
+	
+			<p>Tipo de Resíduos Processados</p>
+			<md-radio-group ng-model="unidCentralizadora.tipoResiduos" ng-init="unidCentralizadora.tipoResiduos='QUIMICO'">
+			<md-radio-button value="QUIMICO">Resíduos Químicos</md-radio-button> <md-radio-button
+				value="SERVICOSAUDE">Resíduos Hospitalares</md-radio-button> <md-radio-button
+				value="SOLIDO">Resíduos Sólidos</md-radio-button> </md-radio-group>
+			<md-divider></md-divider>
+	
+	
+			<div class="bg-light lter b-b wrapper-md" style="margin-top: 30px;">
+				<b>Locais de Coleta da Unidade Centralizadora</b>
+				<md-button class="md-fab md-primary md-mini" ng-click="addLabs(unidCentralizadora)"
+					aria-label="Add Locais de Coleta"> <md-tooltip
+					md-direction="right"> Add Locais de Coleta </md-tooltip> 
+					<i class="glyphicon glyphicon-plus"></i>
+				</md-button>
+			</div>
+	
+	
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Nome</th>
+						<th>Sigla</th>
+						<th>Tipos de Resíduos</th>
+						<th>Campus</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="local in unidCentralizadora.locais">
+	
+						<td>{{local.id}}</td>
+						<td>{{local.nome}}</td>
+						<td>{{local.sigla}}</td>
+	
+						<td><span ng-if=local.residuoQuimico>Quimico</span> <span
+							ng-if=local.residuoHospitalar>Hospitalar</span> <span
+							ng-if=local.residuoSolido>Sólido</span></td>
+	
+						<td>{{local.campus.nome}}</td>
+					</tr>
+				</tbody>
+	
+			</table>
+			<section layout="row" layout-sm="column" layout-align="right right"
+				layout-wrap>
+				<md-button class="md-raised" novalidate type="button" ng-if="!isEditing"
+					ng-click='showConfirmDialog($event)'>Cancelar</md-button>
+				<md-button class="md-raised md-primary"
+					ng-click='unidCentralizadoraForm.$valid && submitUnidCentralizadora()' ng-if="!isEditing">Salvar</md-button>
+				
+				<md-button class="md-raised" novalidate type="button" ng-if="isEditing"
+					ng-click="$state.go('app.unidCentralizadoras.pesquisar')">Voltar</md-button>
+				<md-button class="md-raised" novalidate type="button" ng-if="isEditing"
+					ng-click="edit()">Editar</md-button>
+				<md-button class="md-raised" novalidate type="button" ng-if="isEditing"
+					ng-click="delete()">Excluir</md-button>
+			</section>
+		</form>
+		</md-content>
+	</div>
 
-<div class="bg-light lter b-b wrapper-md">
-	<h1 class="m-n font-thin h3">Nova Unidade Centralizadora</h1>
 </div>
-<div flash-message="10000"></div>
-
-<div ng-controller="unidCentralizadoraCtrl" layout="column" ng-cloak
-	class="md-inline-form">
-	<md-content layout-padding>
-	<form name="unidCentralizadoraForm" ngSubmit="submitUnidCentralizadora()">
-		<div layout layout-sm="column">
-			<md-input-container flex> <label>Nome
-				Unidade Centralizadora</label> <input ng-model="unidCentralizadora.nome"
-				required="required"> </md-input-container>
-		</div>
-		<div layout layout-sm="column">
-			<md-input-container flex> <label>Campus</label>
-			<md-select ng-model="unidCentralizadora.campus"
-				ng-model-options="{trackBy: '$value.nome'}"> <md-option
-				required ng-repeat="campus in campi" ng-value="campus">
-			{{ campus.nome }} </md-option> </md-select> </md-input-container>
-
-			<md-input-container flex> <label>Bloco</label> <input
-				required ng-model="unidCentralizadora.bloco"> </md-input-container>
-
-			<md-input-container flex> <label>Sala</label> <input
-				required ng-model="unidCentralizadora.sala"> </md-input-container>
-		</div>
-
-
-		<div layout layout-sm="column" style="margin-bottom: 20px;">
-
-			<md-input-container flex> <label>Responsável</label>
-			<input ng-model="unidCentralizadora.responsavel" required> </md-input-container>
-
-			<md-input-container flex> <label>Telefone</label>
-			<input ng-model="unidCentralizadora.telefone" required> </md-input-container>
-
-		</div>
-
-
-		<p>Tipo de Resíduos Processados</p>
-		<md-radio-group ng-model="unidCentralizadora.tipoResiduos" ng-init="unidCentralizadora.tipoResiduos='QUIMICO'">
-		<md-radio-button value="QUIMICO">Resíduos Químicos</md-radio-button> <md-radio-button
-			value="HOSPITALAR">Resíduos Hospitalares</md-radio-button> <md-radio-button
-			value="SOLIDO">Resíduos Sólidos</md-radio-button> </md-radio-group>
-		<md-divider></md-divider>
-
-
-		<div class="bg-light lter b-b wrapper-md" style="margin-top: 30px;">
-			<b>Locais de Coleta da Unidade Centralizadora</b>
-			<md-button class="md-fab md-primary md-mini" ng-click="addLabs(unidCentralizadora)"
-				aria-label="Add Locais de Coleta"> <md-tooltip
-				md-direction="right"> Add Locais de Coleta </md-tooltip> 
-				<i class="glyphicon glyphicon-plus"></i>
-			</md-button>
-		</div>
-
-
-		<table class="table table-bordered table-striped">
-			<thead>
-				<tr>
-					<th>Id</th>
-					<th>Nome</th>
-					<th>Sigla</th>
-					<th>Tipos de Resíduos</th>
-					<th>Campus</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr ng-repeat="local in unidCentralizadora.locais">
-
-					<td>{{local.id}}</td>
-					<td>{{local.nome}}</td>
-					<td>{{local.sigla}}</td>
-
-					<td><span ng-if=local.residuoQuimico>Quimico</span> <span
-						ng-if=local.residuoHospitalar>Hospitalar</span> <span
-						ng-if=local.residuoSolido>Sólido</span></td>
-
-					<td>{{local.campus.nome}}</td>
-				</tr>
-			</tbody>
-
-		</table>
-		<section layout="row" layout-sm="column" layout-align="right right"
-			layout-wrap>
-			<md-button class="md-raised" novalidate type="button"
-				ng-click='showConfirmDialog($event)'>Cancelar</md-button>
-			<md-button class="md-raised md-primary"
-				ng-click='unidCentralizadoraForm.$valid && submitUnidCentralizadora()'>Salvar</md-button>
-		</section>
-	</form>
-	</md-content>
-</div>
-
-
 

@@ -1,6 +1,5 @@
 package br.uem.gestaoresiduos.services;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 
@@ -23,10 +22,6 @@ public class MaterialService {
 		return materialRepository.save(material);
 	}
 	
-	public List<Material> findByTipo(TipoMaterial tipo) {
-		return materialRepository.findByTipo(tipo);
-	}
-	
 	public List<Material> findAll() {
 		return materialRepository.findAll();
 	}
@@ -47,5 +42,9 @@ public class MaterialService {
 		tiposMaterial.append(" ]");
 		
 		return tiposMaterial.toString();
+	}
+
+	public void deleteMaterial(int materialId){
+		materialRepository.delete(materialId);
 	}
 }

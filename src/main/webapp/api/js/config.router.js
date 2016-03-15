@@ -133,20 +133,30 @@ angular
 												templateUrl : 'tpl/materiais/quimicos.html',
 												resolve : load([
 											                	'js/controllers/materialQuimico.js',
-																'js/services/materialQuimico.js' ])
+																'js/services/materialQuimico.js'])
 											})
 											
 									/*
 									 * Locais de coleta
 									 */
+											
+									.state(
+											'app.locais',
+											{
+												url : '/locais',
+												template : '<div ui-view class="wrapper-md"></div>'
+											})
+											
 									.state(
 											'app.locais.coleta',
 											{
-												url : '/locaisColeta',
+												url : '/coleta',
 												templateUrl : 'tpl/locais/coleta.html',
 												resolve : load([
 									                	'js/controllers/locaisColeta.js',
-														'js/services/locaisColeta.js' ])
+									                	'js/services/campus.js',
+									                	'js/services/tiposResiduos.js',
+														'js/services/local.js' ])
 											})
 		
 

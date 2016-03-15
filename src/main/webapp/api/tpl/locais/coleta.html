@@ -1,0 +1,87 @@
+<meta charset="UTF-8">
+
+<div class="bg-light lter b-b wrapper-md">
+	<h1 class="m-n font-thin h3">Locais de Coleta</h1>
+</div>
+<div flash-message="10000"></div>
+
+<div ng-controller="locaisColetaCtrl" ng-cloak
+	class="md-inline-form">
+	<md-content layout-padding  flex >
+		<form name="locaisColetaForm">
+			<div layout layout-sm="column" >
+				<md-input-container flex="70">
+					<label>Nome</label> 
+					<input ng-model="novoLocalColeta.nome" required="required">
+				</md-input-container>
+	
+				<md-input-container flex="30">
+					<label>Sigla</label> 
+					<input ng-model="novoLocalColeta.sigla" >
+				</md-input-container>
+			</div>
+			<div layout layout-sm="column" >
+				<md-input-container flex="70"> 
+					<label>Campus</label>
+					<md-select ng-model="novoLocalColeta.campus"
+						ng-model-options="{trackBy: '$value.nome'}">
+						<md-option required="required" ng-repeat="campus in campi" ng-value="campus">
+							{{ campus.nome }}
+						</md-option>
+					</md-select>
+				</md-input-container>		
+				
+				<md-input-container flex="30">
+					<label>Tipo de Resíduos Gerados</label>
+					<md-select required="required" ng-model="novoLocalColeta.tipoResiduos">
+						<md-option required ng-repeat="residuo in tiposResiduos" ng-value="residuo.tipoResiduos">
+							{{ residuo.tipo }}
+						</md-option>
+					</md-select>
+				</md-input-container>
+				
+			</div>	
+				<section layout="row" layout-sm="column" layout-align="right right"
+					layout-wrap>
+					<md-button class="md-raised md-primary" 
+						ng-click='locaisColetaForm.$valid && submitLocal()'>Adicionar Novo Local</md-button>
+				</section>
+		</form>
+		</md-content>
+		
+		<md-content layout-padding flex>
+				<div class="bg-light lter b-b wrapper-md">
+					<b>Locais de Coleta</b>
+				</div>
+				<div class="controls form-inline" >
+					     <div class="input-group" style="width: 32%;">
+						    <select class="form-control" ng-model="searchCampus"  >
+						    	<option value="">Filtre por Campus</option>
+						    	<option ng-repeat="campus in campi" >{{ campus.nome }}</option>
+						    </select>
+					  	</div>
+					<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Nome</th>
+							<th>Sigla</th>		
+							<th>Campus</th>
+							<th>Tipo Material</th>
+						</tr>
+					</thead>
+						<tbody>
+							<tr ng-repeat="local in locaisColeta | filter:searchCampus" >
+								<td>{{local.id}}</td>
+								<td>{{local.nome}}</td>
+								<td>{{local.sigla}}</td>
+								<td>{{local.campus.nome}}</td>
+								<td>{{getTipoResiduosStr(local.tipoResiduos)}}</td>
+							</tr>
+						</tbody>
+					</table>		
+	
+	</md-content>
+
+</div>
+

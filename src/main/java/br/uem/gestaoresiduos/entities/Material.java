@@ -4,8 +4,6 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,8 +11,6 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
-
-//ALTERAR TIPO MATERIAL PARA QUIM/HOSP/SOLIDO... CRIAR TIPOMATERIALSERVICOSAUDE COM A, B, C, D, E
 
 @JsonAutoDetect
 @Entity
@@ -31,16 +27,12 @@ public class Material implements Serializable {
 	@Column(unique=true)
 	private String descricao;
 
-	@Enumerated(EnumType.STRING)
-	private TipoMaterial tipo;
-
 	public Material() {
 		super();
 	}
 
-	public Material(String descricao, TipoMaterial tipo) {
+	public Material(String descricao) {
 		this.descricao = descricao;
-		this.tipo = tipo;
 	}
 
 	public int getId() {

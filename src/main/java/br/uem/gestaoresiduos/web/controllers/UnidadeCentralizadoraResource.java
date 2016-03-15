@@ -50,4 +50,15 @@ public class UnidadeCentralizadoraResource {
 		UnidadeCentralizadora unid = unidadeCentralidoraService.findById(id);
 		return new ResponseEntity<UnidadeCentralizadora>(unid, HttpStatus.OK);
 	}
+	
+	@RequestMapping(value="unid/{id}", method=RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public ResponseEntity<UnidadeCentralizadora> deleteById(@PathVariable("id") int id) {
+		try{
+			unidadeCentralidoraService.deleteById(id);
+			return new ResponseEntity<UnidadeCentralizadora>(HttpStatus.OK);
+		}catch(Exception e){
+			return new ResponseEntity<UnidadeCentralizadora>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 }

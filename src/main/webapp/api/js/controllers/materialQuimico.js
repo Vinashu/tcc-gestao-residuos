@@ -17,6 +17,7 @@ app.controller('materialQuimicoCtrl', [
 		$scope.novoMaterial = {};
 		$scope.materiais = [];
 		$scope.tiposMaterial = [];
+		$scope.isCreating = false;
 		
 		$scope.carregaMateriais = function() {
 			materialQuimicoSvc.getMateriais()
@@ -35,22 +36,61 @@ app.controller('materialQuimicoCtrl', [
 		$scope.carregaMateriais();
 		$scope.carregaTiposMaterial();
 		
-		$scope.submitMaterial = function() {
-			materialQuimicoSvc.novoMaterial($scope.material)
-				.then(function(novoMaterialData) {
-					Flash.create('success', 'Material '
-												+ materialData.descricao
-												+ ' criado com sucesso',
-												'custom-class');
-				}, function(error) {
-					Flash.create('error', 'Não foi possível criar o material '
-							+ $scope.material.descricao + ". "
-							+ error + '. Verifique os campos e tente novamente',
-							'custom-class');
-				});
+		
+		$scope.novoMaterialCtrl = function($scope, $mdDialog) {
+			$scope.submitMaterial = function() {
+				materialQuimicoSvc.saveMaterial($scope.novoMaterial)
+					.then(function(novoMaterialData) {
+						Flash.create('success', 'Material '
+													+ novoMaterialData.descricao
+													+ ' salvo com sucesso',
+													'custom-class');
+						$scope.closeDialog();
+						$scope.carregaMateriais();
+					}, function(error) {
+						Flash.create('error', 'Não foi possível salvar o material '
+								+ $scope.novoMaterial.descricao + ". "
+								+ error + '. Verifique os campos e tente novamente',
+								'custom-class');
+					});
+			}
+			
+
+			$scope.closeDialog = function() {
+				$mdDialog.hide();
+				$scope.novoMaterial = {};
+			}
+			
 		}
 		
+		$scope.edit = function(materialEdit) {
+			$scope.novoMaterial = materialEdit;
+			$mdDialog
+					.show({
+						clickOutsideToClose : true,
+						scope : $scope,
+						preserveScope : true,
+						
+						controller : 'novoMaterialCtrl',
+						
+						templateUrl : 'tpl/materiais/novoMaterial.html'
+					});
+			
+		}
 		
+		$scope.addMaterial = function() {
+			$scope.novoMaterial = {};
+			$mdDialog
+					.show({
+						clickOutsideToClose : true,
+						scope : $scope,
+						preserveScope : true,
+						
+						controller : 'novoMaterialCtrl',
+						templateUrl : 'tpl/materiais/novoMaterial.html'
+					});
+			
+		}
 		
 		
 		}]);

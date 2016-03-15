@@ -35,4 +35,14 @@ app.service('materialQuimicoSvc', [ '$http', function($http) {
 				});
 	}
 	
+	this.deleteMaterial = function(materialId) {
+		return $http.delete("material/" + materialId)
+			.then(
+				function(response) {
+					return response.data
+				}, function(httpError) {
+					throw httpError.status;
+				});
+	}
+	
 }]);

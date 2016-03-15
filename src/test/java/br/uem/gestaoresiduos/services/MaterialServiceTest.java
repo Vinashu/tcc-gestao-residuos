@@ -29,10 +29,10 @@ public class MaterialServiceTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		material1 = new Material("Alcool contaminado", TipoMaterial.A);
-		material2 = new Material("Reagentes sólidos vencidos", TipoMaterial.B);
-		material3 = new Material("Embalagens de agrotoxicos", TipoMaterial.B);
-		material4 = new Material("Litros vazios", TipoMaterial.D);
+		material1 = new Material("Alcool contaminado");
+		material2 = new Material("Reagentes sólidos vencidos");
+		material3 = new Material("Embalagens de agrotoxicos");
+		material4 = new Material("Litros vazios");
 	}
 
 	@Test

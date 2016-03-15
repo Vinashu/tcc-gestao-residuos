@@ -48,6 +48,9 @@ public class UnidadeCentralizadora implements Serializable{
 	@Column(name="tipo_residuos")
 	@Enumerated(value=EnumType.STRING)
 	private TiposResiduos tipoResiduos;
+	
+	@Column(nullable=false)
+	private boolean ativa;
 
 	public int getId() {
 		return id;
@@ -120,6 +123,14 @@ public class UnidadeCentralizadora implements Serializable{
 
 	public void setTipoResiduos(TiposResiduos tipoResiduos) {
 		this.tipoResiduos = tipoResiduos;
+	}
+
+	public boolean isAtiva() {
+		return ativa;
+	}
+
+	public void setAtiva(boolean ativa) {
+		this.ativa = ativa;
 	}
 
 	@Override

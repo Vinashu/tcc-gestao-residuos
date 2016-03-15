@@ -5,68 +5,38 @@
 </div>
 <div flash-message="10000"></div>
 
-<div ng-controller="materialQuimicoCtrl" layout="column" ng-cloak
+<div ng-controller="materialQuimicoCtrl" ng-cloak
 	class="md-inline-form">
-	<md-content layout-padding >
-		<form name="materialForm">
-			<div layout="column" layout-sm="column" flex="40">
-				<md-input-container flex>
-					<label>Descrição do Material</label> 
-					<input ng-model="novoMaterial.descricao" required="required">
-				</md-input-container>
-	
-				<md-input-container flex>
-					<label>Tipo do Material</label>
-					<md-select required="required" ng-model="novoMaterial.tipo">
-						<md-option required ng-repeat="tipo in tiposMaterial" ng-value="tipo">
-							{{ tipo.tipo }} - {{tipo.descricao}} 
-						</md-option>
-					</md-select>
-				</md-input-container>
-			</div>
+	<md-content layout-padding  flex >
+		<form name="materialQuimicoForm">
+			<md-list ng-cloak flex="50">
+			<div class="md-toolbar-tools">
+        		<span>Materiais Químicos Cadastrados</span>
+        		<md-button class="md-fab md-primary md-mini" style="float:right"
+						ng-click="addMaterial()" aria-label="Add Material Químico">
+						<md-tooltip md-direction="right">
+						 	Adicionar Material	Novo Material Químico
+						</md-tooltip> <i class="glyphicon glyphicon-plus"></i> 
+					</md-button>
+      		</div>
+  				<md-subheader class="md-no-sticky">
+					<div class="input-group" >
+					 	Pesquise<input flex type="text" class="form-control" ng-model="searchMaterial"  placeholder="Material" >
+					 </div>
+					<md-divider></md-divider>
+				</md-subheader>
+  					<md-list-item ng-repeat="material in materiais | filter:searchMaterial">
+    					<p> {{ material.descricao }} </p>
+    					<i class="glyphicon glyphicon-edit" ng-click="edit(material)">
+								<md-tooltip md-direction="left">
+					 				Editar Material Químico
+								</md-tooltip>
+						</i>
+   					</md-list-item>
+			</md-list>
+  </md-list-item>
 			
-			<div flex="40">
-			
-				
-				<div class="bg-light lter b-b wrapper-md" style="margin-top: 30px;">
-					<b>Materiais Químicos</b>
-				</div>
-					<table	class="table table-bordered table-striped">
-					<thead>
-						<tr>
-							<th>Id</th>
-							<th>Material</th>		
-							<th>Tipo Material</th>
-							<th>Ações</th>
-						</tr>
-					</thead>
-						<tbody>
-							<tr >
-								
-								<td>{{coleta.laboratorio.nome}}</td>
-								<td>{{coleta.dataColeta  | asDate | date:'dd-MM-yyyy' }}</td>
-								<td>{{coleta.materiaisColetados}}</td>
-								<td>
-									<i class="glyphicon glyphicon-edit" ng-click="editColeta(coleta)">
-										<md-tooltip md-direction="left" >
-							 				Editar Coleta de Resíduos Químicos
-										</md-tooltip>
-									</i>
-									<i class="glyphicon glyphicon-trash" ng-click="deleteColeta(coleta)">
-										<md-tooltip md-direction="left">
-							 				Excluir Coleta de Resíduos Químicos
-										</md-tooltip>
-									</i>
-								
-								</td>
-								
-							</tr>
-						</tbody>
-					</table>		
-			</div>
-	
 		</form>
-
 	</md-content>
 
 </div>

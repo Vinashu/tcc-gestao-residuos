@@ -126,7 +126,7 @@ app
 								
 								$scope.locais = [];
 								$scope.carregaLocais = function() {
-									localSvc.findLocais().then(
+									localSvc.findLocaisColetaSolidos().then(
 											function(locaisData) {
 												$scope.locais = locaisData;
 											})

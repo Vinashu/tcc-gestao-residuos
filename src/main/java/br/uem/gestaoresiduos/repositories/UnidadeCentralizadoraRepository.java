@@ -10,5 +10,5 @@ import br.uem.gestaoresiduos.entities.UnidadeCentralizadora;
 
 public interface UnidadeCentralizadoraRepository extends JpaRepository<UnidadeCentralizadora, Serializable>{
 	
-	List<UnidadeCentralizadora> findByTipoResiduos(TiposResiduos tiposResiduos);
+	List<UnidadeCentralizadora> findByTipoResiduosAndAtiva(TiposResiduos tiposResiduos, boolean antiva);
 }

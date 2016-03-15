@@ -29,12 +29,10 @@ public class CampusRepositoryTest {
 	@Before
 	public void setUp() throws Exception {
 		campus = new Campus();
-		campus.setId(1);
-		campus.setSigla("SEDE");
-		campus.setNome("Campus Sede");
-		campus.setTipo(TipoCampus.Sede);
-		campus.setLocalizacao("Maring√°");
-		campus.setDataAtualizacao(new Date());
+		campus.setId(2);
+		campus.setNome("Campus Resional Ivaipor„");
+		campus.setTipo(TipoCampus.Regional);
+		campus.setLocalizacao("Ivaipora");
 		
 	}
 

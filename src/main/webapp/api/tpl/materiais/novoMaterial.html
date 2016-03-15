@@ -1,0 +1,34 @@
+<md-dialog flex="50"> 
+	<md-toolbar  layout="row">
+		<div class="bg-solidos md-toolbar-tools">
+				<span>Novo Material Químico</span>
+		</div>
+		
+		<section class="bg-solidos" layout="row" layout-sm="column" layout-align="end center">
+			<md-button class="md-raised " novalidate type="button"
+				ng-click='closeDialog()'>Cancelar</md-button>
+			<md-button class="md-raised md-primary"
+				ng-click='submitMaterial()'>Salvar</md-button>
+		</section>
+	</md-toolbar>
+	
+	<div ng-controller="novoMaterialCtrl" layout="column" ng-cloak class="md-inline-form">
+		<md-content layout-padding>
+		
+		<div layout layout-sm="column">
+				<md-input-container flex> 
+					<label>Id</label>
+					<input ng-model="novoMaterial.id" disabled> 
+				</md-input-container>
+		</div>	
+		
+		<div layout layout-sm="column">
+				<md-input-container flex> 
+					<label>Descrição</label>
+					<input required ng-model="novoMaterial.descricao"> 
+				</md-input-container>
+		</div>		
+		
+		</md-content>
+</div>
+</md-dialog>
