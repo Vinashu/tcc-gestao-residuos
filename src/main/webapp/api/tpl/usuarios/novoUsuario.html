@@ -1,0 +1,49 @@
+<md-dialog flex="50"> 
+	<md-toolbar  layout="row">
+		<div class="md-toolbar-tools">
+				<span>Novo Usuário</span>
+		</div>
+	</md-toolbar>
+	<div flash-message="10000"></div>
+		
+	<div ng-controller="usersCtrl" ng-cloak class="md-inline-form">
+		
+		<md-content layout="column" layout-padding flex>
+			<md-content layout>
+					    
+			    <md-input-container style="width:50%">
+			        <label style="color:black">Nome</label>
+			        <input style="color:black" ng-model="newUser.name" >
+			    </md-input-container>
+			    
+			    
+			 	<md-input-container flex="30"> 
+			 		<label style="color:black">Campus</label>
+			 		<b><input style="color:black" ng-model="newUser.campus.nome"> </b>
+				</md-input-container>
+			
+		    </md-content>
+			
+			
+			<md-content layout>
+				<md-input-container style="width:50%">
+			        <label style="color:black">Email</label>
+			        <input style="color:black" ng-model="newUser.email" type="email">
+			    </md-input-container>
+				
+				
+				<md-input-container flex> 
+					<label style="color:black" class="md-no-sticky">Níveis de Acesso</label>
+							<md-list-item ng-repeat="role in roles">
+							    <p> {{ role.name }} </p>
+							    <md-checkbox class="md-secondary" ng-model="topping.wanted"></md-checkbox>
+							  </md-list-item>
+				</md-input-container>
+				
+				
+			
+		 	</md-content>
+		 
+		 </md-content>
+</div>
+</md-dialog>

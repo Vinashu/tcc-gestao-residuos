@@ -39,6 +39,28 @@ angular
 											})
 
 									// componentes
+											
+									/*
+									 * Usuarios
+									 */		
+									.state(
+											'app.usuarios',
+											{
+												url : '/usuarios',
+												template : '<div ui-view class="wrapper-md"></div>',
+												resolve : load([
+														'js/controllers/usuarios.js',
+														'js/services/usuarios.js',
+														'js/services/role.js',
+														'js/services/campus.js' ])
+											})
+									.state(
+											'app.usuarios.pesquisar',
+											{
+												url : '/',
+												templateUrl : 'tpl/usuarios/pesquisar.html'
+											})		
+											
 
 									/*
 									 * Laboratórios

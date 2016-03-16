@@ -1,5 +1,7 @@
 package br.uem.gestaoresiduos.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,5 +18,8 @@ public class RoleService {
 		return roleRepository.getOne(id);
 	}
 	
+	public List<Role> list(){
+		return roleRepository.findAll();
+	}
 	
 }
