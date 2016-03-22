@@ -19,7 +19,6 @@ app.controller('usersCtrl', [
 			$scope.usuarios = [];
 			$scope.campi = [];
 			$scope.user = {};
-			$scope.roles = [];
 			
 			$scope.user = $scope.loggedUser.principal;
 			
@@ -37,12 +36,6 @@ app.controller('usersCtrl', [
 			}
 			$scope.getCampi();
 			
-			$scope.getRoles= function() {
-				roleSvc.getRoles().then(function(rolesData) {
-					$scope.roles = rolesData;
-				});
-			}
-			
 			$scope.addNovoUsuario = function() {
 				$mdDialog
 				.show({
@@ -58,26 +51,47 @@ app.controller('usersCtrl', [
 			}
 			
 			$scope.novoUsuarioCtrl = function($scope, $mdDialog) {
-				$scope.novoUsuario = {};
+				$scope.newUser = {};
+				$scope.newUser.roles = [];
+				$scope.roles = [];
 				
+				$scope.getRoles= function() {
+					roleSvc.getRoles().then(function(rolesData) {
+						$scope.roles = rolesData;
+					});
+				}
 				$scope.getRoles();
 				
 				$scope.submitNovoUsuario = function() {
-					userSvc.submitUsuario($scope.novoUsuario)
+					userSvc.submitUsuario($scope.newUser)
 						.then(function(savedUsuarioData) {
 							Flash.create('success', 'Usuário '
-													+ novoUsuarioData.name
+													+ savedUsuarioData.name
 													+ ' criado com sucesso',
 													'custom-class');
 							$scope.closeDialog();
 							$scope.listUsuarios();
 						},function(error){
 							Flash.create('error', 'Não foi possível criar usuário '
-									+ $scope.novoUsuario.name + ". \n"
+									+ $scope.newUser.name + ". \n"
 									+ error + '. Verifique os campos e tente novamente',
 									'custom-class');
 						});
 				}
+				
+			      $scope.toggle = function (item, list) {
+			        var idx = list.indexOf(item);
+			        if (idx > -1) list.splice(idx, 1);
+			        else list.push(item);
+			      };
+			      $scope.exists = function (item, list) {
+			        return list.indexOf(item) > -1;
+			      };
+			      
+			      $scope.closeDialog = function() {
+						$mdDialog.hide();
+					}
+			      
 			}
 			
 		}]);

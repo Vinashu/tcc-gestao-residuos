@@ -23,25 +23,28 @@ public class RoleRepositoryTest {
 	
 	Role adminRole;
 	Role unidCentralRole;
+	Role pesquisador;
 	
 	@Before
 	public void setUp() throws Exception {
-		adminRole = new Role(1, "ADMIN");
-		unidCentralRole = new Role(2, "UNIDCENTRAL");
+		adminRole = new Role(1, "GESTORRESIDUOS");
+		unidCentralRole = new Role(2, "TECNICOCOLETA");
+		pesquisador = new Role(3, "PESQUISADOR");
 	}
 	
 	@Test
 	public void testSaveIterableOfS() {
 		Role savedRoleAdmin = roleRepository.save(adminRole);
 		Role savedRoleUnidCentral = roleRepository.save(unidCentralRole);
+		roleRepository.save(pesquisador);
 		
-		assertEquals("ADMIN", savedRoleAdmin.getRoleName());
-		assertEquals("UNIDCETRAL", savedRoleUnidCentral.getRoleName());
+		assertEquals("GESTORRESIDUOS", savedRoleAdmin.getRoleName());
+		assertEquals("TECNICOCOLETA", savedRoleUnidCentral.getRoleName());
 	}
 
 	@Test
 	public void testGetOne() {
-		assertEquals("ADMIN", roleRepository.getOne(1));
+		assertEquals("GESTORRESIDUOS", roleRepository.getOne(1));
 	}
 
 }

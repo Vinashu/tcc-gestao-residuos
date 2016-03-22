@@ -40,7 +40,7 @@
 			<md-input-container flex> 
 			<label style="color:black" class="md-no-sticky">Níveis de Acesso</label>
 			<md-list-item  disabled style="color:black"  ng-repeat="role in user.roles"> 
-				{{role}}
+				{{role.roleName}}
 			</md-list-item>
 			</md-input-container>
 		 </md-content>
@@ -79,7 +79,7 @@
 									<td>{{user.name}}</td>
 									<td>{{user.email}}</td>
 									<td>{{user.campus.nome}}</td>
-									<td>{{user.roles}}</td>
+									<td><span ng-repeat="role in user.roles">{{role.roleName}}</span></td>
 									<td>{{user.dob}}</td>
 								</tr>
 							</tbody>

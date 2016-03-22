@@ -15,6 +15,8 @@ app.service('userSvc', [ '$http', function($http) {
 	}
 	
 	this.submitUsuario = function(user) {
+		user.password = "1234";
+		user.dob = new Date();
 		return $http.post("users/", user)
 			.then(function(response) {
 				return response.data

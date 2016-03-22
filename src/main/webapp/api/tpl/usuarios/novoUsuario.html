@@ -3,6 +3,12 @@
 		<div class="md-toolbar-tools">
 				<span>Novo Usuário</span>
 		</div>
+		<section layout="row" layout-sm="column" layout-align="end center">
+			<md-button class="md-raised " novalidate type="button"
+				ng-click='closeDialog()'>Cancelar</md-button>
+			<md-button class="md-raised md-primary"
+				ng-click=submitNovoUsuario()>Salvar</md-button>
+		</section>
 	</md-toolbar>
 	<div flash-message="10000"></div>
 		
@@ -11,35 +17,46 @@
 		<md-content layout="column" layout-padding flex>
 			<md-content layout>
 					    
-			    <md-input-container style="width:50%">
+			    <md-input-container style="width:70%">
 			        <label style="color:black">Nome</label>
 			        <input style="color:black" ng-model="newUser.name" >
 			    </md-input-container>
 			    
 			    
-			 	<md-input-container flex="30"> 
-			 		<label style="color:black">Campus</label>
-			 		<b><input style="color:black" ng-model="newUser.campus.nome"> </b>
+			 	<md-input-container flex> 
+					<label>Campus</label>
+					<md-select ng-model="newUser.campus"
+						ng-model-options="{trackBy: '$value.nome'}">
+						<md-option required ng-repeat="campus in campi" ng-value="campus">
+							{{ campus.nome }}
+						</md-option>
+					</md-select>
 				</md-input-container>
 			
 		    </md-content>
 			
 			
 			<md-content layout>
-				<md-input-container style="width:50%">
+				<md-input-container style="width:100%">
 			        <label style="color:black">Email</label>
 			        <input style="color:black" ng-model="newUser.email" type="email">
 			    </md-input-container>
-				
-				
+			</md-content>	
+			
+			<md-content	layout="row">
 				<md-input-container flex> 
-					<label style="color:black" class="md-no-sticky">Níveis de Acesso</label>
-							<md-list-item ng-repeat="role in roles">
-							    <p> {{ role.name }} </p>
-							    <md-checkbox class="md-secondary" ng-model="topping.wanted"></md-checkbox>
-							  </md-list-item>
+					<fieldset class="standard" >
+						<legend style="font-size: medium;">Níveis de Acesso</legend> 
+						 <div layout="row" flex>
+						<div flex ng-repeat="role in roles">
+			              <md-checkbox ng-checked="exists(role, newUser.roles)" ng-click="toggle(role, newUser.roles)">
+			                	<span>{{ role.roleName }}</span> 
+			              </md-checkbox>
+			            </div>
+			            </div>
+			        </fieldset>     
 				</md-input-container>
-				
+			</md-content>
 				
 			
 		 	</md-content>
