@@ -113,6 +113,7 @@ angular
 														'js/services/unidCentralizadora.js',
 														'js/services/campus.js',
 														'js/services/laboratorio.js',
+														'js/services/usuarios.js',
 														'js/services/local.js'])
 											})
 									.state(
@@ -317,7 +318,7 @@ angular
 									.state(
 											'access.signin',
 											{
-												url : '/signin',
+												url : '/login',
 												templateUrl : 'tpl/page_signin.html',
 												resolve : load([ 'js/controllers/signin.js' ])
 											})
@@ -332,6 +333,11 @@ angular
 									.state('access.404', {
 										url : '/404',
 										templateUrl : 'tpl/page_404.html'
+									})
+									.state('app.logout', {
+										url : '/logout',
+										template : '<div ui-view ng-controller="logoutCtrl" class="wrapper-md"></div>',
+										resolve : load([ 'js/controllers/logout.js', 'js/services/usuarios.js' ])
 									})
 									.state('layout', {
 										abstract : true,

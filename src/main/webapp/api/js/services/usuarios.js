@@ -14,6 +14,15 @@ app.service('userSvc', [ '$http', function($http) {
 			});
 	}
 	
+	this.listByRole = function(role) {
+		return $http.get("users/" + role )
+			.then(function(response) {
+				return response.data
+			}, function(httpError) {
+				throw httpError;
+			});
+	}
+	
 	this.submitUsuario = function(user) {
 		user.password = "1234";
 		user.dob = new Date();

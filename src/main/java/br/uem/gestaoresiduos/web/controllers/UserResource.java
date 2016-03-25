@@ -41,7 +41,13 @@ public class UserResource {
 		return userService.findAll();
 	}
 	
-	@RequestMapping(value="{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value="{role}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public List<User> findAllTecnicosColeta(@PathVariable("role") String role){
+		return userService.findByRole(role);
+	}
+	
+	@RequestMapping(value="user/{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public User findUser(@PathVariable("id") int id) {
 		return userService.findUserById(id);

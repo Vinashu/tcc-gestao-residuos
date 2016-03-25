@@ -38,8 +38,11 @@ public class UnidadeCentralizadora implements Serializable{
 	private Campus campus;
 	private String bloco;
 	private String sala;
-	private String responsavel;
 	private String telefone;
+
+	@ManyToOne
+	@JoinColumn(name="responsavel_id")
+	private User responsavel;
 	
 	@ManyToMany(cascade=CascadeType.DETACH, fetch=FetchType.EAGER)
 	@JoinTable(name="unid_centralizadora_to_local", joinColumns={@JoinColumn(name="unid_centralizadora_id", referencedColumnName="unid_id")}, inverseJoinColumns={@JoinColumn(name="loc_id", referencedColumnName="local_id")})
@@ -100,11 +103,11 @@ public class UnidadeCentralizadora implements Serializable{
 		this.sala = sala;
 	}
 
-	public String getResponsavel() {
+	public User getResponsavel() {
 		return responsavel;
 	}
 
-	public void setResponsavel(String responsavel) {
+	public void setResponsavel(User responsavel) {
 		this.responsavel = responsavel;
 	}
 

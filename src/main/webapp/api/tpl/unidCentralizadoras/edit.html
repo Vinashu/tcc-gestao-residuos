@@ -31,7 +31,13 @@
 			<div layout layout-sm="column" style="margin-bottom: 20px;">
 	
 				<md-input-container flex> <label>Responsável</label>
-				<input ng-model="unidCentralizadora.responsavel" required> </md-input-container>
+					<md-select ng-model="unidCentralizadora.responsavel"
+						ng-model-options="{trackBy: '$value.name'}">
+						<md-option required ng-repeat="user in users" ng-value="user">
+						{{ user.name }}
+						</md-option>
+					</md-select>
+				</md-input-container>
 	
 				<md-input-container flex> <label>Telefone</label>
 				<input ng-model="unidCentralizadora.telefone" required> </md-input-container>

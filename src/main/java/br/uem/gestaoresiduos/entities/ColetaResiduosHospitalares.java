@@ -40,7 +40,8 @@ public class ColetaResiduosHospitalares implements Serializable {
 	private Double qtdA;
 	private Double qtdB;
 	private Double qtdC;
-	private Double qtdD;
+	private Double qtdDcomum;
+	private Double qtdDreciclavel;
 	private Double qtdE;
 
 	public int getId() {
@@ -99,14 +100,31 @@ public class ColetaResiduosHospitalares implements Serializable {
 		this.qtdC = qtdC;
 	}
 
+	public Double getQtdDcomum() {
+		return qtdDcomum;
+	}
+
+	public void setQtdDcomum(Double qtdD) {
+		this.qtdDcomum = qtdD;
+	}
+	
+	public Double getQtdDreciclavel() {
+		return qtdDreciclavel;
+	}
+
+	public void setQtdDreciclavel(Double qtdD) {
+		this.qtdDreciclavel = qtdD;
+	}
+
 	public Double getQtdD() {
-		return qtdD;
+		return qtdDcomum;
 	}
 
 	public void setQtdD(Double qtdD) {
-		this.qtdD = qtdD;
+		this.qtdDcomum = qtdD;
 	}
 
+	
 	public Double getQtdE() {
 		return qtdE;
 	}

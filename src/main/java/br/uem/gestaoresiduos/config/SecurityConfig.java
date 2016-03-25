@@ -61,7 +61,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.usernameParameter("username").passwordParameter("password")
 		.successHandler(
 				new AjaxAuthenticationSuccessHandler(new SavedRequestAwareAuthenticationSuccessHandler()))
-		.and().httpBasic().and().logout().and().authorizeRequests()
+		.and().httpBasic().and().logout().deleteCookies("remove").invalidateHttpSession(true).logoutUrl("/api/logout").logoutSuccessUrl("/api/material.html")
+		.and().authorizeRequests()
 		.antMatchers("/public/js/login**", "/public/login*", "/public/login**", "/public/register",
 				"/public/logout", "/libs/**").permitAll().anyRequest()
 		.authenticated().and().csrf()

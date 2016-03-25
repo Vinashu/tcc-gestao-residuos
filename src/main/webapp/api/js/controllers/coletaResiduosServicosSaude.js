@@ -29,50 +29,7 @@ app
 							$scope.pagination = {
 								current : 1
 							};
-							
-							$scope.coletas = [
-								                  {
-								                	  dataColeta : 'janeiro',
-								                	  local : {nome : 'HUM'},
-								                	  residuosInfectantesA : 2389.0,
-								                	  residuosQuimicosB : 2419.2,
-								                	  residuosRadioativosC : 0.0,
-								                	  residuosComunsD : 1291.0,
-								                	  residuosReciclaveisD : 223.2,
-								                	  residuosPerfuroCortantesE : 4598.0  
-								                  },
-								                  {
-								                	  dataColeta : 'fevereiro',
-								                	  local : {nome : 'HUM'},
-								                	  residuosInfectantesA : 1235.0,
-								                	  residuosQuimicosB : 5434.2,
-								                	  residuosRadioativosC : 0.0,
-								                	  residuosComunsD : 2354.0,
-								                	  residuosReciclaveisD : 345.2,
-								                	  residuosPerfuroCortantesE : 7467.0  
-								                  },
-								                  {
-								                	  dataColeta : 'março',
-								                	  local : {nome : 'HUM'},
-								                	  residuosInfectantesA : 2356.0,
-								                	  residuosQuimicosB : 2342.2,
-								                	  residuosRadioativosC : 0.0,
-								                	  residuosComunsD : 4636.0,
-								                	  residuosReciclaveisD : 234.2,
-								                	  residuosPerfuroCortantesE : 654.0  
-								                  },
-								                  {
-								                	  dataColeta : 'abril',
-								                	  local : {nome : 'HUM'},
-								                	  residuosInfectantesA : 2425.0,
-								                	  residuosQuimicosB : 6453.2,
-								                	  residuosRadioativosC : 0.0,
-								                	  residuosComunsD : 4333.0,
-								                	  residuosReciclaveisD : 345.2,
-								                	  residuosPerfuroCortantesE : 2346.0  
-								                  }
-								                  
-							                  ];
+							$scope.coletas = [];
 							
 							$scope.carregaUnidadesCentralizadoras = function() {
 								unidCentralizadoraSvc
@@ -93,6 +50,7 @@ app
 															"custom-class");
 												})
 							}
+							$scope.carregaUnidadesCentralizadoras();
 
 							$scope.buscaInicial = function(page) {
 								coletaResiduosServicosSaudeSvc
@@ -114,7 +72,7 @@ app
 												})
 							}
 
-							$scope.carregaUnidadesCentralizadoras();
+							
 
 							if ($stateParams.novaColeta) {
 								$scope.addNovaColeta();

@@ -1,10 +1,12 @@
 package br.uem.gestaoresiduos.repositories;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import br.uem.gestaoresiduos.entities.Role;
 import br.uem.gestaoresiduos.entities.User;
 
 public interface UserRepository extends JpaRepository<User, Serializable>{
@@ -15,5 +17,7 @@ public interface UserRepository extends JpaRepository<User, Serializable>{
 	User findByEmailAndPassword(String email, String password);
 
 	User findUserByEmail(String email);
+
+	List<User> findByRoles(Role roleObj);
 
 }

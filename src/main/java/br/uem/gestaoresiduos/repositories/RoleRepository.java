@@ -9,4 +9,6 @@ import br.uem.gestaoresiduos.entities.Role;
 public interface RoleRepository extends JpaRepository<Role, Serializable>
 {
 
+	Role findByRoleName(String role);
+
 }

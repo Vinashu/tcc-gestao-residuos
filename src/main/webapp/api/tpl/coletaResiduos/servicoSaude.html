@@ -108,14 +108,14 @@
 				<tbody>
 					<tr dir-paginate="coleta in coletas | itemsPerPage: coletasPerPage" total-items="coletasCount" current-page="pagination.current">
 						
-						<td>{{coleta.dataColeta }}</td>
+						<td>{{coleta.dataColeta | asDate | date:'dd/MM/yyyy'}}</td>
 						<td>{{coleta.local.nome}}</td>
-						<td>{{coleta.residuosInfectantesA}}</td>
-						<td>{{coleta.residuosQuimicosB}}</td>
-						<td>{{coleta.residuosRadioativosC}}</td>
-						<td>{{coleta.residuosComunsD}}</td>
-						<td>{{coleta.residuosReciclaveisD}}</td>
-						<td>{{coleta.residuosPerfuroCortantesE}}</td>
+						<td>{{coleta.qtdA}}</td>
+						<td>{{coleta.qtdB}}</td>
+						<td>{{coleta.qtdC}}</td>
+						<td>{{coleta.qtdDcomum}}</td>
+						<td>{{coleta.qtdDreciclavel}}</td>
+						<td>{{coleta.qtdE}}</td>
 						<td>
 							<i class="glyphicon glyphicon-edit" ng-click="editColeta(coleta)">
 								<md-tooltip md-direction="left" >

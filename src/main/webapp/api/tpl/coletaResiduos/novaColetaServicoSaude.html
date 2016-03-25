@@ -1,82 +1,76 @@
-<md-dialog flex="60"> 
-	<md-toolbar  layout="row">
-		<div class="bg-hospitalares md-toolbar-tools">
-				<span>Nova Coleta de Resíduos de Serviços de Saúde de {{unidCentralizadora.nome}}</span>
-		</div>
-		
-		<section class="bg-hospitalares" layout="row" layout-sm="column" layout-align="end center">
-			<md-button class="md-raised " novalidate type="button"
-				ng-click='closeDialog()'>Cancelar</md-button>
-			<md-button class="md-raised md-primary"
-				ng-click='salvarColeta()'>Salvar</md-button>
-		</section>
-	</md-toolbar>
-
+<md-dialog flex="75"> 
 	<div ng-controller="novaColetaCtrl" layout="column" ng-cloak class="md-inline-form">
-		<md-content layout-padding>
-		
-			<div layout layout-sm="column">
+		<form name="novaColetaForm" ngSubmit="salvarColeta()">
+			<md-toolbar  layout="row">	
 			
-				<md-datepicker ng-model="novaColeta.dataColeta" md-placeholder="Data da Coleta" style="margin-right: 0px;"></md-datepicker>
+				<div class="bg-hospitalares md-toolbar-tools">
+						<span>Nova Coleta de Resíduos de Serviços de Saúde de {{unidCentralizadora.nome}}</span>
+				</div>
 				
-				<md-input-container flex>
-					<label>Local</label>
-					<md-select ng-model="novaColeta.local" ng-model-options="{trackBy: '$value.nome'}">
-						<md-option required ng-repeat="local in unidCentralizadora.locais" ng-value="local">
-							{{ local.nome }} 
-						</md-option>
-					</md-select>
-				</md-input-container>
-			</div>
-				
-			<div layout layout-sm="column" style="background-color:#FFEB3B">
-				<md-input-container flex> 
-					<label style="font-weight: bold">Resíduos Infectantes A</label>
-					<input required ng-model="novaColeta.residuosInfectantesA"> 
-				</md-input-container>
-			</div>
-			
-			<div layout layout-sm="column" style="background-color: #8BC34A">
-				<md-input-container flex> 
-					<label style="font-weight: bold">Resíduos Quimicos B</label>
-					<input required ng-model="novaColeta.residuosQuimicosB"> 
-				</md-input-container>
-			</div>
-			
-			<div layout layout-sm="column" style="background-color: #90CAF9">
-				<md-input-container flex> 
-					<label style="font-weight: bold">Resíduos Radiotivos C</label>
-					<input required ng-model="novaColeta.residuosRadioativosC"> 
-				</md-input-container>
-			</div>
-			
-			<div layout layout-sm="column"  style="background-color: #BDBDBD">
-				<md-input-container flex > 
-					<label style="font-weight: bold">Resíduos Comuns D</label>
-					<input required ng-model="novaColeta.residuosComunsD"> 
-				</md-input-container>
-			</div>
-			
-			<div layout layout-sm="column" style="background-color: #F8BBD0">
-				<md-input-container flex> 
-					<label style="font-weight: bold">Resíduos Recicláveis D</label>
-					<input required ng-model="novaColeta.residuosReciclaveisD"> 
-				</md-input-container>
-			</div>
-			
-			<div layout layout-sm="column" style="background-color: #F44336">
-				<md-input-container flex> 
-					<label>Resíduos Perfurocortantes E</label>
-					<input required ng-model="novaColeta.residuosPerfuroCortantesE"> 
-				</md-input-container>
-			</div>
-				
-				
-			
-				
-				
-				
-			
+				<section class="bg-hospitalares" layout="row" layout-sm="column" layout-align="end center">
+					<md-button class="md-raised " novalidate type="button"
+						ng-click='closeDialog()'>Cancelar</md-button>
+					<md-button class="md-raised md-primary"
+						ng-click='novaColetaForm.$valid && salvarColeta()'>Salvar</md-button>
+				</section>
+			</md-toolbar>
+
 	
-		</md-content>
+		
+			<md-content layout-padding>
+			
+				<div layout layout-sm="column">
+				
+					<md-datepicker ng-model="novaColeta.dataColeta" md-placeholder="Data da Coleta" style="margin-right: 0px;"></md-datepicker>
+					
+					<md-input-container flex="40">
+						<label>Local</label>
+						<md-select ng-model="novaColeta.local" ng-model-options="{trackBy: '$value.nome'}">
+							<md-option required ng-repeat="local in unidCentralizadora.locais" ng-value="local">
+								{{ local.nome }} 
+							</md-option>
+						</md-select>
+					</md-input-container>
+				</div>
+				
+				<div layout="row">
+					<fieldset class="standard" >
+						<legend style="font-size: medium;">Residuos de Servicos de Saude (kg)</legend> 
+						
+						<md-input-container flex> 
+							<label style="font-weight: bold; color: #FFEB3B">Infectantes A</label>
+							<input required ng-model="novaColeta.qtdA"> 
+						</md-input-container>
+					
+						<md-input-container flex> 
+							<label style="font-weight: bold; color: #8BC34A">Quimicos B</label>
+							<input required ng-model="novaColeta.qtdB"> 
+						</md-input-container>
+					
+						<md-input-container flex> 
+							<label style="font-weight: bold; color: #90CAF9">Radiotivos C</label>
+							<input required ng-model="novaColeta.qtdC"> 
+						</md-input-container>
+					
+						<md-input-container flex > 
+							<label style="font-weight: bold; color: #BDBDBD">Comuns D</label>
+							<input required ng-model="novaColeta.qtdDcomum"> 
+						</md-input-container>
+					
+						<md-input-container flex> 
+							<label style="font-weight: bold; color: #F8BBD0">Recicláveis D</label>
+							<input required ng-model="novaColeta.qtdDreciclavel"> 
+						</md-input-container>
+					
+						<md-input-container flex> 
+							<label style="font-weight: bold; color: #F44336">Perfurocortantes E</label>
+							<input required ng-model="novaColeta.qtdE"> 
+						</md-input-container>
+						
+					</fieldset>			
+				</div>
+					
+			</md-content>
+		</form>
+	</div>	
 </md-dialog>

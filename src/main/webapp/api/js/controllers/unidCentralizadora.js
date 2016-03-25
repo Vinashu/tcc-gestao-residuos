@@ -18,13 +18,15 @@ app
 						'$location',
 						'_',
 						'localSvc',
+						'userSvc',
 						function($scope, $http, unidCentralizadoraSvc,
 								campusSvc, labSvc, $state, $stateParams, Flash,
-								$mdDialog, $location, _, localSvc) {
+								$mdDialog, $location, _, localSvc, userSvc) {
 
 							$scope.unidCentralizadora = {};
 							$scope.unidCentralizadora.locais = [];
 							$scope.unidadesCentralizadoras = [];
+							$scope.users = [];
 							$scope.isEditing = false;
 							$scope.titulo = "Nova Unidade Centralizadora";
 							
@@ -36,6 +38,14 @@ app
 							}
 							$scope.carregaUnidCentralizadoras();
 
+							$scope.carregaTecnicosColeta = function() {
+								userSvc.listByRole('TECNICOCOLETA')
+									.then(function(usersData) {
+										$scope.users = usersData;
+									});
+							}
+							$scope.carregaTecnicosColeta();
+							
 							$scope.submitUnidCentralizadora = function() {
 								unidCentralizadoraSvc
 										.saveUnidCentralizadora(
