@@ -17,6 +17,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.data.annotation.Transient;
+
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -119,6 +121,12 @@ public class User implements Serializable {
 
 	public void setCampus(Campus campus) {
 		this.campus = campus;
+	}
+	
+	@Transient
+	public boolean hasRole(String roleName){
+		Role role = new Role(roleName);
+		return this.getRoles().contains(role);
 	}
 
 	@Override

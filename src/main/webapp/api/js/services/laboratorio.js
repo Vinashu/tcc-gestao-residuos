@@ -43,4 +43,14 @@ app.service('labSvc', [ '$http', function($http) {
 					});
 	}
 	
+	this.delLab = function(labId) {
+		return $http.delete("laboratorios/lab/"+labId)
+			.then(
+					function(response) {
+						return response
+					}, function(httpError) {	
+						throw httpError;
+					});
+	}
+	
 } ]);

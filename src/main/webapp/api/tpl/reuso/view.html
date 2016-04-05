@@ -1,0 +1,28 @@
+<md-dialog flex="75"> 
+	<div ng-controller="viewReusoCtrl" layout="column" ng-cloak class="md-inline-form">
+		<form name="reusoForm" >
+			<md-toolbar  layout="row">	
+			
+				<div class="bg-hospitalares md-toolbar-tools">
+						<span>Material disponível para reuso</span>
+				</div>
+				
+				<section class="bg-hospitalares" layout="row" layout-sm="column" layout-align="end center">
+					<md-button class="md-raised " novalidate type="button"
+						ng-click='closeDialog()'>Cancelar</md-button>
+					<md-button class="md-raised md-primary"
+						ng-click='solicitarMaterialReuso()'>Solicitar Reuso</md-button>
+				</section>
+			</md-toolbar>
+					{{viewReuso}}
+				
+		
+			<md-content layout-padding>
+			
+			</md-content>
+			
+		</form>
+			
+	</div>
+			
+</md-dialog>

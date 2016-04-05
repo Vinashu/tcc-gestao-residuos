@@ -1,59 +1,90 @@
-<md-dialog flex="60"> 
+<md-dialog flex="60" ng-controller="novaReusoCtrl"> 
 	<md-toolbar  layout="row">
-		<div class="bg-solidos md-toolbar-tools">
-				<span>Nova Coleta de Resíduos Sólidos de {{unidCentralizadora.nome}}</span>
+		<div class="bg-reuso md-toolbar-tools">
+				<span>Adicionar Materiais para Reuso</span>
 		</div>
-		
-		<section class="bg-solidos" layout="row" layout-sm="column" layout-align="end center">
+		<section class="bg-reuso" layout="row" layout-sm="column" layout-align="end center">
 			<md-button class="md-raised " novalidate type="button"
 				ng-click='closeDialog()'>Cancelar</md-button>
 			<md-button class="md-raised md-primary"
-				ng-click='salvarColeta()'>Salvar</md-button>
+				ng-click='salvarReusos()'>Salvar</md-button>
 		</section>
 	</md-toolbar>
 
-	<div ng-controller="novaColetaCtrl" layout="column" ng-cloak class="md-inline-form">
+	<div  layout="column" ng-cloak class="md-inline-form">
 		<md-content layout-padding>
 		
-			<div layout layout-sm="column">
-				<md-input-container flex> 
-					<label>OS</label>
-					<input required ng-model="novaColeta.os"> 
-				</md-input-container>
-				
-				<md-input-container flex> 
-					<label>Peso (Kg)</label>
-					<input required ng-model="novaColeta.peso"> 
-				</md-input-container>
-				
-				<md-input-container flex>
-					<label>Local</label>
-					<md-select ng-model="novaColeta.local" ng-model-options="{trackBy: '$value.nome'}">
-						<md-option required ng-repeat="local in unidCentralizadora.locais" ng-value="local">
-							{{ local.nome }} 
-						</md-option>
-					</md-select>
-				</md-input-container>
-				
-			</div>
-			<div layout layout-sm="column">	
-					<md-radio-group ng-model="novaColeta.reciclavel" style="margin: 0px;">
-	     				<md-radio-button ng-value="true" class="md-primary">Reciclável</md-radio-button>
-	     				<md-radio-button ng-value="false"> Não Reciclável</md-radio-button>
-	      			</md-radio-group>
-</div>
-			<div layout>
-				<md-datepicker ng-model="novaColeta.dataColeta" md-placeholder="Data da Coleta" style="margin-right: 0px;"></md-datepicker>
-				
-				<md-input-container flex> 
-					<label>Observações</label>
-					<input ng-model="novaColeta.observacoes"> 
-				</md-input-container>
-			</div>
-				
-				
-				
+			<md-input-container flex="70" style="min-width: 250px"> <label>Unidade Centralizadora</label>
+				<md-select ng-model="unidCentralizadora" ng-model-options="{trackBy: '$value.nome'}" ng-change="buscaInicial(1)">
+					<md-option	required ng-repeat="unid in unidadesCentralizadoras" ng-value="unid">
+						{{ unid.nome }} 
+					</md-option> 
+				</md-select> 
+			</md-input-container>
 			
+			<md-content flex>
+			<nav ui-nav class="navi clearfix">
+				<ul class="nav">
+					<li >
+						<a href md-ink-ripple style="text-decoration: underline;">
+	      					<i class="glyphicon glyphicon-search"></i>
+	      					<span>Pesquisar Coletas</span>
+	    				</a>
+						<ul class="nav nav-sub dk">
+							<li>
+	          					<md-content layout-padding layout="row"  style="border: 1px solid #eee" flex>
+									<md-input-container class="md-icon-float md-icon-right md-block" flex="10">
+										<label>M�s</label>
+										<input ng-model="search.mes" type="number" step="1" max="12" min="1">
+									</md-input-container>
+									
+									<md-input-container class="md-icon-float md-icon-right md-block" flex="20">
+										<label>Ano</label>
+										<input ng-model="search.ano">
+									</md-input-container>
+									
+									<md-button class="md-raised md-primary" style="max-height: 20px;" ng-click='findColetasUnid(1)'>
+											Pesquisar
+									</md-button>
+									
+								</md-content>	
+							</li>
+						</ul>
+					</li>			
+				</ul>
+			</nav>			
+							
+			<table	class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th>Laborat�rio</th>
+					<th>Data</th>		
+					<th>Materiais Coletados</th>
+				</tr>
+			</thead>
+				<tbody>
+					<tr dir-paginate="coleta in coletas | itemsPerPage: coletasPerPage" total-items="coletasCount" current-page="pagination.current">
+						
+						<td>{{coleta.laboratorio.nome}}</td>
+						<td>{{coleta.dataColeta  | asDate | date:'dd/MM/yyyy' }}</td>
+						<td>
+							<md-list-item ng-repeat="material in coleta.materiaisColetados" style="min-height:25px">
+								<span ng-click="selecionarMaterial(material, coleta.laboratorio)">{{material.material.descricao}} - {{material.quantidade}} {{getUnidMedidaInfos(material.unidadeMedida)}}</span>
+							</md-list-item>
+						</td>
+						
+						
+					</tr>
+				</tbody>
+			</table>		
+			<dir-pagination-controls on-page-change="pageChanged(newPageNumber)" auto-hide="false"></dir-pagination-controls>						
+									
+			<md-subheader class="md-no-sticky">Materiais selecionados para Reuso</md-subheader>
+			<md-list-item ng-repeat="reuso in materiaisSelecionados">
+		    	{{reuso.materialColetado.material.descricao}} - {{reuso.origem.sigla}}
+			    <i class="glyphicon glyphicon-remove" style="float: right;" removerMaterial(material)"></i>
+		  	</md-list-item>
 	
 		</md-content>
+	</md-content>
 </md-dialog>

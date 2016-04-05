@@ -19,6 +19,7 @@
 					<th>Responsável</th>
 					<th>Telefone</th>
 					<th>Campus</th>
+					<th>Ativa</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -27,10 +28,10 @@
 					<td>{{unid.id}}</td>
 					<td>{{unid.nome}}</td>
 					<td>{{unid.tipoResiduos}}</td>
-					<td>{{unid.responsavel}}</td>
+					<td>{{unid.responsavel.name}}</td>
 					<td>{{unid.telefone}}</td>
 					<td>{{unid.campus.nome}}</td>
-					
+					<td>{{unid.ativa | asBoo}}</td>
 				</tr>
 			</tbody>
 			

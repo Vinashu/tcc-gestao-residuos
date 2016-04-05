@@ -32,8 +32,8 @@ app
 							
 							$scope.carregaUnidadesCentralizadoras = function() {
 								unidCentralizadoraSvc
-										.findUnidadesCentralizadorasByTipo(
-												'SOLIDO')
+										.findUnidadesCentralizadorasByTipoAndUser(
+												'SOLIDO', $scope.loggedUser.principal)
 										.then(
 												function(unidades) {
 													$scope.unidadesCentralizadoras = unidades;

@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.uem.gestaoresiduos.entities.Role;
 import br.uem.gestaoresiduos.entities.TiposResiduos;
 import br.uem.gestaoresiduos.entities.UnidadeCentralizadora;
+import br.uem.gestaoresiduos.entities.User;
 import br.uem.gestaoresiduos.repositories.UnidadeCentralizadoraRepository;
 
 @Service
@@ -19,6 +21,9 @@ public class UnidadeCentralidoraService {
 
 	@Autowired
 	private UnidadeCentralizadoraRepository unidadeCentralizadoraRepository;
+	
+	@Autowired
+	private RoleService roleService;
 
 	public List<UnidadeCentralizadora> findAll() {
 		return unidadeCentralizadoraRepository.findAll();
@@ -26,6 +31,12 @@ public class UnidadeCentralidoraService {
 	
 	public List<UnidadeCentralizadora> findByTipoResiduos(TiposResiduos tiposResiduos) {
 		return unidadeCentralizadoraRepository.findByTipoResiduosAndAtiva(tiposResiduos, true);
+	}
+	
+	public List<UnidadeCentralizadora> findByTipoResiduosAndUser(TiposResiduos tiposResiduos, User user) {
+		return user.hasRole("GESTORRESIDUOS")
+				? unidadeCentralizadoraRepository.findByTipoResiduosAndAtiva(tiposResiduos, true) 
+				: unidadeCentralizadoraRepository.findByTipoResiduosAndAtivaAndResponsavel(tiposResiduos, true, user);
 	}
 
 	public UnidadeCentralizadora create(UnidadeCentralizadora unidadeCentralizadora) {
@@ -48,4 +59,6 @@ public class UnidadeCentralidoraService {
 		unid.setAtiva(false);
 		unidadeCentralizadoraRepository.save(unid);
 	}
+
+
 }

@@ -15,10 +15,6 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
-/*
- * add atributo boolean disponivelParaReuso e criar tabela materialcoletado_to_localarmazenado
- */
-
 @JsonAutoDetect
 @Entity
 @Table(name="material_coletado")
@@ -41,9 +37,6 @@ public class MaterialColetado implements Serializable{
 	@Column(name="unidade_medida")
 	private UnidadeMedida unidadeMedida;
 	
-	@Column(name="disponivel_para_reuso")
-	private boolean disponivelReuso;
-
 	public int getId() {
 		return id;
 	}
@@ -75,4 +68,43 @@ public class MaterialColetado implements Serializable{
 	public void setUnidadeMedida(UnidadeMedida unidadeMedida) {
 		this.unidadeMedida = unidadeMedida;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		result = prime * result + ((material == null) ? 0 : material.hashCode());
+		result = prime * result + ((quantidade == null) ? 0 : quantidade.hashCode());
+		result = prime * result + ((unidadeMedida == null) ? 0 : unidadeMedida.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		MaterialColetado other = (MaterialColetado) obj;
+		if (id != other.id)
+			return false;
+		if (material == null) {
+			if (other.material != null)
+				return false;
+		} else if (!material.equals(other.material))
+			return false;
+		if (quantidade == null) {
+			if (other.quantidade != null)
+				return false;
+		} else if (!quantidade.equals(other.quantidade))
+			return false;
+		if (unidadeMedida != other.unidadeMedida)
+			return false;
+		return true;
+	}
+	
+	
 }

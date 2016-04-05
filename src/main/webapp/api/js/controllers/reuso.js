@@ -7,240 +7,240 @@ app
 				'reusoCtrl',
 				[
 						'$scope',
-						'unidCentralizadoraSvc',
-						'localSvc',
 						'reusoSvc',
 						'$state',
 						'$stateParams',
 						'Flash',
 						'$mdDialog',
 						'$location',
+						'$q',
 						'_',
-						function($scope, unidCentralizadoraSvc, localSvc,
-								coletaResiduosSolidosSvc, $state, $stateParams,
-								Flash, $mdDialog, $location, _) {
+						'unidadeMedidaSvc',
+						'campusSvc',
+						'unidCentralizadoraSvc',
+						'coletaResiduosQuimicosSvc',
+						function($scope, reusoSvc, $state, $stateParams,
+								Flash, $mdDialog, $location, $q, _, unidadeMedidaSvc,campusSvc, 
+								unidCentralizadoraSvc, coletaResiduosQuimicosSvc) {
 
 							// Inicialização da Página
-							$scope.unidCentralizadora = {};
-							$scope.unidadesCentralizadoras = [];
 							$scope.search = {};
-							$scope.coletasCount = 0;
-							$scope.coletasPerPage = 20;
+							$scope.reusoCount = 0;
+							$scope.reusoPerPage = 20;
 							$scope.pagination = {
 								current : 1
 							};
+							$scope.campi = [];
+							$scope.materiaisDisp = [];
+							$scope.materiaisDispReuso = [];
 							
-							$scope.materiaisDispReuso = [
-							                             {
-							                            	 descricao : 'Formol usado',
-							                            	 quantidade : 54,
-							                            	 unidade : 'L',
-							                            	 dataColeta : '11/12/2015',
-							                            	 status: 'Disponível'
-							                             },{
-							                            	 descricao : 'Acetato de Etila',
-							                            	 quantidade : 2,
-							                            	 unidade : 'L',
-							                            	 dataColeta : '04/12/2015',
-							                            	 status: 'Reservado'
-							                             },{
-							                            	 descricao : 'Reagente Sólido',
-							                            	 quantidade : 54,
-							                            	 unidade : 'Kg',
-							                            	 dataColeta : '05/02/2016',
-							                            	 status: 'Disponível'
-							                             }
-							                             ];
-							
-							$scope.carregaUnidadesCentralizadoras = function() {
-								unidCentralizadoraSvc
-										.findUnidadesCentralizadorasByTipo(
-												'QUIMICO')
-										.then(
-												function(unidades) {
-													$scope.unidadesCentralizadoras = unidades;
-													$scope.unidCentralizadora = _
-															.first(unidades);
-													$scope.buscaInicial(1);
-													$scope.pageChanged = $scope.buscaInicial;
-												},
-												function(error) {
-													Flash.create('error',
-															"Não foi possível carregar as Unidades Centralizadoras: "
-																	+ error,
-															"custom-class");
-												})
+							$scope.getCampi = function() {
+								campusSvc.getCampi().then(function(campiData) {
+									$scope.campi = campiData;
+								});
 							}
-
+							$scope.getCampi();
+							
+							$scope.getMateriaisDisp = function() {
+								reusoSvc.getMateriaisDisp()
+									.then(function(materiaisData) {
+										$scope.materiaisDisp = materiaisData;
+									})
+							}
+							$scope.getMateriaisDisp();
+							
 							$scope.buscaInicial = function(page) {
-								coletaResiduosSolidosSvc
-										.findColetasUnid(
-												$scope.unidCentralizadora.id,
-												--page)
-										.then(
-												function(coletasData) {
-													$scope.coletas = coletasData.content;
-													$scope.coletasCount = coletasData.totalElements;
+								reusoSvc.findReusos(--page)
+										.then(function(reusosData) {
+													$scope.materiaisDispReuso = reusosData.content;
+													$scope.coletasCount = reusosData.totalElements;
+													$scope.pageChanged = $scope.buscaInicial;
+													
+													$scope.materiaisDispReuso.forEach(function(item) {
+														unidadeMedidaSvc.getUnidadeMedidaInfos(item.materialColetado.unidadeMedida)
+															.then(function(unidMedidaInfos) {
+																item.materialColetado.unidadeMedida = unidMedidaInfos;
+															});
+													});
 												},
 												function(error) {
-													Flash
-															.create(
-																	'error',
-																	"Erro ao pesquisar coletas: "
-																			+ error.statusText,
-																	"custom-class");
-												})
+													Flash.create('error',"Erro ao pesquisar materiais de reuso: " + error.statusText,"custom-class");
+												});
 							}
+							$scope.buscaInicial(1);
 
-							$scope.carregaUnidadesCentralizadoras();
 
-							if ($stateParams.novaColeta) {
-								$scope.addNovaColeta();
-							}
-
-							// Pesquisa Coletas
-							$scope.findColetasUnid = function(page) {
-								$scope.search.unidCentralizadoraId = $scope.unidCentralizadora.id;
+							// Pesquisa reusos
+							$scope.findMateriaisReuso = function(page) {
 								
-								coletaResiduosSolidosSvc
-										.findColetasMesAnoLocalUnid(
-												$scope.search, --page)
-										.then(
-												function(coletasData) {
-													$scope.coletas = coletasData.content;
-													$scope.coletasCount = coletasData.totalElements;
-													$scope.pageChanged = $scope.findColetasUnid;
-												},
-												function(error) {
-													Flash
-															.create(
-																	'error',
-																	"Erro ao pesquisar coletas: "
-																			+ error.statusText,
-																	"custom-class");
-												})
+								reusoSvc.findReusosMaterialCampus($scope.search, --page)
+									.then(function(reusosData) {
+													$scope.materiaisDispReuso = reusosData.content;
+													$scope.reusoCount = reusosData.totalElements;
+													$scope.pageChanged = $scope.findMateriaisReuso;
+										},
+										function(error) {
+											Flash.create('error',"Erro ao pesquisar coletas: "+ error.statusText,"custom-class");
+										})
 							}
 							
-							$scope.limparCampos = function() {
-								$scope.search = {};
-								$scope.search.localId = -1;
-								$scope.buscaInicial(1);
-							}
 
-							// Nova Coleta
+							// Novo reuso
 
-							$scope.addNovaColeta = function() {
-								$scope.novaColeta = {};
+							$scope.addReuso = function() {
+								$scope.novaReuso = {};
 								$mdDialog
 										.show({
 											clickOutsideToClose : true,
 											scope : $scope,
 											preserveScope : true,
-											controller : 'novaColetaCtrl',
+											controller : 'novaReusoCtrl',
 
-											templateUrl : 'tpl/coletaResiduos/novaColetaSolido.html'
+											templateUrl : 'tpl/reuso/novaMaterialReuso.html'
 										});
 							}
 							
-							$scope.novaColetaCtrl = function($scope, $mdDialog) {
+							$scope.novaReusoCtrl = function($scope, $mdDialog) {
+								$scope.unidadesCentralizadoras = [];
+								$scope.unidCentralizadora = {};
+								$scope.search = {};
+								$scope.coletasCount = 0;
+								$scope.coletasPerPage = 20;
+								$scope.pagination = {
+									current : 1
+								};
+								$scope.materiaisSelecionados = [];
 								
-								$scope.novaColeta.unidadeCentralizadora = $scope.unidCentralizadora;
-								
-								$scope.locais = [];
-								$scope.carregaLocais = function() {
-									localSvc.findLocais().then(
-											function(locaisData) {
-												$scope.locais = locaisData;
-											})
+								$scope.carregaUnidadesCentralizadoras = function() {
+									unidCentralizadoraSvc
+											.findUnidadesCentralizadorasByTipoAndUser(
+													'QUIMICO', $scope.loggedUser.principal)
+											.then(
+													function(unidades) {
+														$scope.unidadesCentralizadoras = unidades;
+														$scope.unidCentralizadora = _.first(unidades);
+													},
+													function(error) {
+														Flash.create('error',
+																"Não foi possível carregar as Unidades Centralizadoras: "+ error,"custom-class");
+													})
 								}
-								$scope.carregaLocais();
+								$scope.carregaUnidadesCentralizadoras();
 								
-								$scope.salvarColeta = function() {
-									coletaResiduosSolidosSvc
-										.submitColeta($scope.novaColeta)
-										.then(function(savedColeta) {
-											Flash.create('success','Coleta ' + savedColeta.os + ' criada com sucesso', 'custom-class');
-												$mdDialog.hide();
-												$scope.novaColeta = {};
-												$scope.buscaInicial(1);
-											},
-											function(error) {
-												Flash.create('error',"Erro ao criar coleta" + ": "+ error.statusText,"custom-class");
-											});
+								$scope.findColetasUnid = function(page) {
+									$scope.search.unidCentralizadoraId = $scope.unidCentralizadora.id;
+									$scope.search.labId = -1;
+									coletaResiduosQuimicosSvc
+											.findColetasMesAnoLabUnid($scope.search, --page)
+											.then(function(coletasData) {
+														$scope.coletas = coletasData.content;
+														$scope.coletasCount = coletasData.totalElements;
+														$scope.pageChanged = $scope.findColetasUnid;
+													},
+													function(error) {
+														Flash.create('error',"Erro ao pesquisar coletas: "+ error.statusText,"custom-class");
+													})
 								}
 								
 								$scope.closeDialog = function() {
 									$mdDialog.hide();
 								}
-
+								
+								$scope.selecionarMaterial = function(material, lab) {
+									var novoMaterialReuso = { materialColetado : material, origem : lab};
+									if (!_.any($scope.materiaisSelecionados,  function(item){ return _.isEqual(item.materialColetado, novoMaterialReuso.materialColetado); })) {
+										$scope.materiaisSelecionados.push(novoMaterialReuso);
+									}
+								}
+								
+								$scope.salvarReusos = function() {
+									$scope.addReusos().then(function(cont) {
+										Flash.create('success', 'Materiais disponibilizados para reuso com sucesso', 'custom-class');
+										$scope.closeDialog();
+										$scope.buscaInicial($scope.pagination.current);
+									});	
+									
+								}
+								
+								$scope.addReusos = function() {
+									
+									return $q(function(resolve, reject) {
+										var cont = 0;
+										_.each($scope.materiaisSelecionados, function(materialReuso) {
+											var novoMaterialReuso = { 	
+													materialColetado : materialReuso.materialColetado,
+													responsavel : $scope.loggedUser.principal,
+													entrada: new Date(),
+													saida: null,
+													consumidor: null,
+													campus: materialReuso.origem.campus,
+													status: 'Disponível'
+												};
+							
+											reusoSvc.isMaterialDisponivelReuso(materialReuso.materialColetado.id)
+												.then(function(disponivel) {	
+													if(disponivel){
+														reusoSvc.addMaterialReuso(novoMaterialReuso)
+															.then(function(result) {
+																resolve(cont++);
+															}, function(error) {
+															});
+													}
+												});
+										});
+									});
+								}
+								
+								$scope.getUnidMedidaInfos = function(unid) {
+									
+									if (unid === 'LITRO') {
+										return 'L';
+									} else if (unid === 'UNIDADE') {
+										return 'Unid.';
+									}else if (unid === 'QUILO') {
+										return 'kg';
+									}
+								}
 							}
 							
 							/*
-							 * edit coleta
+							 * view reuso
 							 */
-							$scope.editColeta = function(editColeta) {
-								
-								$mdDialog.show({
+							
+							$scope.viewReuso = function(reuso) {
+								$scope.viewReuso = reuso;
+								$mdDialog
+										.show({
 											clickOutsideToClose : true,
 											scope : $scope,
 											preserveScope : true,
-											controller : 'editColetaCtrl',
-											locals : { 
-												editColeta : editColeta,
-													isEditing: true
-																	},
+											controller : 'viewReusoCtrl',
+											locals : { reuso : reuso },
 
-											templateUrl : 'tpl/coletaResiduos/novaColetaSolido.html'
+											templateUrl : 'tpl/reuso/view.html'
 										});
 							}
-
-							$scope.editColetaCtrl = function($scope, $mdDialog, editColeta) {
+							
+							$scope.viewReusoCtrl = function($scope, $mdDialog) {
 								
-								$scope.novaColeta = editColeta;
-								$scope.novaColeta.dataColeta = new Date($scope.novaColeta.dataColeta);
 								
-								$scope.locais = [];
-								$scope.carregaLocais = function() {
-									localSvc.findLocais().then(
-											function(locaisData) {
-												$scope.locais = locaisData;
-											})
-								}
-								$scope.carregaLocais();
-								
-								$scope.salvarColeta = function() {
-									coletaResiduosSolidosSvc
-										.submitColeta($scope.novaColeta)
-										.then(function(savedColeta) {
-											Flash.create('success','Coleta ' + savedColeta.os + ' editada com sucesso', 'custom-class');
-												$mdDialog.hide();
-												$scope.novaColeta = {};
-												$scope.buscaInicial(1);
-											},
-											function(error) {
-												Flash.create('error',"Erro ao editar coleta" + ": "+ error.statusText,"custom-class");
-											});
-								}
-								
-								$scope.closeDialog = function() {
-									$mdDialog.hide();
-								}
-
 							}
+
+							
+							
 							
 							/*
 							 * delete coleta
 							 */
-							
-							$scope.deleteColeta = function(coleta) {
+							$scope.deleteMaterialReuso = function(reuso) {
 								var confirm = $mdDialog.confirm().title(
-								'Tem certeza que deseja excluir a coleta de resíduos sólidos OS: '+ coleta.os + ' ?').ariaLabel(
-								'Excluir Coleta de Resíduos Sólidos').ok('Sim').cancel('Cancelar');
+								'Tem certeza que deseja excluir o material: '+ reuso.materialColetado.material.descricao + ' ?').ariaLabel(
+								'Excluir material de reuso').ok('Sim').cancel('Cancelar');
 
 								$mdDialog.show(confirm).then(function() {
-									coletaResiduosSolidosSvc.deleteColeta(coleta.id)
+									reusoSvc.deleteReusoByMaterialColetadoId(reuso.materialColetado.id)
 										.then(function(result) {
-											Flash.create('success',"Coleta Excluída com sucesso " +result);
+											Flash.create('success',"Material excluído com sucesso " +result);
 											$scope.pageChanged($scope.pagination.current);
 										})
 								});

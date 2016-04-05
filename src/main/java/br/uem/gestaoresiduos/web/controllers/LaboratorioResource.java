@@ -50,4 +50,11 @@ public class LaboratorioResource {
 		Laboratorio lab = laboratorioService.findLaboratorioById(id);
 		return new ResponseEntity<Laboratorio>(lab, HttpStatus.OK);
 	}
+	
+	@RequestMapping(value="lab/{id}", method=RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public ResponseEntity<Laboratorio> deleteById(@PathVariable("id") int id) {
+		laboratorioService.deleteById(id);
+		return new ResponseEntity<Laboratorio>(HttpStatus.OK);
+	}
 }

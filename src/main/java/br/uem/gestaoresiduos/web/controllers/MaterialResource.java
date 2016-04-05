@@ -17,7 +17,7 @@ import br.uem.gestaoresiduos.entities.Material;
 import br.uem.gestaoresiduos.services.MaterialService;
 
 @Controller
-@RequestMapping("api/material/")
+@RequestMapping("api/materiais/")
 public class MaterialResource {
 	
 	@Autowired
@@ -39,6 +39,18 @@ public class MaterialResource {
 	@ResponseBody
 	public String findTiposMaterial() {
 		return materialService.getTiposMaterial();
+	}
+	
+	@RequestMapping(value="material/{descricao}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public Material findMaterialByDescricao(@PathVariable String descricao) {
+		return materialService.findByDescricao(descricao);
+	}
+	
+	@RequestMapping(value="material/materialDiverso", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public Material findMaterialDiversos() {
+		return materialService.getMaterialDiversos();
 	}
 	
 	@RequestMapping(value="/{materialId}", method=RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_VALUE)

@@ -103,7 +103,7 @@
 						<td>{{coleta.peso}}</td>
 						<td>{{coleta.local.nome}}</td>
 						<td>{{coleta.observacoes}}</td>
-						<td>{{coleta.reciclavel}}</td>
+						<td>{{coleta.reciclavel | asBoo}}</td>
 						<td>
 							<i class="glyphicon glyphicon-edit" ng-click="editColeta(coleta)">
 								<md-tooltip md-direction="left" >

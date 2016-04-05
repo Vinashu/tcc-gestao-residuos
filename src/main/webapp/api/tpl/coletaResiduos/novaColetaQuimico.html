@@ -41,49 +41,78 @@
 		</md-content>
 
 		<md-content flex="75">
-			<div class="bg-light lter b-b wrapper-md" style="margin-top: 30px;">
-				<b>Materiais Coletados</b>
-				<md-button class="md-fab md-primary md-mini"
-					ng-click="showNovoMaterialInputs()" aria-label="Add Material Coletado">
-					<md-tooltip md-direction="right">
-					 	Adicionar Material	Coletado no Laboratório selecionado
-					</md-tooltip> <i class="glyphicon glyphicon-plus"></i> 
-				 </md-button>
-			</div>
-		
-			<div ng-show="isShowNovoMaterialInputs" >
+			<fieldset style="margin-top:20px; font-size: medium;">
+				<legend>Materiais Coletados</legend>
+				<div class="bg-light lter b-b wrapper-md">
+					<b>Total de Materiais Coletados</b>
+				</div>
+				<md-content layout="row" style="margin-top: 20px;">
+					<md-input-container class="md-icon-float md-icon-right md-block" flex="30" padding>
+						<label>Tipo</label>
+						<input disabled value="Materiais Diversos" style="color: black; font-weight: bold">
+					</md-input-container>
+					
+					<md-input-container class="md-icon-float md-icon-right md-block" flex="30">
+						<label>Quantidade</label>
+						<input ng-model="novoTotalColeta.quantidade">
+					</md-input-container>
+					
+					<md-input-container class="md-icon-float md-icon-right md-block" flex="30">
+					<label>Unidade Medida</label>
+						 <md-select ng-model="novoTotalColeta.unidadeMedida" >
+						 	<md-option	ng-repeat="unidMedida in unidadesMedida" value="{{unidMedida}}">
+								{{unidMedida.nome}} 
+							</md-option>
+						 </md-select> 
+					</md-input-container>
+					
+					<button type="button" ng-click="addTotalColetado()" class="btn btn-primary" flex="10" style="height: 38px;align-self: center;">Ok</button>
+				</md-content>
 				
-				<form class="form-horizontal">
-					<div class="controls form-inline" >
-					     <div class="input-group" style="width: 32%;">
-	     					<span class="input-group-btn" style="width: 10%;">
-					       		<button class="btn btn-default" type="button">
-					       			<md-tooltip md-direction="right">
-						 				Adicionar Novo Material
-									</md-tooltip>
-									<i class="glyphicon glyphicon-plus" ></i>
-								</button>
-					      	</span>
-						    <select class="form-control" ng-model="novoMaterialColetado.material"  placeholder="Material" name="size" >
-						    	<option value="">Selecione o material</option>
-						    	<option ng-repeat="material in materiais" value="{{material | json}}">{{material.descricao}}</option>
+				<div class="bg-light lter b-b wrapper-md" style="margin-top: 30px;">
+					<b>Discriminação dos Materiais Coletados</b>
+					<md-button class="md-fab md-primary md-mini"
+						ng-click="showNovoMaterialInputs()" aria-label="Add Material Coletado">
+						<md-tooltip md-direction="right">
+						 	Adicionar Material	Coletado no Laboratório selecionado
+						</md-tooltip> <i class="glyphicon glyphicon-plus"></i> 
+					 </md-button>
+				</div>
+			
+				<div ng-show="isShowNovoMaterialInputs" >
+					
+					<form class="form-horizontal">
+						<div class="controls form-inline" >
+						     <div class="input-group" style="width: 32%;">
+		     					<span class="input-group-btn" style="width: 10%;">
+						       		<button class="btn btn-default" type="button">
+						       			<md-tooltip md-direction="right">
+							 				Adicionar Novo Material
+										</md-tooltip>
+										<i class="glyphicon glyphicon-plus" ></i>
+									</button>
+						      	</span>
+							    <select class="form-control" ng-model="novoMaterialColetado.material"  placeholder="Material" name="size" >
+							    	<option value="">Selecione o material</option>
+							    	<option ng-repeat="material in materiais" value="{{material | json}}">{{material.descricao}}</option>
+							    </select>
+						  	</div>
+						  	
+						  	<div class="input-group" style="width: 23%;">
+						 	<input flex type="text" class="form-control" ng-model="novoMaterialColetado.quantidade"  placeholder="Quantidade" >
+						  </div>
+						  
+						  <div class="input-group" style="width: 25%;">
+						    <select flex class="form-control" ng-model="novoMaterialColetado.unidadeMedida" placeholder="Unidade Medida" name="size" >
+						    	<option value="">Unidade de Medida</option>
+						    	<option ng-repeat="unidMedida in unidadesMedida" value="{{unidMedida}}">{{unidMedida.nome}}</option>
 						    </select>
-					  	</div>
-					  	
-					  	<div class="input-group" style="width: 23%;">
-					 	<input flex type="text" class="form-control" ng-model="novoMaterialColetado.quantidade"  placeholder="Quantidade" >
-					  </div>
-					  
-					  <div class="input-group" style="width: 25%;">
-					    <select flex class="form-control" ng-model="novoMaterialColetado.unidadeMedida" placeholder="Unidade Medida" name="size" >
-					    	<option value="">Unidade de Medida</option>
-					    	<option ng-repeat="unidMedida in unidadesMedida" value="{{unidMedida}}">{{unidMedida.nome}}</option>
-					    </select>
-					  </div>
-					  	  <button type="button" ng-click="addMaterialColetado()" class="btn btn-primary" style="width: 14%;">Ok</button>
-					</div>
-				</form>
-			</div>
+						  </div>
+						  	  <button type="button" ng-click="addMaterialColetado()" class="btn btn-primary" style="width: 14%;">Ok</button>
+						</div>
+					</form>
+				</div>
+			</fieldset>
 		
 		<table class="table table-bordered table-striped">
 			<thead>
@@ -110,7 +139,7 @@
 				 				Excluir material da coleta
 							</md-tooltip>
 						</i>
-						<i class="glyphicon glyphicon-refresh" ng-if="isEditing && !isCreating">
+						<i class="glyphicon glyphicon-refresh" ng-if="isEditing && !isCreating" ng-click="disponibilizarReuso(materialColetado)">
 							<md-tooltip md-direction="left">
 				 				Disponibilizar material para reuso
 							</md-tooltip>

@@ -61,7 +61,6 @@ app.controller('labCtrl', [
 			$scope.submitLab = function() {
 				var idSavedLab;
 				$scope.lab.dataAtualizacao = null;
-				$scope.lab.id = null;
 				$scope.lab.tipoResiduos = null;
 				labSvc.saveLab($scope.lab).then(
 						function successCallBack(labData) {
@@ -84,7 +83,14 @@ app.controller('labCtrl', [
 											+ error, 'custom-class');
 						});
 			};
-
+			
+			$scope.editLab = function(labId) {
+				$state.go('app.laboratorios.edit', {
+					'labId' : labId,
+					'action' : 'edit'
+				});
+			}
+			
 			$scope.showConfirmDialog = function(ev) {
 				var confirm = $mdDialog.confirm().title(
 						'Cancelar cadastro de laboratório?').ariaLabel(

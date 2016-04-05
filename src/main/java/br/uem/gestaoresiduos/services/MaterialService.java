@@ -29,6 +29,10 @@ public class MaterialService {
 	public Material findById(int id) {
 		return materialRepository.findOne(id);
 	}
+	
+	public Material findByDescricao(String descricao){
+		return materialRepository.findOne(descricao);
+	}
 
 	public String getTiposMaterial() {
 		StringBuffer tiposMaterial = new StringBuffer();
@@ -46,5 +50,9 @@ public class MaterialService {
 
 	public void deleteMaterial(int materialId){
 		materialRepository.delete(materialId);
+	}
+
+	public Material getMaterialDiversos() {
+		return materialRepository.getMaterialdiversos();
 	}
 }

@@ -23,7 +23,14 @@ var app = angular.module('app').config(
 	return function(input) {
 		return new Date(input);
 	}
-}).config(function($mdDateLocaleProvider) {
+})
+.filter("asBoo", function() {
+	return function(input) {
+		return input ? "Sim" : "Não";
+	}
+})
+
+.config(function($mdDateLocaleProvider) {
 	$mdDateLocaleProvider.formatDate = function(date) {
 		return date ? moment(date).format('DD/MM/YYYY') : '';
 	};

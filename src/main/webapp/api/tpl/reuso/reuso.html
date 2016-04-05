@@ -10,20 +10,7 @@
 	<md-content layout-padding>
 	
 	<form name="reusoForm">
-		<md-content flex>		
-			<md-input-container flex="70" style="min-width: 250px"> <label>Unidade Centralizadora</label>
-				<md-select ng-model="unidCentralizadora"  ng-change="buscaInicial(1)">
-					<md-option	required ng-repeat="unid in unidadesCentralizadoras" ng-value="unid">
-						{{ unid.nome }} 
-					</md-option> 
-				</md-select> 
-			</md-input-container>
-			
-			<md-input-container flex="30"> <label>Campus</label> <b><input
-				disabled ng-model="unidCentralizadora.campus.nome"> </b></md-input-container>
-				
-		</md-content>
-		<md-divider></md-divider>
+		
 		<!-- Pesquisa materiais para reuso -->
 		<md-content flex>
 			<nav ui-nav class="navi clearfix">
@@ -36,33 +23,33 @@
 						<ul class="nav nav-sub dk">
 							<li>
 	          					<md-content layout-padding layout="row"  style="border: 1px solid #eee" flex>
-									<md-input-container class="md-icon-float md-icon-right md-block" flex="10">
-										<label>Mês</label>
-										<input ng-model="search.mes" type="number" step="1" max="12" min="1">
-									</md-input-container>
-									
-									<md-input-container class="md-icon-float md-icon-right md-block" flex="20">
-										<label>Ano</label>
-										<input ng-model="search.ano" ng-required="search.mes!=null">
-									</md-input-container>
-									
-									<md-input-container flex="50"> <label>Material</label>
-										<md-select ng-model="search.localId" ng-init="search.localId=-1">
+																		
+									<md-input-container flex="50"> <label>Campus</label>
+										<md-select ng-model="search.campusId" ng-init="search.campusId=-1">
 											<md-option ng-value="-1">
 												Todos 
 											</md-option> 
-											<md-option	required ng-repeat="local in unidCentralizadora.locais" ng-value="local.id">
-												{{ local.nome }} 
+											<md-option	required ng-repeat="campus in campi" ng-value="campus.id">
+												{{ campus.nome }} 
 											</md-option> 
 										</md-select> 
 									</md-input-container>	
 									
-									<md-button class="md-raised md-primary" style="max-height: 20px;" ng-click='findColetasUnid(1)'>
+									<md-input-container flex="50"> <label>Material</label>
+										<md-select ng-model="search.materialId" ng-init="search.materialId=-1">
+											<md-option ng-value="-1">
+												Todos 
+											</md-option> 
+											<md-option	required ng-repeat="material in materiaisDisp" ng-value="material[0]">
+												{{ material[1] }} 
+											</md-option> 
+										</md-select> 
+									</md-input-container>	
+									
+									<md-button class="md-raised md-primary" style="max-height: 20px;" ng-click='findMateriaisReuso(1)'>
 											Pesquisar
 									</md-button>
-									<md-button class="md-primary" style="max-height: 20px;" ng-click='limparCampos()'>
-											Limpar Campos
-									</md-button>
+									
 								</md-content>
 							</li>
 						</ul>
@@ -75,8 +62,8 @@
 		
 			
 		<div class="bg-light lter b-b wrapper-md" style="margin-top: 30px;">
-			<b>Materiais disponíveis para Reuso em {{unidCentralizadora.nome}}</b>
-			<md-button class="md-fab md-primary md-mini" ng-click="addNovaColeta()"
+			<b>Materiais disponíveis para Reuso </b>
+			<md-button class="md-fab md-primary md-mini" ng-click="addReuso()"
 				aria-label="Add Coleta"> <md-tooltip
 				md-direction="right"> Adicionar Material Químico para Reuso </md-tooltip> 
 				<i class="glyphicon glyphicon-plus"></i>
@@ -89,35 +76,30 @@
 					<th>Material</th>		
 					<th>Quantidade</th>
 					<th>Data de Coleta</th>
-					<th>Status</th>
+					<th>Campus</th>
 					<th>Ações</th>
 				</tr>
 			</thead>
 				<tbody>
-					<tr dir-paginate="material in materiaisDispReuso | itemsPerPage: materiaisPerPage" total-items="materiaisCount" current-page="pagination.current">
+					<tr dir-paginate="reuso in materiaisDispReuso | itemsPerPage: reusoPerPage" total-items="reusoCount" current-page="pagination.current">
 						
 						
-						<td>{{material.descricao}}</td>
-						<td>{{material.quantidade}} {{material.unidade}}</td>
-						<td>{{material.dataColeta}}</td>
-						<td>{{material.status}}</td>
+						<td ng-click="">{{reuso.materialColetado.material.descricao}}</td>
+						<td>{{reuso.materialColetado.quantidade}} {{reuso.materialColetado.unidadeMedida.sigla}}</td>
+						<td>{{reuso.entrada | date:'dd/MM/yyyy'}}</td>
+						<td>{{reuso.campus.nome}}</td>
 						<td>
-							<i class="glyphicon glyphicon-refresh" ng-click="retiradaMaterial(material)">
+							<i class="glyphicon glyphicon-refresh" ng-click="retiradaMaterial(reuso)">
 								<md-tooltip md-direction="left" >
 					 				Registrar Retirada de Material para Reuso
 								</md-tooltip>
 							</i>
-							<i class="glyphicon glyphicon-edit" ng-click="editMateria(material)">
-								<md-tooltip md-direction="left" >
-					 				Editar Material Disponível para Reuso
-								</md-tooltip>
-							</i>
-							<i class="glyphicon glyphicon-trash" ng-click="deleteMaterial(material)">
+							<i class="glyphicon glyphicon-trash" ng-click="deleteMaterialReuso(reuso)">
 								<md-tooltip md-direction="left">
 					 				Excluir Material de Reuso
 								</md-tooltip>
 							</i>
-							<i class="glyphicon glyphicon-eye-open" ng-click="visualizarColeta(material)">
+							<i class="glyphicon glyphicon-eye-open" ng-click="viewReuso(reuso)">
 								<md-tooltip md-direction="left">
 					 				Visualizar Detalhes da Coleta do Material
 								</md-tooltip>

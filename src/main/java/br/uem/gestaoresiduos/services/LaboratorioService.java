@@ -64,4 +64,8 @@ public class LaboratorioService {
 		return laboratorioRepository.findAll();
 	}
 
+	public void deleteById(int id) {
+		laboratorioRepository.deleteById(id);
+	}
+
 }

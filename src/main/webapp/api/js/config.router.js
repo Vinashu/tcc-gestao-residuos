@@ -235,6 +235,7 @@ angular
 														'js/controllers/coletaResiduosQuimicos.js',
 														'js/services/coletaResiduosQuimicos.js',
 														'js/services/unidadeMedida.js',
+														'js/services/materialColetado.js',
 														'js/services/materialQuimico.js'])
 											})
 									.state(
@@ -249,6 +250,7 @@ angular
 												},
 												parent : 'app.coletaResiduos',
 												resolve : load([
+								                		'js/services/reuso.js',
 														'js/controllers/novaColetaResiduosQuimicos.js'])
 											})
 									.state(
@@ -264,6 +266,7 @@ angular
 												},
 												parent : 'app.coletaResiduos',
 												resolve : load([
+												        'js/services/reuso.js',
 														'js/controllers/novaColetaResiduosQuimicos.js'])
 											})		
 											
@@ -303,8 +306,12 @@ angular
 												url : '/reuso',
 												templateUrl : 'tpl/reuso/reuso.html',
 												resolve : load([
+								                		'js/services/unidadeMedida.js',
 														'js/controllers/reuso.js',
-														'js/services/reuso.js' ])
+														'js/services/reuso.js',
+														'js/services/unidCentralizadora.js',
+														'js/services/coletaResiduosQuimicos.js',
+														'js/services/campus.js'])
 											})
 								
 									// pages

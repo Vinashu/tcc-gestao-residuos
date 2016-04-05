@@ -18,4 +18,6 @@ public interface LaboratorioRepository extends JpaRepository<Laboratorio, Serial
 
 	List<Laboratorio> findByBloco(String bloco);
 
+	void deleteById(int id);
+
 }

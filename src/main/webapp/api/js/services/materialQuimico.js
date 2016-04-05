@@ -6,7 +6,7 @@
 app.service('materialQuimicoSvc', [ '$http', function($http) {
 	
 	this.getMateriais = function() {
-		return $http.get("material/")
+		return $http.get("materiais/")
 			.then(
 				function(response) {
 					return response.data
@@ -15,8 +15,27 @@ app.service('materialQuimicoSvc', [ '$http', function($http) {
 				});
 	}
 	
+	this.getMaterialByDescricao = function(descricao) {
+		return $http.get("materiais/material/" + descricao)
+			.then(
+				function(response) {
+					return response.data
+				}, function(httpError) {
+					throw httpError.status;
+				});
+	}
+	
+	this.getMaterialDiversos = function() {
+		return $http.get("materiais/material/materialDiverso")
+			.then(
+				function(response) {
+					return response.data
+				}, function(httpError) {
+					throw httpError.status;
+				});
+	}
 	this.getTiposMaterial = function() {
-		return $http.get("material/tiposMaterial")
+		return $http.get("materiais/tiposMaterial")
 			.then(
 				function(response) {
 					return response.data
@@ -26,7 +45,7 @@ app.service('materialQuimicoSvc', [ '$http', function($http) {
 	}
 	
 	this.saveMaterial = function(material) {
-		return $http.post("material/", material)
+		return $http.post("materiais/", material)
 			.then(
 				function(response) {
 					return response.data
@@ -36,7 +55,7 @@ app.service('materialQuimicoSvc', [ '$http', function($http) {
 	}
 	
 	this.deleteMaterial = function(materialId) {
-		return $http.delete("material/" + materialId)
+		return $http.delete("materiais/" + materialId)
 			.then(
 				function(response) {
 					return response.data
