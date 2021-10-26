@@ -20,7 +20,7 @@
 		<hibernate.version>5.0.0.CR4</hibernate.version>
 		<aspectj.version>1.7.2</aspectj.version>
 		<mysql.version>8.0.16</mysql.version>
-		<jackson-json.version>2.3.1</jackson-json.version>
+		<jackson-json.version>2.9.10.7</jackson-json.version>
 		<commons-dbcp.version>1.2.2</commons-dbcp.version>
 		<commons-lang3.version>3.1</commons-lang3.version>
 		<my.tomcat.path>/root/workspace/tcc-gestao-residuos/target/tomcat</my.tomcat.path>
