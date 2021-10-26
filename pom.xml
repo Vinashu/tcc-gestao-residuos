@@ -15,7 +15,7 @@
 		<slf4j.version>1.7.5</slf4j.version>
 		<logback.version>1.2.0</logback.version>
 		<spring.version>4.2.0.RELEASE</spring.version>
-		<spring-data-jpa.version>1.8.2.RELEASE</spring-data-jpa.version>
+		<spring-data-jpa.version>1.11.23.RELEASE</spring-data-jpa.version>
 		<spring-security.version>3.2.0.RELEASE</spring-security.version>
 		<hibernate.version>5.0.0.CR4</hibernate.version>
 		<aspectj.version>1.7.2</aspectj.version>
